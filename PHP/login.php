@@ -23,16 +23,12 @@
     }
     //se esiste un utente con le credenziali inserite
     else{
-        echo "confirmed";
-
         $row = mysqli_fetch_array($preleva_utente);
-        
         $username = $row['nome'];
-
         $_SESSION['utente'] = $username;
-
         mysqli_close($connect);
 
+        echo "success";
     }
 
 

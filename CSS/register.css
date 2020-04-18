@@ -7,6 +7,14 @@
 }
 
 .myTitle {
-    margin-top: 6em;
-    margin-bottom: 1em;
+    margin-top: 3.5em;
+    margin-bottom: 1.5em;
+}
+
+.spacer{
+    width: 90%;
+}
+
+#titleBar{
+    border-radius: 0px;
 }
