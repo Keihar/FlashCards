@@ -22,15 +22,20 @@
     if($count != 1){
         echo "error";
     }
-    //se esiste un utente con le credenziali inserite
-    else{
-        $row = mysqli_fetch_array($preleva_utente);
-        $username = $row['nome'];
-        $_SESSION['utente'] = $username;
-        mysqli_close($connect);
-
-        echo "success";
+    else {
+        $found = 1;
     }
+
+    if($found === 1){
+        echo "success";
+
+        session_start();
+        $_SESSION['user'] = $user;
+
+
+    }
+
+    mysqli_close($connect);
 
     //PER LOGOUT (NOTA A SCOPO DI RICORDARSI): session_destroy(); header("location: index.html");
 
