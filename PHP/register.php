@@ -16,10 +16,9 @@
     $inserisci_utente = mysqli_query($connect, $inserisci_utente_str);
 
     if(!$inserisci_utente){
-        echo "failed";
+        echo "error";
     }
     else{
         echo "success";
     }
-
 ?>

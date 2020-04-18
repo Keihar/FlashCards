@@ -1,44 +1,83 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Titolo esempio!</h1>
-    <div class = "container">
-      <div class="wrapper">
-        <form>
-          <div class="form-group">
-            <label for="email">Indirizzo Email</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Inserisci email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
-            <label for="username">Nome Utente</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Nome Utente">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary">Registrati</button>
-        </form>			
-      </div>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <title>Hello, world!</title>
+
+  <!-- Personal CSS -->
+  <link rel="stylesheet" href="CSS/register.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="myTitle" style="width: 200px;">
+      <h1>FlashCards</h1>
+      <h3>Registrati</h3>
     </div>
-    <!-- Optional JavaScript -->
-    <script></script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="vendors/jquery-3.5.0.min.js" ></script>
-    <script src="vendors/popper.min.js" ></script>
-    <script src="vendors/bootstrap/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+    <div class="wrapper">
+      <form id="registerForm" action="PHP/register.php">
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Indirizzo Email</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
+            placeholder="Inserisci email" required>
+          <p id="emailHelp" class="text-danger">Questa Email è già utilizzata.</p>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Nome Utente</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Nome Utente" required>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrati</button>
+      </form>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <script>
+    $("#registerForm").submit(function (e) {
+      let emailAlert = document.getElementById("emailHelp");
+      emailAlert.style.display = "none";
+
+      e.preventDefault();
+      var form = $(this);
+      var url = form.attr('action');
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(),
+        success: function (data) {
+          if (data == "success") {
+            alert("Registrazione avvenuta con successo!")
+          } 
+          else {
+            emailAlert.style.display = "block";
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="vendors/jquery-3.5.0.min.js"></script>
+  <script src="vendors/popper.min.js"></script>
+  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+</body>
+
 </html>
