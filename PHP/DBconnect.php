@@ -7,7 +7,7 @@
 
     $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
-    if(!connect){
+    if(!$connect){
         echo "Server non raggiungibile.";
     }
 
