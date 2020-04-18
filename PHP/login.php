@@ -3,8 +3,6 @@
     //effettuo l'include per connettermi al DataBase
     include 'DBconnect.php';
 
-    //inizializzo la sessione
-    session_start();
 
     //prelevo campi dal form
     $email = $_POST['email'];
@@ -18,29 +16,22 @@
     $preleva_utente = mysqli_query($connect, $preleva_utente_str);
 
 
-    $row = mysqli_fetch_array($preleva_utente);
+    $count = mysqli_num_rows($preleva_utente);
 
-    $email2 = $row['email'];
-    
-
-    if($email2 == NULL){
-        $found = 0;
+    //se non esiste alcun utente con le credenziali inserite
+    if($count != 1){
         echo "error";
     }
-    else {
-        $found = 1;
-    }
-
-    if($found === 1){
-        echo "success";
-
+    //se esiste un utente con le credenziali inserite
+    else{
+        $row = mysqli_fetch_array($preleva_utente);
+        $username = $row['nome'];
         session_start();
-        $_SESSION['user'] = $user;
+        $_SESSION['utente'] = $username;
+        mysqli_close($connect);
 
-
+        echo "success";
     }
-
-    mysqli_close($connect);
 
     //PER LOGOUT (NOTA A SCOPO DI RICORDARSI): session_destroy(); header("location: index.html");
 
