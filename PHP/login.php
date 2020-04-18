@@ -18,13 +18,12 @@
     $preleva_utente = mysqli_query($connect, $preleva_utente_str);
 
 
-
-
     $row = mysqli_fetch_array($preleva_utente);
 
-    $username = $row['nome'];
+    $email2 = $row['email'];
+    
 
-    if($username == NULL){
+    if($email2 == NULL){
         $found = 0;
         echo "error";
     }
@@ -36,7 +35,7 @@
         echo "success";
 
         session_start();
-        $_SESSION['utente'] = $username;
+        $_SESSION['user'] = $user;
 
 
     }
