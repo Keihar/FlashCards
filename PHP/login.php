@@ -14,6 +14,7 @@
     //confronto i dati inseriti con quelli all'interno del DataBase
     $preleva_utente_str = "SELECT * FROM Utente WHERE email='$email' AND password='$psw_criptata'";
     $preleva_utente = mysqli_query($connect, $preleva_utente_str);
+    $count = mysqli_num_rows($preleva_utente);
 
 
     $count = mysqli_num_rows($preleva_utente);
