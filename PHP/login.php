@@ -16,9 +16,10 @@
     //confronto i dati inseriti con quelli all'interno del DataBase
     $preleva_utente_str = "SELECT * FROM Utente WHERE email='$email' AND password='$psw_criptata'";
     $preleva_utente = mysqli_query($connect, $preleva_utente_str);
+    $count = mysqli_num_rows($preleva_utente);
 
     //se non esiste alcun utente con le credenziali inserite
-    if(!$preleva_utente){
+    if($count != 1){
         echo "error";
     }
     //se esiste un utente con le credenziali inserite
