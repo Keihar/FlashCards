@@ -9,7 +9,6 @@ $(document).ready(function() {
             try {
                 let user = JSON.parse(data); 
                 // Set Username
-                document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
                 document.getElementById("userCardName").innerHTML = "" + user.nome;
             } catch{}
         }
