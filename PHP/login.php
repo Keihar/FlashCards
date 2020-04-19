@@ -33,7 +33,6 @@
 
         echo "success";
     }
-
-    //PER LOGOUT (NOTA A SCOPO DI RICORDARSI): session_destroy(); header("location: index.html");
+    
 
 ?>
