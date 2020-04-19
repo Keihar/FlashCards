@@ -108,4 +108,45 @@ body {
 .welcomeText {
   color: white;
 }
+
+.profileFrame {
+  align-content: center;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.profilePic {
+  margin: 35%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container > div {
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  min-height: 100px;
+  min-width: 120px;
+  padding-top: 1.3em;
+  border-radius: 20px;
+}
+
+.numberDisplay {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cardTop {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.cardBottom {
+  border-radius: 0px 0px 5px 5px;
+}
   
