@@ -7,19 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="vendors/jquery-3.5.0.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <title>Hello, world!</title>
+  <script src="vendors/popper.min.js"></script>
+  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
   <!-- Personal CSS -->
+  <title>Accedi</title>
   <link rel="stylesheet" href="CSS/register.css">
 </head>
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" id="titleBar">
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow titleBar">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
       <svg class="bi bi-card-heading" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
@@ -61,36 +66,8 @@
       </form>
     </div>
   </div>
-  <!-- Optional JavaScript -->
-  <script>
-    $("#loginForm").submit(function (e) {
-      let emailAlert = document.getElementById("emailHelp");
-      emailAlert.style.display = "none";
-
-      e.preventDefault();
-      var form = $(this);
-      var url = form.attr('action');
-
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize(),
-        success: function (data) {
-          if (data != "success") {
-            emailAlert.style.display = "block";
-          } 
-          else {
-            window.location.href = "dashboard.html";
-          }
-        }
-      });
-    });
-  </script>
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="vendors/jquery-3.5.0.min.js"></script>
-  <script src="vendors/popper.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+  <!-- Personal JS -->
+  <script src="JS/login.js"></script>
 </body>
 
 </html>
