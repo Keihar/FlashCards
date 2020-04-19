@@ -1,7 +1,11 @@
 <?php
 
-    //faccio partire la sessione
-    session_start();
+//faccio partire la sessione
+session_start();
+
+if (!$_SESSION['valid']) {
+    echo "session_error";
+} else {
 
     //includo codice per connessione al DataBase
     include 'DBconnect.php';
@@ -17,8 +21,7 @@
     $json_array = array();
 
     //splitto le righe che ottengo dalla query
-    while($row = mysqli_fetch_assoc($result))
-    {
+    while ($row = mysqli_fetch_assoc($result)) {
         $json_array[] = $row;
     }
 
@@ -26,7 +29,7 @@
     $albums = array();
 
     //ciclo che assegna per ogni array i campi
-    foreach($json_array as &$rows){
+    foreach ($json_array as &$rows) {
         array_push($albums, array(
             'id' => $rows['id'],
             'nome' => $rows['nome'],
@@ -44,3 +47,4 @@
     $output = json_encode($post_data);
 
     echo $output;
+}

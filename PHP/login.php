@@ -29,10 +29,12 @@
         $username = $row['nome'];
         session_start();
         $_SESSION['utente'] = $username;
+        $_SESSION['valid'] = true;
         mysqli_close($connect);
 
         echo "success";
     }
     
+
 
 ?>
