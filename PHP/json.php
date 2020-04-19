@@ -5,7 +5,8 @@ session_start();
 
 if (!$_SESSION['valid']) {
     echo "session_error";
-} else {
+} 
+else {
 
     //includo codice per connessione al DataBase
     include 'DBconnect.php';

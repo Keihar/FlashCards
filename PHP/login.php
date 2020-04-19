@@ -3,7 +3,6 @@
     //effettuo l'include per connettermi al DataBase
     include 'DBconnect.php';
 
-
     //prelevo campi dal form
     $email = $_POST['email'];
     $psw = $_POST['password'];
