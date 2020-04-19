@@ -6,4 +6,6 @@
     //reindirizzo l'utente alla pagina di login
     header("location: ..\login.html");
 
+    echo "success";
+
 ?>
