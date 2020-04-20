@@ -29,7 +29,7 @@ function deleteRow(btn, id) {
     data: { 'id': id},
     success: function (data) {
       if (data != "success") {
-        console.log("Errore nella rimozione")
+        alert("Errore nella rimozione")
       } 
     }
   });
