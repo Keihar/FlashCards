@@ -6,7 +6,7 @@ $("#addAlbum").submit(function (e) {
     $.ajax({
       type: "POST",
       url: url,
-      data: new FormData(form),
+      data: form.serialize(),
       success: function (data) {
           console.log(data);
         if (data == "success") {
