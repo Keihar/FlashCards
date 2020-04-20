@@ -18,6 +18,22 @@ else {
     $sql = "SELECT id, Album.nome, descrizione FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
     $result = mysqli_query($connect, $sql);
 
+    //query per conto degli album
+    $conta_album_str = "SELECT COUNT(*) AS nalbum FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome=".$user."";
+    $conta_album = mysqli_query($connect, $conta_album_str);
+
+    while($row_conta_album = mysqli_fetch_array($conta_album)){
+        $nalbum = $row_conta_album["nalbum"];
+    }
+
+    //query per conto delle flashcards
+    $conta_flashcards_str = "SELECT COUNT(*) FROM flashcard INNER JOIN Album ON (album.id = flashcard.id_album) INNER JOIN Utente ON (utente.email=album.email) WHERE Utente.nome=".$user."";
+    $conta_flashcards = mysqli_query($connect, $conta_flashcards_str);
+
+    while($row_conta_flashcards = mysqli_fetch_array($conta_flashcards)){
+        $nflashcard = $row_conta_flashcards["nflashcard"];
+    }
+
     //istanzio array che mi servirà per splittare le righe
     $json_array = array();
 
@@ -32,6 +48,8 @@ else {
     //ciclo che assegna per ogni array i campi
     foreach ($json_array as &$rows) {
         array_push($albums, array(
+            'nalbum' = $nalbum,
+            'nflashcard' = $nflashcard,
             'id' => $rows['id'],
             'nome' => $rows['nome'],
             'descrizione' => $rows['descrizione']
