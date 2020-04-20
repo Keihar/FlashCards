@@ -1,7 +1,5 @@
 <?php
 
-    include 'DBconnect.php';
-
     session_start();
 
     $id = $_GET['id'];
