@@ -51,11 +51,15 @@ $("#flashcardsForm").submit(function (e) {
       } 
       else {
         let id = "" + data;
+        let front = document.getElementById("frontCard");
+        let back = document.getElementById("backCard");
         let row = "<tr>" +
-          `<td>${document.getElementById("frontCard").value}</td>` +
-          `<td>${document.getElementById("backCard").value}</td>` +
+          `<td>${front.value}</td>` +
+          `<td>${back.value}</td>` +
           `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
         "</tr>";
+        front.value = "";
+        back.value = "";
         $(document.getElementById("tableList")).find('tbody').append(row);
       }
     }
