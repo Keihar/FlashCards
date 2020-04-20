@@ -11,10 +11,10 @@ $("#addAlbum").submit(function (e) {
           console.log(data);
         if (data == "success") {
           alert("Album aggiunto correttamente!")
-          window.location.href = "dashboard.html";
+          window.location.href = "albumView.html";
         }
         else {
-            alert("Errore nell'aggiunta")
+          alert("Errore nell'aggiunta")
         }
       }
     });

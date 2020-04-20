@@ -55,7 +55,6 @@ $(document).ready(function() {
             catch (error) {
                 window.location.href = "login.html";
             }
-            
         }
     });
 });

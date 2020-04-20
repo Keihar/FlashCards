@@ -153,22 +153,23 @@
           </div>
         </div>
       </div>
+      <!-- Add Flashcards -->
       <div class="col-sm-6" id="card2">
         <div class="card">
           <div class="card-body">
-            <form id="registerForm" action="PHP/register.php">
+            <form id="flashcardsForm" action="PHP/addFlashcard.php">
               <div class="form-group">
                 <h5>Aggiungi FlashCards</h5>
               </div>
               <div class="form-group">
                 <label for="frontCard">Fronte:</label>
-                <textarea class="form-control" rows="3" id="frontCard"></textarea>
+                <textarea name="fronte" class="form-control" rows="3" id="frontCard" maxlength="255"></textarea>
               </div>
               <div class="form-group">
                 <label for="backCard">Retro:</label>
-                <textarea class="form-control" rows="3" id="backCard"></textarea>
+                <textarea name="retro" class="form-control" rows="3" id="backCard" maxlength="255"></textarea>
               </div>
-              <a href="#" class="btn btn-primary">Aggiungi</a>
+              <input type="submit" class="btn btn-primary" value="Aggiungi">
             </form>
           </div>
         </div>
@@ -180,7 +181,7 @@
           <div class="card-body">
             <h5 class="card-title">Lista delle FlashCards</h5>
             <div class="table-responsive">
-              <table class="table table-striped table-sm">
+              <table class="table table-striped table-sm" id="tableList">
                 <thead>
                   <tr>
                     <th>Fronte</th>
