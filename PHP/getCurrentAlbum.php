@@ -17,7 +17,12 @@
 
     $flashcards = array();
 
+    $nome = "";
+    $descrizione = "";
+
     foreach ($json_array as &$rows) {
+        $nome = $rows['nome'];
+        $descrizione = $rows['descrizione'];
         array_push($flashcards, array(
             'id' => $rows['id'],
             'fronte' => $rows['fronte'],
@@ -27,8 +32,8 @@
     
     //array di array
     $post_data = array(
-        'nome' => $rows['nome'],
-        'descrizione' => $rows['descrizione'],
+        'nome' => $nome,
+        'descrizione' => $descrizione,
         'flashcards' => $flashcards
     );
 
