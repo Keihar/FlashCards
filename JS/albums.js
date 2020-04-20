@@ -15,8 +15,9 @@ $(document).ready(function() {
                         "<div class='card-body'>" +
                             `<h5 class='card-title'>${album.nome}</h5>` +
                             `<p class='card-text'>${album.descrizione}</p>` +
-                            `<a href='#' onclick='viewAlbum(${album.id})' class='btn btn-primary'>Modifica</a>` +
-                            `<button onclick='deleteAlbum(${album.id})' type='button' class='btn btn-outline-danger ml-1'>Elimina</button>` +
+                            `<a href='#' onclick='viewAlbum(${album.id})' class='btn btn-primary'>Avvia Lezione</a>` +
+                            `<a href='#' onclick='viewAlbum(${album.id})' class='btn btn-outline-secondary ml-1'>Modifica</a>` +
+                            `<a href='#' onclick='deleteAlbum(${album.id})' class='btn btn-outline-danger ml-1'>Elimina</a>` +                        
                         "</div>" +
                         "</div>" +
                     "</div>";

@@ -32,6 +32,7 @@
     
     //array di array
     $post_data = array(
+        'id' => $id_album,
         'nome' => $nome,
         'descrizione' => $descrizione,
         'flashcards' => $flashcards

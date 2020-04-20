@@ -32,16 +32,14 @@ function viewAlbum(id) {
 }
 
 $(document).ready(function() {
-    console.log( "ready!" );
     $.ajax({
         type: "POST",
         url: "PHP/json.php",
         data: "",
         success: function (data) {
-            console.log(data);
             try {
                 let user = JSON.parse(data);
-                console.log("Session found");
+                console.log("User logged found.");
 
                 document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
                 var albumBox = document.getElementById("recentAlbums");
