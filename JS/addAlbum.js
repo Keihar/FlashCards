@@ -10,8 +10,7 @@ $("#addAlbum").submit(function (e) {
       success: function (data) {
           console.log(data);
         if (data == "success") {
-          alert("Album aggiunto correttamente!")
-          window.location.href = "albumView.html";
+          $('#exampleModal').modal('show');
         }
         else {
           alert("Errore nell'aggiunta")
