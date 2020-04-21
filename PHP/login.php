@@ -26,8 +26,10 @@
     else{
         $row = mysqli_fetch_array($preleva_utente);
         $username = $row['nome'];
+        $motto = $row['motto'];
         session_start();
         $_SESSION['utente'] = $username;
+        $_SESSION['motto'] = $motto;
         $_SESSION['valid'] = true;
         mysqli_close($connect);
 

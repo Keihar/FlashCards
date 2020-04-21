@@ -59,6 +59,7 @@ else {
     //array di array
     $post_data = array(
         'nome' => $_SESSION['utente'],
+        'motto' => $_SESSION['motto'],
         'albums' => $albums
     );
 

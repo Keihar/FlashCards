@@ -9,6 +9,7 @@ $("#loginForm").submit(function (e) {
       url: url,
       data: form.serialize(),
       success: function (data) {
+        console.log(data)
         if (data != "success") {
           emailAlert.style.display = "block";
         } 

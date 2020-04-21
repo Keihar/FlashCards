@@ -10,7 +10,7 @@ $(document).ready(function() {
                 let user = JSON.parse(data); 
                 // Set Username
                 document.getElementById("userCardName").innerHTML = "" + user.nome;
-                console.log(user.albums[0].nalbum);
+                document.getElementById("motto").innerHTML = `"${user.motto}"`;
                 document.getElementById("nalbum").innerHTML = "" + user.albums[0].nalbum;
                 document.getElementById("nflashcard").innerHTML = "" + user.albums[0].nflashcard;
             } catch{}
