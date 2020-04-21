@@ -1,7 +1,7 @@
 <?php
 
     //includo codice per la connessione al DataBase
-    include '$DBconnect';
+    include 'DBconnect.php';
 
     //inizializzo la sessione
     session_start();
