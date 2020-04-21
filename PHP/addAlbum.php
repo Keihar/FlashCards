@@ -8,6 +8,7 @@
     $nome_album = $_POST['nome_album'];
     $descrizione = $_POST['descrizione'];
     
+
     //Prendo l'email
     $user = $_SESSION['utente'];
     
@@ -23,10 +24,19 @@
     $insert_album_query = "INSERT INTO Album(nome, descrizione, email) VALUES ('$nome_album', '$descrizione', '$email')";
     $insert_album = mysqli_query($connect, $insert_album_query);
 
+
     if(!$insert_album){
         echo "error";
     }
     else{
+        $album_id_str = "SELECT id FROM Album WHERE nome='$nome_album' AND descrizione='$descrizione' AND email='$email'";
+        $album_id_query = mysqli_query($connect, $album_id_str);
+
+        while($row = mysqli_fetch_array($album_id_query)){
+            $album_id = $row["id"];
+        }
+
+        $_SESSION['currentAlbum'] = $album_id;
         echo "success";
     }
 
