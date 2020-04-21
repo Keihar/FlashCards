@@ -4,11 +4,11 @@
     include 'DBconnect.php';
 
     //prelevo campi dal form
-    $email = $_POST['email'];
-    $psw = $_POST['password'];
+    $email = mysqli_real_escape_string($connect, $_POST['email']);
+    $psw = mysqli_real_escape_string($connect, $_POST['password']);
     
     //cripto la password inserita per confrontarla successivamente con quella presente nel DataBase
-    $psw_criptata = sha1($psw);
+    $psw_criptata = mysqli_real_escape_string($connect, sha1($psw));
 
     //confronto i dati inseriti con quelli all'interno del DataBase
     $preleva_utente_str = "SELECT * FROM Utente WHERE email='$email' AND password='$psw_criptata'";

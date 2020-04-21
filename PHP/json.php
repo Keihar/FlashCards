@@ -12,7 +12,7 @@ else {
     include 'DBconnect.php';
 
     //attribuisco a $user la variabile di sessione che identifica l'utente
-    $user = $_SESSION['utente'];
+    $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
 
     //query per prelevamento dei campi dell'album
     $sql = "SELECT id, Album.nome, descrizione FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
@@ -23,7 +23,7 @@ else {
     $conta_album = mysqli_query($connect, $conta_album_str);
 
     while($row_conta_album = mysqli_fetch_array($conta_album)){
-        $nalbum = $row_conta_album["nalbum"];
+        $nalbum = mysqli_real_escape_string($connect, $row_conta_album["nalbum"]);
     }
 
     //query per conto delle flashcards
@@ -31,7 +31,7 @@ else {
     $conta_flashcards = mysqli_query($connect, $conta_flashcards_str);
 
     while($row_conta_flashcards = mysqli_fetch_array($conta_flashcards)){
-        $nflashcard = $row_conta_flashcards["nflashcard"];
+        $nflashcard = mysqli_real_escape_string($connect, $row_conta_flashcards["nflashcard"]);
     }
 
     //istanzio array che mi servirà per splittare le righe

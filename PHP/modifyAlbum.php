@@ -7,11 +7,11 @@
     session_start();
 
     //prendo l'id dell'album corrente
-    $id_album = $_SESSION['currentAlbum'];
+    $id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
 
     //nome, descrizione
-    $nome = $_POST["nome"];
-    $descrizione = $_POST["descrizione"];
+    $nome = mysqli_real_escape_string($connect, $_POST["nome"]);
+    $descrizione = mysqli_real_escape_string($connect, $_POST["descrizione"]);
 
     //query per modificare l'album
     $update_query = "UPDATE Album SET nome='$nome', descrizione='$descrizione' WHERE id='$id_album'";

@@ -7,9 +7,9 @@
     session_start();
 
     //prendo i campi da inserire nel database
-    $fronte_flashcard = $_POST["fronte"];
-    $retro_flashcard = $_POST["retro"];
-    $id_album = $_SESSION['currentAlbum'];
+    $fronte_flashcard = mysqli_real_escape_string($connect, $_POST["fronte"]);
+    $retro_flashcard = mysqli_real_escape_string($connect, $_POST["retro"]);
+    $id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
 
     //query per aggiungere la flashcard
     $aggiungi_flashcard_str = "INSERT INTO Flashcard(fronte, retro, id_album) VALUES ('$fronte_flashcard', '$retro_flashcard', ".$id_album.")";

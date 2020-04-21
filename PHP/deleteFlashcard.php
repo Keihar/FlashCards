@@ -7,7 +7,7 @@
     session_start();
     
     //prendo l'ID della flashcard da cancellare
-    $id_flashcard = $_POST["id"];
+    $id_flashcard = mysqli_real_escape_string($connect, $_POST["id"]);
 
     //query per cancellare la suddetta flashcard
     $delete_flashcard_str = "DELETE FROM Flashcard WHERE id=".$id_flashcard."";

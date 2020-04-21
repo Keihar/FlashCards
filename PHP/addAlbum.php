@@ -5,19 +5,19 @@
     
     session_start();
 
-    $nome_album = $_POST['nome_album'];
-    $descrizione = $_POST['descrizione'];
+    $nome_album = mysqli_real_escape_string($connect, $_POST['nome_album']);
+    $descrizione = mysqli_real_escape_string($connect, $_POST['descrizione']);
     
 
-    //Prendo l'email
-    $user = $_SESSION['utente'];
+    //Prendo l'utente
+    $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
     
     //query per ottenere l'email
     $get_email_query = "SELECT email FROM Utente WHERE nome='$user'";
     $email_arr = mysqli_query($connect, $get_email_query);
 
     while($row = mysqli_fetch_array($email_arr)){
-        $email = $row["email"];
+        $email = mysqli_real_escape_string($connect, $row["email"]);
     }
 
     //inserisco nuovo album

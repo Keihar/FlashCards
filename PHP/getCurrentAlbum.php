@@ -7,15 +7,15 @@
     session_start();
 
     //catcho la variabile di sessione
-    $id_album = $_SESSION['currentAlbum'];
+    $id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
 
     //query per avere nome e descrizione dell'Album
     $preleva_nome_descr = "SELECT nome, descrizione FROM Album WHERE id=".$id_album."";
     $result1 = mysqli_query($connect, $preleva_nome_descr);
 
     while ($riga = mysqli_fetch_array($result1)) {
-        $nome = $riga["nome"];
-        $descrizione = $riga["descrizione"];
+        $nome = mysqli_real_escape_string($connect, $riga["nome"]);
+        $descrizione = mysqli_real_escape_string($connect, $riga["descrizione"]);
     }
 
     //le due query devo splittarle in quanto se facessi tutto in una query univoca nel caso in cui l'utente non avesse flashcards non sarei in grado di passare alla prossima pagina il nome e la descrizione dell'album
