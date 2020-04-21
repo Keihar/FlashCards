@@ -7,7 +7,7 @@
         session_start();
     
         //catcho la variabile di sessione
-        $id_album = $_SESSION['currentAlbum'];
+        $id_album = $_POST['id'];
 
         //query per cancellare il suddetto album
         $delete_album_str = "DELETE FROM Album WHERE id=".$id_album."";
