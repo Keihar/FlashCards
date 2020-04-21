@@ -1,4 +1,5 @@
 $("#loginForm").submit(function (e) {
+    let emailAlert = document.getElementById("emailHelp");
     e.preventDefault();
     var form = $(this);
     var url = form.attr('action');
