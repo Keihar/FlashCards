@@ -13,6 +13,10 @@
   <script src="vendors/jquery-3.5.0.min.js"></script>
   <script src="vendors/popper.min.js"></script>
   <script src="vendors/bootstrap/bootstrap.min.js"></script>
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/42cdbffcd9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="vendors/font-awesome.min.css">
   
   <!-- Personal CSS -->
   <title>Dashboard</title>
@@ -104,7 +108,7 @@
   <!-- Contents -->
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Esercitati</h1>
+        <h1 class="h2" id="albumTitle">Esercitati</h1>
       </div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
         <div class="d-flex justify-content-center col align-self-center">
@@ -124,10 +128,10 @@
     </div>
     <div class="d-flex justify-content-center col align-self-center border-bottom pb-3">
       <div class="m-2">
-        <button class="btn btn-primary btn-lg" onclick="flip()">Giraaaaaaaaaaaaaa!</button>
+        <button class="btn btn-primary btn-lg" onclick="flip()"><i class="fas fa-sync-alt"></i> Gira</button>
       </div>
       <div class="m-2">
-        <button class="btn btn-primary btn-lg" onclick="nextCard()">Next!</button>
+        <button id="nextBtn" class="btn btn-primary btn-lg" onclick="nextCard()" disabled><i class="fa fa-forward"></i> Prossima</button>
       </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

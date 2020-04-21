@@ -5,12 +5,14 @@ var sessionConcluded = false;
 function flip() {
     document.querySelector("#myCard").classList.toggle("flip")
     document.getElementById("backCard").innerHTML = "" + cards[currentIndex].retro;
+    $('#nextBtn').prop('disabled', false);
 }
 
 function nextCard() {
     if (document.querySelector("#myCard").classList.contains("flip")) {
         flip();
     }
+    $('#nextBtn').prop('disabled', true);
     currentIndex++;
     if (currentIndex == cards.length) {
         sessionConcluded = true;
@@ -41,6 +43,7 @@ $(document).ready(function() {
                 let user = JSON.parse(data);
                 console.log(user.flashcards[0].fronte);
                 cards = user.flashcards;
+                document.getElementById("albumTitle").innerHTML = "" + user.nome;
                 document.getElementById("frontCard").innerHTML = "" + cards[0].fronte;
             } 
             catch (error) {}
