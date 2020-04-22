@@ -10,7 +10,7 @@
     $psw = mysqli_real_escape_string($connect, $_POST["password"]);
 
     //cripto la password
-    $psw_criptata = mysqli_real_escape_string($connect, sha1($psw));
+    $psw_criptata = mysqli_real_escape_string($connect, md5($psw));
 
     //query per inserire nella tabella Utente i campi
     $inserisci_utente_str = "INSERT INTO Utente VALUES ('$email', '$nome', '$motto', '$psw_criptata');";
