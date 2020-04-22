@@ -10,6 +10,10 @@ $.ajax({
     albumID = album.id;
     document.getElementById("albumName").value = album.nome.replace('\\','');
     document.getElementById("albumDescription").innerHTML = album.descrizione.replace('\\','');
+    if (album.imgLink == null) {
+      album.imgLink = "images\\albumCovers\\000-icon.svg";
+    }
+    document.getElementById('currentIcon').src = album.imgLink;
     let tableBody = document.getElementById("tableBody");
     album.flashcards.forEach(flashcard => {
       tableBody.innerHTML += "<tr>" +

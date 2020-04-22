@@ -25,11 +25,6 @@
   <link rel="stylesheet" href="CSS/register.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
   <link rel="stylesheet" href="CSS/albumView.css">
-  <style>
-    img {
-    width: 100px;
-}
-  </style>
 </head>
 
 <body>
@@ -148,35 +143,32 @@
         <div class="card">
           <div class="card-body">
             <form id="modifyAlbum" action="PHP/modifyAlbum.php">
-              <div class="form-row">
-                <div class="col">
-                <h5>Generali</h5>
-              </div>
-              </div>
-              <div class="form-row  mt-2">
-                <div class="col col-md-1 text-center" style="margin-top: 0.5em;">
-                  <img id="currentIcon" class='imgList' src='images/000-icon.svg' onclick="$('#iconModal').modal('show');">
-                </div>
-                <div class="col" style="margin-left: 2em;">
-                <label for="albumName">Name:</label>
-                <input type="text" name="nome" class="form-control" id="albumName" maxlength="50" required>
-                </div>
-              </div>
-              <!-- Hidden Input -->
-              <input type="text" id="imgLink" name="imgLink" class="d-none">
+          <div class="row no-gutters">
+            <div class="col-md-4 text-center">
+              <img id="currentIcon" class='profilePic ml-4' src='' onclick="$('#iconModal').modal('show');">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body pb-0">
+                <h5 class="card-title">Generali</h5>
+                <!-- Nome -->
+                <p class="card-text ">
+                  <label for="name">Nome Album</label>
+                  <input type="text" class="form-control" id="albumName" name="nome" placeholder="Nome Album"
+                  maxlength="50" required>
+                </p>
 
-              <div class="form-row mt-3">
-                <div class="col">
-                <label for="albumDescription">Descrizione:</label>
-                <textarea name="descrizione" class="form-control" rows="6" id="albumDescription" 
-                maxlength="255" required></textarea>
+                <!-- Hidden Input -->
+                <input type="text" id="imgLink" name="imgLink" class="d-none">
               </div>
-              </div>
-              <div class="form-row mt-3">
-                <div class="col">
-                <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Salva</button>
-              </div>
-              </div>
+            </div>
+            <p class="card-body pb-0 pt-0 mb-0">
+              <label for="desc">Descrizione</label>
+              <textarea class="form-control" name="descrizione" id="albumDescription" rows="4"
+              maxlength="255" required></textarea>
+            </p>
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary btn-block m-4 mt-0"><i class="far fa-save"></i> Salva</button>
+          </div>
             </form>
           </div>
         </div>

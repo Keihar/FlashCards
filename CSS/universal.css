@@ -2,3 +2,25 @@ textarea {
     resize: none;
     white-space: pre-wrap;
 }
+
+.profilePic {
+    width: 80%; 
+    margin: 10%;
+}
+
+.profilePic:hover {
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.imgList {
+    width: 4.5em;
+    height: 4.5em;
+}
+
+.imgList:hover {
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    padding: 1em;
+}
