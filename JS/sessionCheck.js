@@ -31,6 +31,22 @@ function viewAlbum(id) {
   });
 }
 
+function playAlbum(id) {
+  $.ajax({
+    type: "GET",
+    url: "PHP/setCurrentAlbum.php",
+    data: { 'id': id },
+    success: function (data) {
+      if (data != "success") {
+        console.log("Errore nell'impostare la variabile di sessione")
+      } 
+      else {
+        window.location.href = "playGarden.html";
+      }
+    }
+  });
+}
+
 $(document).ready(function() {
     // Blocks breaks in TextAreas
     $("textarea").keypress(function(event) {

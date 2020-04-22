@@ -8,13 +8,13 @@ $.ajax({
   success: function (data) {
     let album = JSON.parse(data);
     albumID = album.id;
-    document.getElementById("albumName").value = album.nome;
-    document.getElementById("albumDescription").innerHTML = album.descrizione;
+    document.getElementById("albumName").value = album.nome.replace('\\','');
+    document.getElementById("albumDescription").innerHTML = album.descrizione.replace('\\','');
     let tableBody = document.getElementById("tableBody");
     album.flashcards.forEach(flashcard => {
       tableBody.innerHTML += "<tr>" +
-        `<td>${flashcard.fronte}</td>` +
-        `<td>${flashcard.retro}</td>` +
+        `<td>${flashcard.fronte.replace('\\','')}</td>` +
+        `<td>${flashcard.retro.replace('\\','')}</td>` +
         `<td> <button type="button" onclick="modifyRow(this, ${flashcard.id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
         `<td> <button type="button" onclick="deleteRow(this, ${flashcard.id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
         "</tr>";
