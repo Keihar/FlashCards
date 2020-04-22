@@ -11,7 +11,7 @@
 /* flip the pane when hovered */
 
 .flip-container.flip .flipper {
-	transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .flip-container, .front, .back {
@@ -50,4 +50,6 @@
     transform: rotateY(180deg);
 }
 
-.hide{display:none;}
+.hide {
+    display: none;
+}

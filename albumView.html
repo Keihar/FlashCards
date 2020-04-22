@@ -147,11 +147,12 @@
               </div>
               <div class="form-group">
                 <label for="albumName">Name:</label>
-                <input type="text" name="nome" class="form-control" id="albumName" required>
+                <input type="text" name="nome" class="form-control" id="albumName" maxlength="50" required>
               </div>
               <div class="form-group">
                 <label for="albumDescription">Descrizione:</label>
-                <textarea name="descrizione" class="form-control" rows="6" id="albumDescription" required></textarea>
+                <textarea name="descrizione" class="form-control" rows="6" id="albumDescription" 
+                maxlength="255" required></textarea>
               </div>
               <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Salva</button>
             </form>
