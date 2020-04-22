@@ -15,7 +15,7 @@ else {
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
+    $sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
     $result = mysqli_query($connect, $sql);
 
     //query per conto degli album
@@ -52,7 +52,8 @@ else {
             'nflashcard' => $nflashcard,
             'id' => $rows['id'],
             'nome' => $rows['nome'],
-            'descrizione' => $rows['descrizione']
+            'descrizione' => $rows['descrizione'],
+            'imgLink' => $rows['imgLink']
         ));
     }
 
