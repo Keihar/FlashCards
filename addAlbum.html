@@ -20,10 +20,11 @@
   
   <!-- Personal CSS -->
   <title>Nuovo Album</title>
-  <link rel="icon" href="images/icon.svg">
+  <link rel="icon" href="images/000-icon.svg">
   <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/register.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
+  <link rel="stylesheet" href="CSS/addAlbum.css">
 </head>
 
 <body>
@@ -109,19 +110,35 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
       <h2 class="mb-4">Nuovo Album</h2>
     <form id="addAlbum" action="PHP/addAlbum.php">
-        <!-- Nome -->
-        <div class="form-group">
-          <label for="name">Nome Album</label>
-          <input type="text" class="form-control" id="name" name="nome_album" placeholder="Nome Album"
-          maxlength="50" required>
-        </div>
+        
+      
+      <div class="form-group">
+        <div class="row">
+            <!-- Icona -->
+            <div class="col col-md-1 text-center">
+              <img id="currentIcon" class='imgList' src='images/000-icon.svg' onclick="$('#iconModal').modal('show');">
+            </div>
+            <!-- Nome -->
+            <div class="col col-sm ml-0 pl-0">
+              <label for="name">Nome Album</label>
+              <input type="text" class="form-control" id="name" name="nome_album" placeholder="Nome Album"
+              maxlength="50" required>
+            </div>
+          </div>
+        </div>          
+        
+        <!-- Hidden Input -->
+        <input type="text" id="imgLink" name="imgLink" class="d-none">
 
         <!-- Descrizione -->
         <div class="form-group">
-            <label for="desc">Descrizione</label>
-            <textarea class="form-control" name="descrizione" id="desc" rows="4"
-            maxlength="255" required></textarea>
+          <label for="desc">Descrizione</label>
+              <textarea class="form-control" name="descrizione" id="desc" rows="4"
+              maxlength="255" required></textarea>
+          
         </div>
+
+      </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -139,6 +156,26 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Chiudi</button>
                 <button type="button" class="btn btn-primary" onclick="window.location.href = 'albumView.html'">Inizia</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Icons Modal -->
+        <div class="modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="iconModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="iconModalLabel">Modifica icona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="icons">
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>
               </div>
             </div>
           </div>
