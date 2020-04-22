@@ -9,11 +9,18 @@ function flip() {
 }
 
 function nextCard() {
+    // Remove focus from clicked button
+    $('input, textarea, select').focus(function() {
+        this.blur();
+    });
+    // Turns the card if it's currently in the back
     if (document.querySelector("#myCard").classList.contains("flip")) {
         flip();
     }
+    // Disables the btn until the card is flipped
     $('#nextBtn').prop('disabled', true);
     currentIndex++;
+    //Concludes the session if the cards are finished
     if (currentIndex == cards.length) {
         sessionConcluded = true;
         $('#exampleModal').modal('show');
@@ -50,3 +57,15 @@ $(document).ready(function() {
         }
     });
 });
+
+$(document).keypress(function(event) {
+    if(event.which == '32') {
+        flip();
+        return false;
+    }
+    if(event.which == '13') {
+        nextCard();
+        return false;
+    }
+});
+
