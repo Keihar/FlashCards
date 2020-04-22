@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/register.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
+  <link rel="stylesheet" href="CSS/addAlbum.css">
 </head>
 
 <body>
@@ -142,19 +143,35 @@
         <div class="card">
           <div class="card-body">
             <form id="modifyAlbum" action="PHP/modifyAlbum.php">
-              <div class="form-group">
+              <div class="form-row">
+                <div class="col">
                 <h5>Generali</h5>
               </div>
-              <div class="form-group">
+              </div>
+              <div class="form-row  mt-2">
+                <div class="col col-md-1 text-center" style="margin-top: 0.5em;">
+                  <img id="currentIcon" class='imgList' src='images/000-icon.svg' onclick="$('#iconModal').modal('show');">
+                </div>
+                <div class="col" style="margin-left: 2em;">
                 <label for="albumName">Name:</label>
                 <input type="text" name="nome" class="form-control" id="albumName" maxlength="50" required>
+                </div>
               </div>
-              <div class="form-group">
+              <!-- Hidden Input -->
+              <input type="text" id="imgLink" name="imgLink" class="d-none">
+
+              <div class="form-row mt-3">
+                <div class="col">
                 <label for="albumDescription">Descrizione:</label>
                 <textarea name="descrizione" class="form-control" rows="6" id="albumDescription" 
                 maxlength="255" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Salva</button>
+              </div>
+              <div class="form-row mt-3">
+                <div class="col">
+                <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Salva</button>
+              </div>
+              </div>
             </form>
           </div>
         </div>
@@ -200,6 +217,25 @@
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Icons Modal -->
+    <div class="modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="iconModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="iconModalLabel">Modifica icona</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="icons">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>
           </div>
         </div>
       </div>

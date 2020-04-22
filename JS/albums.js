@@ -11,6 +11,7 @@ $(document).ready(function() {
                 user.albums.forEach(album => {
                     row.innerHTML += "" +
                     "<div class='col-sm-6 mb-4'>" +
+                        `<img class="card-img-top" src="${album.imgLink}" alt="Card image cap"></img>` +
                         "<div class='card'>" +
                         "<div class='card-body'>" +
                             `<h5 class='card-title'>${album.nome}</h5>` +
