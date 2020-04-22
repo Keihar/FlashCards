@@ -1,4 +1,5 @@
 var albumID = "";
+var modifyingRow = false;
 
 $.ajax({
   type: "GET",
@@ -37,18 +38,48 @@ function deleteRow(btn, id) {
 }
 
 function modifyRow(btn, id) {
+  if (modifyingRow) {
+    return;
+  }
+  else {
+    modifyingRow = true;
+  }
   let row = $(btn).parent().parent()[0];
   let cols = $(row).children();
   // Fronte
-  cols[0].innerHTML = `<div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-sm">Nuovo Fronte</span></div><input type="text" value="${cols[0].innerHTML}" class="form-control w-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></div>`;
+  cols[0].innerHTML = `<div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-sm">Nuovo Fronte</span></div><input type="text" value="${cols[0].innerHTML}" id="newFront" class="form-control w-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></div>`;
   // Retro
-  cols[1].innerHTML = `<div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-sm">Nuovo Retro</span></div><input type="text" value="${cols[1].innerHTML}" class="form-control w-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></div>`;
+  cols[1].innerHTML = `<div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-sm">Nuovo Retro</span></div><input type="text" value="${cols[1].innerHTML}" id="newBack" class="form-control w-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></div>`;
   // Save
-  cols[2].innerHTML = `<button class="btn btn-secondary btn-sm w" onclick="saveNewRow(${id})"><i class="far fa-save"></i> Salva</button>`;
+  cols[2].innerHTML = `<button id="saveRowBtn" class="btn btn-secondary btn-sm w" onclick="saveNewRow(${id})"><i class="far fa-save"></i> Salva</button>`;
 }
 
 function saveNewRow(id) {
-  
+  let newFront = document.getElementById("newFront").value;
+  let newBack = document.getElementById("newBack").value;
+
+  $.ajax({
+    type: "POST",
+    url: "PHP/modifyFlashcard.php",
+    data: { 'id': id, 'fronte': newFront, 'retro': newBack },
+    success: function (data) {
+      if (data != "success") {
+        alert("Errore nella modifica")
+      }
+      else {
+        let btn = document.getElementById("saveRowBtn");
+        let row = $(btn).parent().parent()[0];
+        let cols = $(row).children();
+        // Fronte
+        cols[0].innerHTML = "" + newFront;
+        // Retro
+        cols[1].innerHTML = "" + newBack;
+        // Save
+        cols[2].innerHTML = `<button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button>`;
+        modifyingRow = false;
+      }
+    }
+  });
 }
 
 $("#flashcardsForm").submit(function (e) {
