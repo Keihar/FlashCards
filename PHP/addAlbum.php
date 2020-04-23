@@ -8,6 +8,7 @@
     $nome_album = mysqli_real_escape_string($connect, $_POST['nome_album']);
     $descrizione = mysqli_real_escape_string($connect, $_POST['descrizione']);
     $imgLink = mysqli_real_escape_string($connect, $_POST['imgLink']);
+    $privato = mysqli_real_escape_string($connect, isset($_POST['privato']) ? $_POST['privato'] : 0);
 
     //Prendo l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
@@ -21,7 +22,7 @@
     }
 
     //inserisco nuovo album
-    $insert_album_query = "INSERT INTO Album(nome, descrizione, imgLink, email) VALUES ('$nome_album', '$descrizione','$imgLink', '$email')";
+    $insert_album_query = "INSERT INTO Album(nome, descrizione, imgLink, privato, email) VALUES ('$nome_album', '$descrizione','$imgLink','$privato','$email')";
     $insert_album = mysqli_query($connect, $insert_album_query);
 
 

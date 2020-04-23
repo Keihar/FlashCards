@@ -10,13 +10,15 @@
     $id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
 
     //query per avere nome e descrizione dell'Album
-    $preleva_nome_descr = "SELECT nome, descrizione, imgLink FROM Album WHERE id=".$id_album."";
+    $preleva_nome_descr = "SELECT nome, descrizione, imgLink, privato FROM Album WHERE id=".$id_album."";
     $result1 = mysqli_query($connect, $preleva_nome_descr);
+
 
     while ($riga = mysqli_fetch_array($result1)) {
         $nome = mysqli_real_escape_string($connect, $riga["nome"]);
         $descrizione = mysqli_real_escape_string($connect, $riga["descrizione"]);
         $imgLink = mysqli_real_escape_string($connect, $riga["imgLink"]);
+        $privato = mysqli_real_escape_string($connect, $riga["privato"]);
     }
 
     //le due query devo splittarle in quanto se facessi tutto in una query univoca nel caso in cui l'utente non avesse flashcards non sarei in grado di passare alla prossima pagina il nome e la descrizione dell'album
@@ -51,6 +53,7 @@
         'nome' => $nome,
         'descrizione' => $descrizione,
         'imgLink' => $imgLink,
+        'privato' => $privato,
         'flashcards' => $flashcards
     );
 
