@@ -10,6 +10,8 @@ $.ajax({
     albumID = album.id;
     document.getElementById("albumName").value = album.nome.replace('\\','');
     document.getElementById("albumDescription").innerHTML = album.descrizione.replace('\\','');
+    let check = album.privato == 1;
+    document.getElementById("privateCheck").checked = check;
     if (album.imgLink == null) {
       album.imgLink = "images\\albumCovers\\000-icon.svg";
     }

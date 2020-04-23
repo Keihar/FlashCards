@@ -4,6 +4,7 @@ function search() {
         return;
     }
     let row = document.getElementById("row");
+    row.innerHTML = "Caricamento...";
     row.innerHTML = "";
     $.ajax({
         type: "POST",
@@ -13,11 +14,15 @@ function search() {
             try {
                 console.log(data);
                 let user = JSON.parse(data);
+                if (user.albums.length == 0) {
+                  row.innerHTML = "<div class='mb-3 col'> Nessun risultato.</div>"
+                }
                 user.albums.forEach(album => {
                   if (album.imgLink == null) {
                     album.imgLink = "images\\albumCovers\\000-icon.svg";
                   }
-                  row.innerHTML += "" + getCard(album.id, album.nome, album.descrizione, album.imgLink);
+                  row.innerHTML += "" + getCard(album.id, album.nome, album.descrizione,
+                    album.imgLink, album.nomeutente);
                 });
             } 
             catch (error) {
@@ -27,7 +32,7 @@ function search() {
       });
 }
 
-function getCard(id, name, description, imgLink) {
+function getCard(id, name, description, imgLink, author) {
 
     var descMaxLength = 32;
     if (description.length > descMaxLength) {
@@ -40,6 +45,6 @@ function getCard(id, name, description, imgLink) {
     `<a href='#' onclick='playAlbum(${id})' class='btn btn-primary'> <i class="fa fa-arrow-right"></i> Avvia</a>` +
     `<a href='#' onclick='viewAlbum(${id})' class='btn btn-outline-secondary ml-1'><i class="fa fa-pencil"></i> Modifica</a>` +
     `<a href='#' onclick='deleteAlbumConfirm(${id})' class='btn btn-outline-danger ml-1' data-toggle="modal" data-target="#exampleModal"><i class="fa fa-times"></i> Elimina</a>`+
-    `</p> <p class="card-text text-secondary">Creato da te</p> </div> </div> </div> </div>`;
+    `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
     return str;
   }

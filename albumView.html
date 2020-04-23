@@ -17,7 +17,7 @@
   <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/42cdbffcd9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="vendors/font-awesome.min.css">
-  
+
   <!-- Personal CSS -->
   <title>Albums</title>
   <link rel="icon" href="images/000-icon.svg">
@@ -98,9 +98,14 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="explore.html">
-            <svg class="feather feather-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+            <svg class="feather feather-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                clip-rule="evenodd" />
+              <path fill-rule="evenodd"
+                d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                clip-rule="evenodd" />
             </svg>
             Esplora
           </a>
@@ -156,32 +161,41 @@
         <div class="card">
           <div class="card-body">
             <form id="modifyAlbum" action="PHP/modifyAlbum.php">
-          <div class="row no-gutters">
-            <div class="col-md-4 text-center">
-              <img id="currentIcon" class='profilePic ml-4' src='' onclick="$('#iconModal').modal('show');">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body pb-0">
-                <h5 class="card-title">Generali</h5>
-                <!-- Nome -->
-                <p class="card-text ">
-                  <label for="name">Nome Album</label>
-                  <input type="text" class="form-control" id="albumName" name="nome" placeholder="Nome Album"
-                  maxlength="50" required>
-                </p>
+              <div class="row no-gutters">
+                <div class="col-md-4 text-center">
+                  <img id="currentIcon" class='profilePic ml-4' src='' onclick="$('#iconModal').modal('show');">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body pb-0">
+                    <h5 class="card-title">Generali</h5>
+                    <!-- Nome -->
+                    <p class="card-text ">
+                      <label for="name">Nome Album</label>
+                      <input type="text" class="form-control" id="albumName" name="nome" placeholder="Nome Album"
+                        maxlength="50" required>
+                    </p>
 
-                <!-- Hidden Input -->
-                <input type="text" id="imgLink" name="imgLink" class="d-none">
+                    <!-- Hidden Input -->
+                    <input type="text" id="imgLink" name="imgLink" class="d-none">
+                  </div>
+                </div>
+                <br>
+                <div class="card-body p-0 d-block">
+                  <p class="card-body pb-0 pt-0 mb-0">
+                    <label for="desc">Descrizione</label>
+                    <textarea class="form-control" name="descrizione" id="albumDescription" rows="4" maxlength="255"
+                      required></textarea>
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <button type="button" class="btn-block ml-5 mr-4 mt-3" style="background:transparent; border:none;" disabled>
+                  <input type="checkbox" class="form-check-input" name="privato" id="privateCheck">
+                  <label class="form-check-label" for="privateCheck">Album privato?</label>
+                </button>
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary btn-block ml-4 mr-4 mb-3 mt-3"><i class="far fa-save"></i>
+                  Salva</button>
               </div>
-            </div>
-            <p class="card-body pb-0 pt-0 mb-0">
-              <label for="desc">Descrizione</label>
-              <textarea class="form-control" name="descrizione" id="albumDescription" rows="4"
-              maxlength="255" required></textarea>
-            </p>
-            <!-- Submit -->
-            <button type="submit" class="btn btn-primary btn-block m-4 mt-0"><i class="far fa-save"></i> Salva</button>
-          </div>
             </form>
           </div>
         </div>
@@ -232,7 +246,8 @@
       </div>
     </div>
     <!-- Icons Modal -->
-    <div class="modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="iconModalLabel" aria-hidden="true">
+    <div class="modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="iconModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -242,7 +257,7 @@
             </button>
           </div>
           <div class="modal-body" id="icons">
-            
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>

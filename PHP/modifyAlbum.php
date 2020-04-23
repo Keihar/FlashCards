@@ -13,7 +13,7 @@
     $nome = mysqli_real_escape_string($connect, $_POST["nome"]);
     $descrizione = mysqli_real_escape_string($connect, $_POST["descrizione"]);
     $imgLink = mysqli_real_escape_string($connect, $_POST["imgLink"]);
-    $privato = mysqli_real_escape_string($connect, isset($_POST['privato']) ? $_POST['privato'] : 0);
+    $privato = isset($_POST['privato']) ? 1 : 0;;
 
     //query per modificare l'album
     $update_query = "UPDATE Album SET nome='$nome', descrizione='$descrizione', imgLink='$imgLink', privato='$privato' WHERE id='$id_album'";

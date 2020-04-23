@@ -8,7 +8,7 @@
     $nome_album = mysqli_real_escape_string($connect, $_POST['nome_album']);
     $descrizione = mysqli_real_escape_string($connect, $_POST['descrizione']);
     $imgLink = mysqli_real_escape_string($connect, $_POST['imgLink']);
-    $privato = mysqli_real_escape_string($connect, isset($_POST['privato']) ? $_POST['privato'] : 0);
+    $privato = isset($_POST['privato']) ? 1 : 0;
 
     //Prendo l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);

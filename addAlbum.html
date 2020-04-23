@@ -22,7 +22,6 @@
   <title>Nuovo Album</title>
   <link rel="icon" href="images/000-icon.svg">
   <link rel="stylesheet" href="CSS/universal.css">
-  <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
 </head>
 
@@ -176,8 +175,13 @@
                 <!-- Descrizione -->
                 <p class="card-text">
                   <label for="desc">Descrizione</label>
-                  <textarea class="form-control" name="descrizione" id="desc" rows="4" maxlength="255"
+                  <textarea class="form-control" name="descrizione" id="desc" rows="3" maxlength="255"
                     required></textarea>
+                </p>
+
+                <p class="card-text ml-4">
+                  <input type="checkbox" class="form-check-input" name="privato" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Album privato?</label>
                 </p>
               </div>
             </div>
