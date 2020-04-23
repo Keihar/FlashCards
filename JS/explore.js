@@ -3,15 +3,16 @@ function search() {
     if (query == "") {
         return;
     }
+    let row = document.getElementById("row");
+    row.innerHTML = "";
     $.ajax({
         type: "POST",
         url: "PHP/searchQuery.php",
         data: { 'query': query },
         success: function (data) {
             try {
+                console.log(data);
                 let user = JSON.parse(data);
-                let row = document.getElementById("row");
-          
                 user.albums.forEach(album => {
                   if (album.imgLink == null) {
                     album.imgLink = "images\\albumCovers\\000-icon.svg";
