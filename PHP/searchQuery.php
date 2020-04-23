@@ -7,7 +7,7 @@
 
     $stringa = $_POST['query'];
 
-    $search_for_string_query = "SELECT * FROM Album WHERE nome LIKE '%'$stringa'%' AND privato=0";
+    $search_for_string_query = "SELECT * FROM Album WHERE nome LIKE '%$stringa%' AND privato=0";
     $search_for_string = mysqli_query($connect, $search_for_string_query);
 
     //istanzio array che mi servirà per splittare le righe
