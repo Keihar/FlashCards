@@ -13,18 +13,12 @@
   <script src="vendors/jquery-3.5.0.min.js"></script>
   <script src="vendors/popper.min.js"></script>
   <script src="vendors/bootstrap/bootstrap.min.js"></script>
-
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/42cdbffcd9.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="vendors/font-awesome.min.css">
   
   <!-- Personal CSS -->
-  <title>Dashboard</title>
+  <title>Informazioni</title>
   <link rel="icon" href="images/000-icon.svg">
-  <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/register.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
-  <link rel="stylesheet" href="CSS/albumList.css">
 </head>
 
 <body>
@@ -57,12 +51,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="albumList.html">
+          <a class="nav-link" href="albumList.html">
             <svg class="feather feather-layers" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M3.188 8L.264 9.559a.5.5 0 000 .882l7.5 4a.5.5 0 00.47 0l7.5-4a.5.5 0 000-.882L12.813 8l-1.063.567L14.438 10 8 13.433 1.562 10 4.25 8.567 3.187 8z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 01.47 0l7.5 4a.5.5 0 010 .882l-7.5 4a.5.5 0 01-.47 0l-7.5-4a.5.5 0 010-.882l7.5-4zM1.563 6L8 9.433 14.438 6 8 2.567 1.562 6z" clip-rule="evenodd"/>
             </svg>
-            Albums  <span class="sr-only">(current)</span>
+            Albums  
           </a>
         </li>
         <li class="nav-item">
@@ -76,12 +70,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="explore.html">
+          <a class="nav-link active" href="explore.html">
             <svg class="feather feather-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
             </svg>
-            Esplora
+            Esplora <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
@@ -117,35 +111,50 @@
 
   <!-- Contents -->
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
-      <h2 class="mb-4">I Tuoi Album</h2>
-      <div class="row" id="row">
-        
+    <div class="mb-3">
+      <h1 class="h2">Esplora</h1> 
+      <!-- //SELECT * FROM users WHERE username LIKE '%querystring%' -->
+    </div>
+    <div class="col align-self-center mt-4 mb-4 pl-0 pr-0">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search an album..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">
+            <svg class="bi bi-search" style="padding-bottom: 0.2em" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel">Elimina</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Sei sicuro di volere eliminare il seguente album? 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-              <button type="button" class="btn btn-danger" onclick="deleteAlbum()"><i class="fa fa-times"></i> Elimina</button>
-            </div>
+    </div>
+    <div class="mb-3">
+      <h1 class="h5">Risultati:</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
       </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Personal JS -->
   <script src="JS/sessionCheck.js"></script>
-  <script src="JS/albumList.js"></script>
 </body>
 
 </html>

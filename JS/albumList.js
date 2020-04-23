@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 function getCard(id, name, description, imgLink) {
-  let str = `<div class="card mb-3 ml-3" style="max-width: 540px;"> <div class="row no-gutters"> <div class="col-md-4">`+
+  let str = `<div class="card mb-3 ml-3" style="width: 45%"> <div class="row no-gutters"> <div class="col-md-4">`+
   `<img src="${imgLink}"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> `+
   `<p class="card-text">${description}</p><p class="card-text">`+
   `<a href='#' onclick='playAlbum(${id})' class='btn btn-primary'> <i class="fa fa-arrow-right"></i> Avvia</a>` +
