@@ -6,6 +6,8 @@
 
     $stringa = mysqli_real_escape_string($connect, $_POST["query"]);
 
+    $stringa = $_POST['query'];
+
     $search_for_string_query = "SELECT * FROM Album WHERE nome LIKE '%$stringa%' AND privato=0";
     $search_for_string = mysqli_query($connect, $search_for_string_query);
 
