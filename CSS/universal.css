@@ -1,3 +1,24 @@
+#emailHelp {
+    display:none;
+}
+
+.container {
+    width: 30%;
+}
+
+.myTitle {
+    margin-top: 3.5em;
+    margin-bottom: 1.5em;
+}
+
+.spacer{
+    width: 90%;
+}
+
+.titleBar{
+    border-radius: 0px;
+}
+
 textarea {
     resize: none;
     white-space: pre-wrap;
