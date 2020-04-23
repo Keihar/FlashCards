@@ -1,13 +1,16 @@
+//  Local variables
 var cards = [];
 var currentIndex = 0;
 var sessionConcluded = false;
 
+//  Flip
 function flip() {
     document.querySelector("#myCard").classList.toggle("flip")
     document.getElementById("backCard").innerHTML = "" + cards[currentIndex].retro;
     $('#nextBtn').prop('disabled', false);
 }
 
+//  Next Card
 function nextCard() {
     // Remove focus from clicked button
     $('input, textarea, select').focus(function() {
@@ -27,10 +30,6 @@ function nextCard() {
     }
     document.getElementById("backCard").innerHTML = "";
     document.getElementById("frontCard").innerHTML = "" + cards[currentIndex].fronte;
-}
-
-function exit() {
-    window.location.href = "albumList.html";
 }
 
 $(window).on('beforeunload', function () {

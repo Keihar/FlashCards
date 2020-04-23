@@ -26,13 +26,19 @@ $(document).ready(function() {
 });
 
 function getCard(id, name, description, imgLink) {
-  let str = `<div class="card mb-3 ml-3" style="max-width: 540px;"> <div class="row no-gutters"> <div class="col-md-4">`+
+
+  var descMaxLength = 32;
+  if (description.length > descMaxLength) {
+    description = description.substring(0, descMaxLength) + "...";
+  }
+  
+  let str = `<div class="card mb-3 ml-3" style="width: 45%"> <div class="row no-gutters"> <div class="col-md-4">`+
   `<img src="${imgLink}"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> `+
   `<p class="card-text">${description}</p><p class="card-text">`+
   `<a href='#' onclick='playAlbum(${id})' class='btn btn-primary'> <i class="fa fa-arrow-right"></i> Avvia</a>` +
   `<a href='#' onclick='viewAlbum(${id})' class='btn btn-outline-secondary ml-1'><i class="fa fa-pencil"></i> Modifica</a>` +
   `<a href='#' onclick='deleteAlbumConfirm(${id})' class='btn btn-outline-danger ml-1' data-toggle="modal" data-target="#exampleModal"><i class="fa fa-times"></i> Elimina</a>`+
-  `</p> <p class="card-text"><small class="text-muted">Creato da te</small></p> </div> </div> </div> </div>`;
+  `</p> <p class="card-text text-secondary">Creato da te</p> </div> </div> </div> </div>`;
   return str;
 }
 var selectedAlbum = "";
