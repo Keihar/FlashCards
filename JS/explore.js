@@ -77,12 +77,12 @@ function albumPreview(id) {
       //  Adds backs and fronts to the table
       let tableBody = document.getElementById("tableBody");
       tableBody.innerHTML = "";
-
+      console.table(album.flashcards);
       album.flashcards.forEach(flashcard => {
-        tableBody.innerHTML += "<tr>" +
-          `<td>${flashcard.fronte.replace('\\', '')}</td>` +
-          `<td>${flashcard.retro.replace('\\', '')}</td>` +
-          "</tr>";
+          tableBody.innerHTML += "<tr>" +
+            `<td>${flashcard.fronte.replace('\\', '')}</td>` +
+            `<td>${flashcard.retro.replace('\\', '')}</td>` +
+            "</tr>";
       });
     }
   });
