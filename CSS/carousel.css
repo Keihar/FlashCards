@@ -71,7 +71,7 @@ body{
   background: #ff8b94;
 }
 
-.centered-element {
+.centered-element, .carousel-caption {
   -webkit-animation: fadein ease 3s; /* Safari, Chrome and Opera > 12.1 */
      -moz-animation: fadein ease 3s; /* Firefox < 16 */
       -ms-animation: fadein ease 3s; /* Internet Explorer */

@@ -56,6 +56,7 @@
           <label for="username">Nome Utente</label>
           <input type="text" class="form-control" id="username" name="username" placeholder="Nome Utente" 
           maxlength="16" required>
+          <p id="usernameHelp" class="text-danger">Questo Username è già utilizzato.</p>
         </div>
 
         <!-- Motto -->
@@ -85,7 +86,9 @@
   <script>
     $("#registerForm").submit(function (e) {
       let emailAlert = document.getElementById("emailHelp");
+      let usernameAlert = document.getElementById("usernameHelp");
       emailAlert.style.display = "none";
+      usernameAlert.style.display = "none";
 
       e.preventDefault();
       var form = $(this);
@@ -100,7 +103,10 @@
             alert("Registrazione avvenuta con successo!")
             window.location.href = "login.html";
           }
-          else {
+          else if (data == "username_taken") {
+            usernameAlert.style.display = "block";
+          }
+          else{
             emailAlert.style.display = "block";
           }
         }

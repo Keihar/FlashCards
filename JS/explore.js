@@ -48,3 +48,14 @@ function getCard(id, name, description, imgLink, author) {
     `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
     return str;
   }
+
+$(function() {
+  $("#searchBar").keypress(function (e) {
+      if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+          $('button[type=search]').click();
+          return false;
+      } else {
+          return true;
+      }
+  });
+});

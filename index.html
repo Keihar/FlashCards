@@ -9,8 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="fonts/Merriweather-Regular.ttf" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link href="fonts/Merriweather-Regular.ttf" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="vendors/jquery-3.5.0.min.js"></script>
@@ -29,14 +29,13 @@
 
 <body>
     <!-- Contenitore -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel"
-        style="min-width: 100vw; min-height: 100vh;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="min-width: 100vw; min-height: 100vh;">
         <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active" onclick="checkPage(0, 1)"></li>
-            <li data-target="#myCarousel" data-slide-to="1" onclick="checkPage(0, 2)"></li>
-            <li data-target="#myCarousel" data-slide-to="2" onclick="checkPage(0, 3)"></li>
-            <li data-target="#myCarousel" data-slide-to="3" onclick="checkPage(0, 4)"></li>
-            <li data-target="#myCarousel" data-slide-to="4" onclick="checkPage(0, 5)"></li>
+            <li data-target="#myCarousel" class="active"></li>
+            <li data-target="#myCarousel"></li>
+            <li data-target="#myCarousel"></li>
+            <li data-target="#myCarousel"></li>
+            <li data-target="#myCarousel"></li>
         </ol>
         <!-- First Slide -->
         <div class="carousel-inner">
@@ -48,23 +47,29 @@
                         </div>
                         <div class="headerTitle">
                             <h2>FlashCards</h2>
-                            <h5 style="color:gray"> 
+                            <h5 style="color:gray">
                                 "Costruire pensatori indipendenti e creativi, con uno scopo."
                             </h5>
                         </div>
                         <div class="contentCentered">
-                            <button class="bg-primary logBtn" onclick="change('register')">Registrati</button><br/>
+                            <button class="bg-primary logBtn" onclick="change('register')">Registrati</button><br />
                             <button class="bg-dark logBtn" onclick="change('login')">Accedi</button>
                         </div>
                     </div>
                     <div class="carousel-caption d-none d-md-block">
-                        <a href="#myCarousel" style="outline: none;" data-slide="next" onclick="checkPage(1)"><h4 style="color: #232b2b; text-shadow: none;">Cos'è FlashCards?
-                            <svg class="bi bi-arrow-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z" clip-rule="evenodd"/>
-                              </svg>
-                        </h4> </a>
-                      </div>
+                        <a href="#myCarousel" style="outline: none;" data-slide="next" onclick="checkPage(1)">
+                            <h4 style="color: #232b2b; text-shadow: none;">Cos'è FlashCards?
+                                <svg class="bi bi-arrow-right" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd" d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </h4>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="carousel-item bag-2 align-items-center carouselItem">
@@ -78,10 +83,12 @@
                         </div>
                         <div class="contentCentered">
                             <h4>
-                            Abbiamo reso veramente facile per le persone creare una raccolta di flashcard e metterci dentro quello che vogliono.
-                            Storiografia, barzellette stupide, battute intelligenti, pesca, moda, arte, cose profonde.
-                            FlashCards da la possibilità di creare milioni di album differenti, pieni letteralmente di tutto.
-                        </h4>
+                                Abbiamo reso veramente facile per le persone creare una raccolta di flashcard e metterci
+                                dentro quello che vogliono.
+                                Storiografia, barzellette stupide, battute intelligenti, pesca, moda, arte, cose
+                                profonde.
+                                FlashCards da la possibilità di creare milioni di album, pieni letteralmente di tutto.
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -96,14 +103,17 @@
                             <h2>FlashCards è apprendimento</h2>
                         </div>
                         <div class="contentCentered">
-                            <h4> 
-                                Succede che quando rendi estremamente facile creare contenuti interessanti, le persone fanno esattamente quello. 
-                                Tutti quegli album meravigliosi che ti manderanno i tuoi amici, saranno album FlashCards. 
-                                Ti aiuteremo a trovare e seguire album meravigliosi, e aiuteremo altre persone a trovare e seguire i tuoi.
+                            <h4>
+                                Succede che quando rendi estremamente facile creare contenuti interessanti, le persone
+                                fanno esattamente quello.
+                                Tutti quegli album meravigliosi che ti manderanno i tuoi amici, saranno album
+                                FlashCards.
+                                Ti aiuteremo a trovare e seguire album meravigliosi, e aiuteremo altre persone a trovare
+                                e seguire i tuoi.
                             </h4>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="carousel-item bag-4 carouselItem" style="min-width: 100vw; min-height: 100vh;">
                 <div class="carouselItem container">
@@ -115,14 +125,17 @@
                             <h2>Praticamente sai già come funziona.</h2>
                         </div>
                         <div class="contentCentered">
-                            <h4> 
-                                Quando segui un autore, puoi vedere tutti i suoi album nella tua dashboard, proprio come ti aspetti. 
-                                Vedi qualcosa di spettacolare? Salvalo nei tuoi album. Fallo tuo. Poi rimuovilo se non ti va più. 
-                                Altre persone faranno lo stesso con i tuoi album. È così che si conosce gente in questo posto.
+                            <h4>
+                                Quando segui un autore, puoi vedere tutti i suoi album nella tua dashboard, proprio come
+                                ti aspetti.
+                                Vedi qualcosa di spettacolare? Salvalo nei tuoi album. Fallo tuo. Poi rimuovilo se non
+                                ti va più.
+                                Altre persone faranno lo stesso con i tuoi album. È così che si conosce gente in questo
+                                posto.
                             </h4>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="carousel-item bag-5 carouselItem" style="min-width: 100vw; min-height: 100vh;">
                 <div class="carouselItem container">
@@ -132,79 +145,82 @@
                         </div>
                         <div class="headerTitle">
                             <h2>Okay, non è difficile da spiegare.</h2>
-                            <h4> 
+                            <h4>
                                 Ti abbiamo mentito. Ma adesso sai come funziona. Entra pure.
-                            </h4>     
+                            </h4>
                         </div>
                         <div class="contentCentered">
-                            <button class="bg-primary logBtn" onclick="change('register')">Registrati</button><br/>
+                            <button class="bg-primary logBtn" onclick="change('register')">Registrati</button><br />
                             <button class="bg-dark logBtn" onclick="change('login')">Accedi</button>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
-        onclick="checkPage(-1)" id="c1">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
-        onclick="checkPage(1)"  id="c2">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    <!-- Optional JavaScript -->
-    <script>
-        function change(str) {
-            window.location.href = str + ".html"
-        }
-        var pageCounter = 1;
-        function checkPage(n, set = 0) {
-            pageCounter += n;
-            if (set != 0) {
-                pageCounter = set;
+            <a class="carousel-control-prev d-none" href="#myCarousel" role="button" data-slide="prev" onclick="checkPage(-1)"
+                id="c1">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next" onclick="checkPage(1)"
+                id="c2">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!-- Optional JavaScript -->
+        <script>
+            function change(str) {
+                window.location.href = str + ".html"
             }
-            if (pageCounter == 1) {
-                $( "#c1" ).addClass( "d-none" );
-            }
-            else {
-                $( "#c1" ).removeClass( "d-none" );
-            } 
-            if (pageCounter == 5){
-                $( "#c2" ).addClass( "d-none" );
-            }
-            else {
-                $( "#c2" ).removeClass( "d-none" );
-            }
-        }
-        $("#registerForm").submit(function (e) {
-            let emailAlert = document.getElementById("emailHelp");
-            emailAlert.style.display = "none";
-
-            e.preventDefault();
-            var form = $(this);
-            var url = form.attr('action');
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(),
-                success: function (data) {
-                    if (data == "success") {
-                        alert("Registrazione avvenuta con successo!")
-                        window.location.href = "login.html";
-                    }
-                    else {
-                        emailAlert.style.display = "block";
-                    }
+            function checkPage(n = 0) {
+                let pageCounter = getCurrentPage() + n;
+                if (pageCounter < 1) {
+                    $("#c1").addClass("d-none");
                 }
+                else {
+                    $("#c1").removeClass("d-none");
+                }
+                if (pageCounter > 3) {
+                    $("#c2").addClass("d-none");
+                }
+                else {
+                    $("#c2").removeClass("d-none");
+                }
+            }
+
+            function getCurrentPage() {
+                var carouselEl = $('.carousel');
+                var carouselItems = carouselEl.find('.carousel-item');
+                return carouselItems.siblings('.active').index();
+            }
+
+            $("#registerForm").submit(function (e) {
+                let emailAlert = document.getElementById("emailHelp");
+                emailAlert.style.display = "none";
+
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function (data) {
+                        if (data == "success") {
+                            alert("Registrazione avvenuta con successo!")
+                            window.location.href = "login.html";
+                        }
+                        else {
+                            emailAlert.style.display = "block";
+                        }
+                    }
+                });
             });
-        });
-        $(document).ready(function() {
-            checkPage(0);
-        });
-    </script>
+            $(document).ready(function () {
+                //checkPage();
+            });
+        </script>
 </body>
 
 </html>
