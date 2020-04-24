@@ -43,11 +43,11 @@
 
     $flashcards_final = array();
 
-    foreach ($flashcards as &$rows){
+    foreach ($flashcards as &$righe){
         array_push($flashcards_final, array(
-            'id_flashcard' => $rows['id'],
-            'fronte' => $rows['fronte'],
-            'retro' => $rows['retro']
+            'id_flashcard' => $righe['id'],
+            'fronte' => $righe['fronte'],
+            'retro' => $righe['retro']
         ));
     }
 
