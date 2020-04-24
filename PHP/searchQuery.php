@@ -41,11 +41,20 @@
         ));
     }    
 
+    $flashcards_final = array();
+
+    foreach ($flashcards as &$rows){
+        array_push($flashcards_final, array(
+            'id' => $rows['id'],
+            'fronte' => $rows['fronte'],
+            'retro' => $rows['retro']
+        ));
+    }
 
     //array di array
     $post_data = array(
         'albums' => $albums,
-        'flashcards' => $flashcards
+        'flashcards' => $flashcards_final
     );    
 
 
