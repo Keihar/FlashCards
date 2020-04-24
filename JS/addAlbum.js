@@ -10,7 +10,7 @@ $("#addAlbum").submit(function (e) {
       data: form.serialize(),
       success: function (data) {
           console.log(data);
-        if (data == "success") {
+        if (data.trim() == "success") {
           $('#exampleModal').modal('show');
         }
         else {

@@ -1,4 +1,8 @@
+
+
 <?php
+
+    date_default_timezone_set('Europe/Rome');
 
     //effettuo l'include per connettermi al DataBase
     include 'DBconnect.php';
@@ -22,8 +26,10 @@
         $email = mysqli_real_escape_string($connect, $row["email"]);
     }
 
+    $data = date('Y-m-d');
+    
     //inserisco nuovo album
-    $insert_album_query = "INSERT INTO Album(nome, descrizione, imgLink, privato, email) VALUES ('$nome_album', '$descrizione','$imgLink','$privato','$email')";
+    $insert_album_query = "INSERT INTO Album(nome, descrizione, data, imgLink, privato, email) VALUES ('$nome_album', '$descrizione','$data', '$imgLink','$privato','$email')";
     $insert_album = mysqli_query($connect, $insert_album_query);
 
 
