@@ -3,20 +3,37 @@
 //faccio partire la sessione
 session_start();
 
-if (!$_SESSION['valid']) {
-    echo "session_error";
-} 
-else {
+//includo codice per connessione al DataBase
+include 'DBconnect.php';
 
-    //includo codice per connessione al DataBase
-    include 'DBconnect.php';
+$user = "";
+
+if (isset($_POST["username"])) {
+
+    $user = $_POST["username"];
+
+}    
+else if ($_SESSION['valid']) {
 
     //attribuisco a $user la variabile di sessione che identifica l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
 
+
+}
+else{
+    exit("error");
+}
+
     //query per prelevamento dei campi dell'album
     $sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
     $result = mysqli_query($connect, $sql);
+
+    $preleva_motto_str = "SELECT motto FROM Utente WHERE Utente.nome='$user'";
+    $preleva_motto = mysqli_query($connect, $preleva_motto_str);
+
+    while($row = mysqli_fetch_array($preleva_motto)){
+        $motto = mysqli_real_escape_string($connect, $row["motto"]);
+    }
 
     //query per conto degli album
     $conta_album_str = "SELECT COUNT(*) AS nalbum FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome='$user'";
@@ -59,8 +76,8 @@ else {
 
     //array di array
     $post_data = array(
-        'nome' => $_SESSION['utente'],
-        'motto' => $_SESSION['motto'],
+        'nome' => $user,
+        'motto' => $motto,
         'albums' => $albums
     );
 
@@ -68,4 +85,3 @@ else {
     $output = json_encode($post_data);
 
     echo $output;
-}
