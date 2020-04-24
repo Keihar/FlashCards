@@ -80,3 +80,7 @@ $(document).ready(function() {
         }
     });
 });
+
+function setCurrentUser(id) {
+  
+}
