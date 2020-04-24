@@ -2,111 +2,209 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="fonts/Merriweather-Regular.ttf" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="vendors/jquery-3.5.0.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="vendors/popper.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="vendors/jquery-3.5.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="vendors/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-  <!-- Personal CSS -->
-  <title>Registrati</title>
-  <link rel="icon" href="images/000-icon.svg">
-  <link rel="stylesheet" href="CSS/universal.css">
+    <!-- Personal CSS -->
+    <title>FlashCards</title>
+    <link rel="icon" href="images/000-icon.svg">
+    <link rel="stylesheet" href="CSS/universal.css">
+    <link rel="stylesheet" href="CSS/carousel.css">
+
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow titleBar">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
-      <svg class="feather feather-files" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M3 2h8a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1H3z" clip-rule="evenodd"/>
-        <path d="M5 0h8a2 2 0 012 2v10a2 2 0 01-2 2v-1a1 1 0 001-1V2a1 1 0 00-1-1H5a1 1 0 00-1 1H3a2 2 0 012-2z"/>
-      </svg>
-      FlashCards
-    </a>
-    <div class="spacer"> </div>
-  </nav>
-  <!-- Contenitore -->
-  <div class="container">
-    <div class="myTitle" style="width: 200px;">
-      <h1>FlashCards </h1>
-      <h3>Registrati</h3>
+    <!-- Contenitore -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel"
+        style="min-width: 100vw; min-height: 100vh;">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active" onclick="checkPage(0, 1)"></li>
+            <li data-target="#myCarousel" data-slide-to="1" onclick="checkPage(0, 2)"></li>
+            <li data-target="#myCarousel" data-slide-to="2" onclick="checkPage(0, 3)"></li>
+            <li data-target="#myCarousel" data-slide-to="3" onclick="checkPage(0, 4)"></li>
+            <li data-target="#myCarousel" data-slide-to="4" onclick="checkPage(0, 5)"></li>
+        </ol>
+        <!-- First Slide -->
+        <div class="carousel-inner">
+            <div class="carousel-item active bag-1 carouselItem">
+                <div class="carouselItem container">
+                    <div class="centered-element">
+                        <div class="headerImage">
+                            <img class="imgCentered" src="images\000-icon.svg">
+                        </div>
+                        <div class="headerTitle">
+                            <h2>FlashCards</h2>
+                            <h5 style="color:gray"> 
+                                "Costruire pensatori indipendenti e creativi, con uno scopo."
+                            </h5>
+                        </div>
+                        <div class="contentCentered">
+                            <button class="bg-primary logBtn" onclick="change('register')">Registrati</button><br/>
+                            <button class="bg-dark logBtn" onclick="change('login')">Accedi</button>
+                        </div>
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <a href="#myCarousel" style="outline: none;" data-slide="next" onclick="checkPage(1)"><h4 style="color: #232b2b; text-shadow: none;">Cos'è FlashCards?
+                            <svg class="bi bi-arrow-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z" clip-rule="evenodd"/>
+                              </svg>
+                        </h4> </a>
+                      </div>
+                </div>
+            </div>
+            <div class="carousel-item bag-2 align-items-center carouselItem">
+                <div class="carouselItem container">
+                    <div class="centered-element">
+                        <div class="headerImage">
+                            <img class="imgCentered" src="images\carousel\files-and-folders.svg">
+                        </div>
+                        <div class="headerTitle">
+                            <h2>FlashCards è così facile da usare <br>che è difficile da spiegare.</h2>
+                        </div>
+                        <div class="contentCentered">
+                            <h4>
+                            Abbiamo reso veramente facile per le persone creare una raccolta di flashcard e metterci dentro quello che vogliono.
+                            Storiografia, barzellette stupide, battute intelligenti, pesca, moda, arte, cose profonde.
+                            FlashCards da la possibilità di creare milioni di album differenti, pieni letteralmente di tutto.
+                        </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item bag-3 carouselItem" style="min-width: 100vw; min-height: 100vh; ">
+                <div class="carouselItem container">
+                    <div class="centered-element" style="top: 26vh;">
+                        <div class="headerImage">
+                            <img class="imgCentered" src="images\carousel\process.svg">
+                        </div>
+                        <div class="headerTitle">
+                            <h2>FlashCards è apprendimento</h2>
+                        </div>
+                        <div class="contentCentered">
+                            <h4> 
+                                Succede che quando rendi estremamente facile creare contenuti interessanti, le persone fanno esattamente quello. 
+                                Tutti quegli album meravigliosi che ti manderanno i tuoi amici, saranno album FlashCards. 
+                                Ti aiuteremo a trovare e seguire album meravigliosi, e aiuteremo altre persone a trovare e seguire i tuoi.
+                            </h4>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="carousel-item bag-4 carouselItem" style="min-width: 100vw; min-height: 100vh;">
+                <div class="carouselItem container">
+                    <div class="centered-element" style="top: 27vh;">
+                        <div class="headerImage">
+                            <img class="imgCentered" src="images\carousel\talk.svg">
+                        </div>
+                        <div class="headerTitle">
+                            <h2>Praticamente sai già come funziona.</h2>
+                        </div>
+                        <div class="contentCentered">
+                            <h4> 
+                                Quando segui un autore, puoi vedere tutti i suoi album nella tua dashboard, proprio come ti aspetti. 
+                                Vedi qualcosa di spettacolare? Salvalo nei tuoi album. Fallo tuo. Poi rimuovilo se non ti va più. 
+                                Altre persone faranno lo stesso con i tuoi album. È così che si conosce gente in questo posto.
+                            </h4>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="carousel-item bag-5 carouselItem" style="min-width: 100vw; min-height: 100vh;">
+                <div class="carouselItem container">
+                    <div class="centered-element">
+                        <div class="headerImage">
+                            <img class="imgCentered" src="images\000-icon.svg">
+                        </div>
+                        <div class="headerTitle">
+                            <h2>Okay, non è difficile da spiegare.</h2>
+                            <h4> 
+                                Ti abbiamo mentito. Ma adesso sai come funziona. Entra pure.
+                            </h4>     
+                        </div>
+                        <div class="contentCentered">
+                            <button class="bg-primary logBtn" onclick="change('register')">Registrati</button><br/>
+                            <button class="bg-dark logBtn" onclick="change('login')">Accedi</button>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
+        onclick="checkPage(-1)" id="c1">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
+        onclick="checkPage(1)"  id="c2">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <div class="wrapper">
-      <form id="registerForm" action="PHP/register.php">
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Indirizzo Email</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
-            placeholder="Inserisci email" maxlength="50" required>
-          <p id="emailHelp" class="text-danger">Questa Email è già utilizzata.</p>
-        </div>
-
-        <!-- Username -->
-        <div class="form-group">
-          <label for="username">Nome Utente</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Nome Utente" 
-          maxlength="16" required>
-        </div>
-
-        <!-- Motto -->
-        <div class="form-group">
-          <label for="motto">Motto</label>
-          <input type="text" class="form-control" id="motto" name="motto" placeholder="Motto" 
-          maxlength="24" required>
-        </div>
-
-        <!-- Password -->
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-          maxlength="255" required>
-        </div>
-
-        <!-- Link -->
-        <div class="form-group">
-          <a href="login.html"> Sei già registrato? </a>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Registrati</button>
-      </form>
-    </div>
-  </div>
-  <!-- Optional JavaScript -->
-  <script>
-    $("#registerForm").submit(function (e) {
-      let emailAlert = document.getElementById("emailHelp");
-      emailAlert.style.display = "none";
-
-      e.preventDefault();
-      var form = $(this);
-      var url = form.attr('action');
-
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize(),
-        success: function (data) {
-          if (data == "success") {
-            alert("Registrazione avvenuta con successo!")
-            window.location.href = "login.html";
-          }
-          else {
-            emailAlert.style.display = "block";
-          }
+    <!-- Optional JavaScript -->
+    <script>
+        function change(str) {
+            window.location.href = str + ".html"
         }
-      });
-    });
-  </script>
+        var pageCounter = 1;
+        function checkPage(n, set = 0) {
+            pageCounter += n;
+            if (set != 0) {
+                pageCounter = set;
+            }
+            if (pageCounter == 1) {
+                $( "#c1" ).addClass( "d-none" );
+            }
+            else {
+                $( "#c1" ).removeClass( "d-none" );
+            } 
+            if (pageCounter == 5){
+                $( "#c2" ).addClass( "d-none" );
+            }
+            else {
+                $( "#c2" ).removeClass( "d-none" );
+            }
+        }
+        $("#registerForm").submit(function (e) {
+            let emailAlert = document.getElementById("emailHelp");
+            emailAlert.style.display = "none";
+
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (data) {
+                    if (data == "success") {
+                        alert("Registrazione avvenuta con successo!")
+                        window.location.href = "login.html";
+                    }
+                    else {
+                        emailAlert.style.display = "block";
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            checkPage(0);
+        });
+    </script>
 </body>
 
 </html>

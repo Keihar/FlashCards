@@ -9,7 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-  
+
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="vendors/jquery-3.5.0.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -18,7 +18,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
   <!-- Personal CSS -->
-  <title>Accedi</title>
+  <title>Registrati</title>
   <link rel="icon" href="images/000-icon.svg">
   <link rel="stylesheet" href="CSS/universal.css">
 </head>
@@ -31,7 +31,7 @@
         <path fill-rule="evenodd" d="M3 2h8a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1H3z" clip-rule="evenodd"/>
         <path d="M5 0h8a2 2 0 012 2v10a2 2 0 01-2 2v-1a1 1 0 001-1V2a1 1 0 00-1-1H5a1 1 0 00-1 1H3a2 2 0 012-2z"/>
       </svg>
-      FlashCards 
+      FlashCards
     </a>
     <div class="spacer"> </div>
   </nav>
@@ -39,16 +39,30 @@
   <div class="container">
     <div class="myTitle" style="width: 200px;">
       <h1>FlashCards </h1>
-      <h3>Accedi</h3>
+      <h3>Registrati</h3>
     </div>
     <div class="wrapper">
-      <form id="loginForm" action="PHP/login.php">
+      <form id="registerForm" action="PHP/register.php">
         <!-- Email -->
         <div class="form-group">
           <label for="email">Indirizzo Email</label>
           <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
             placeholder="Inserisci email" maxlength="50" required>
-          <p id="emailHelp" class="text-danger">Email o password non corrette.</p>
+          <p id="emailHelp" class="text-danger">Questa Email è già utilizzata.</p>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Nome Utente</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Nome Utente" 
+          maxlength="16" required>
+        </div>
+
+        <!-- Motto -->
+        <div class="form-group">
+          <label for="motto">Motto</label>
+          <input type="text" class="form-control" id="motto" name="motto" placeholder="Motto" 
+          maxlength="24" required>
         </div>
 
         <!-- Password -->
@@ -60,15 +74,39 @@
 
         <!-- Link -->
         <div class="form-group">
-          <a href="register.html"> Non sei registrato? </a>
+          <a href="login.html"> Sei già registrato? </a>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Accedi</button>
+        <button type="submit" class="btn btn-primary btn-block">Registrati</button>
       </form>
     </div>
   </div>
-  <!-- Personal JS -->
-  <script src="JS/login.js"></script>
+  <!-- Optional JavaScript -->
+  <script>
+    $("#registerForm").submit(function (e) {
+      let emailAlert = document.getElementById("emailHelp");
+      emailAlert.style.display = "none";
+
+      e.preventDefault();
+      var form = $(this);
+      var url = form.attr('action');
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(),
+        success: function (data) {
+          if (data == "success") {
+            alert("Registrazione avvenuta con successo!")
+            window.location.href = "login.html";
+          }
+          else {
+            emailAlert.style.display = "block";
+          }
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
