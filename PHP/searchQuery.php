@@ -12,9 +12,17 @@
     //istanzio array che mi servirà per splittare le righe
     $json_array = array();
 
+    
+    $flashcards = array();
+
     //splitto le righe che ottengo dalla query
     while ($row = mysqli_fetch_assoc($search_for_string)) {
         $json_array[] = $row;
+        $preleva_flashcard_str = "SELECT Flashcard.id, fronte, retro FROM Flashcard WHERE id_album = ".$row["id"]."";
+        $preleva_flashcard = mysqli_query($connect, $preleva_flashcard_str);
+        while($riga = mysqli_fetch_assoc($preleva_flashcard)){
+            $flashcards = $riga;
+        }
     }
 
     //istanzio l'array per creare la matrice
@@ -36,7 +44,8 @@
 
     //array di array
     $post_data = array(
-        'albums' => $albums
+        'albums' => $albums,
+        'flashcards' => $flashcards
     );    
 
 
