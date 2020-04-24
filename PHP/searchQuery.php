@@ -18,7 +18,7 @@
     //splitto le righe che ottengo dalla query
     while ($row = mysqli_fetch_assoc($search_for_string)) {
         $json_array[] = $row;
-        $preleva_flashcard_str = "SELECT Flashcard.id, fronte, retro FROM Flashcard WHERE id_album = ".$row["id"]."";
+        $preleva_flashcard_str = "SELECT Flashcard.id AS id, fronte, retro FROM Flashcard WHERE id_album = ".$row["id"]."";
         $preleva_flashcard = mysqli_query($connect, $preleva_flashcard_str);
         while($riga = mysqli_fetch_assoc($preleva_flashcard)){
             $flashcards = $riga;
@@ -45,7 +45,7 @@
 
     foreach ($flashcards as &$rows){
         array_push($flashcards_final, array(
-            'id' => $rows['id'],
+            'id_flashcard' => $rows['id'],
             'fronte' => $rows['fronte'],
             'retro' => $rows['retro']
         ));
