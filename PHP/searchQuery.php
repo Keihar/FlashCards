@@ -11,17 +11,16 @@
 
     //istanzio array che mi servirà per splittare le righe
     $json_array = array();
-
     
-    $flashcards = array();
+    $json_array2 = array();
 
     //splitto le righe che ottengo dalla query
     while ($row = mysqli_fetch_assoc($search_for_string)) {
         $json_array[] = $row;
-        $preleva_flashcard_str = "SELECT Flashcard.id AS id, fronte, retro FROM Flashcard WHERE id_album = ".$row["id"]."";
+        $preleva_flashcard_str = "SELECT id, fronte, retro FROM Flashcard WHERE id_album = ".$row["id"]."";
         $preleva_flashcard = mysqli_query($connect, $preleva_flashcard_str);
         while($riga = mysqli_fetch_assoc($preleva_flashcard)){
-            $flashcards = $riga;
+            $json_array2[] = $riga;
         }
     }
 
@@ -41,10 +40,10 @@
         ));
     }    
 
-    $flashcards_final = array();
+    $flashcards = array();
 
-    foreach ($flashcards as &$righe){
-        array_push($flashcards_final, array(
+    foreach($json_array2 as &$righe){
+        array_push($flashcards, array(
             'id_flashcard' => $righe['id'],
             'fronte' => $righe['fronte'],
             'retro' => $righe['retro']
@@ -54,7 +53,7 @@
     //array di array
     $post_data = array(
         'albums' => $albums,
-        'flashcards' => $flashcards_final
+        'flashcards' => $flashcards
     );    
 
 
