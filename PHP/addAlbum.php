@@ -9,6 +9,7 @@
     $descrizione = mysqli_real_escape_string($connect, $_POST['descrizione']);
     $imgLink = mysqli_real_escape_string($connect, $_POST['imgLink']);
     $privato = isset($_POST['privato']) ? 1 : 0;
+    //
 
     //Prendo l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
