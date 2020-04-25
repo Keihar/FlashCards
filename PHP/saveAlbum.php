@@ -13,7 +13,7 @@
     $insert_saved_str = "INSERT INTO album_salvati(emailUtente, idAlbum) VALUES ('$email', '$id_album')";
     $insert_saved = mysqli_query($connect, $insert_saved_str);
 
-    //se non esiste alcun utente con le credenziali inserite
+    //se non esiste alcun utente con le credenziali inseritee
     if(!$insert_saved){
         echo "error";
     }
