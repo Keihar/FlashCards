@@ -5,8 +5,9 @@
     session_start();
 
     $stringa = mysqli_real_escape_string($connect, $_POST["query"]);
+    $user = $_SESSION["utente"];
 
-    $search_for_string_query = "SELECT id, Album.nome AS nome, descrizione, imgLink, privato, Album.email AS email, Utente.nome AS username FROM Album INNER JOIN Utente ON (Album.email = Utente.email) WHERE Album.nome LIKE '%$stringa%' AND privato=0 AND Album.email = Utente.email LIMIT 10";
+    $search_for_string_query = "SELECT id, Album.nome AS nome, descrizione, imgLink, privato, Album.email AS email, Utente.nome AS username FROM Album INNER JOIN Utente ON (Album.email = Utente.email) WHERE Album.nome LIKE '%$stringa%' AND privato=0 AND Album.email = Utente.email AND Utente.nome != '$user' LIMIT 10 ";
     $search_for_string = mysqli_query($connect, $search_for_string_query);
 
     //istanzio array che mi servirà per splittare le righe

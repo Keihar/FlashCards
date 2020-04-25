@@ -25,8 +25,14 @@ else{
 }
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
+    
+    /*$sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
+    $result = mysqli_query($connect, $sql);*/
+
+    $sql = "SELECT Album.id AS id, Album.nome, descrizione, imgLink, Utente.nome AS username FROM Album INNER JOIN Utente ON (utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) WHERE Utente.nome = '$user' OR  Album.email = emailUtente";
     $result = mysqli_query($connect, $sql);
+
+    $creatore_query = "SELECT Utente.nome AS creatore FROM Album INNER JOIN Utente ON (Utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) WHERE Album.email = emailUtente";
 
     $preleva_motto_str = "SELECT motto FROM Utente WHERE Utente.nome='$user'";
     $preleva_motto = mysqli_query($connect, $preleva_motto_str);
@@ -70,7 +76,9 @@ else{
             'id' => $rows['id'],
             'nome' => $rows['nome'],
             'descrizione' => $rows['descrizione'],
-            'imgLink' => $rows['imgLink']
+            'imgLink' => $rows['imgLink'],
+            //restituisco username creatore!
+            'username' => $rows['username']
         ));
     }
 
