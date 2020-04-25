@@ -55,12 +55,12 @@ function getCard(id, name, description, imgLink, author) {
   }
 
   //  Returns the formatted HTML
-  return `<div class="card mb-3 ml-3" style="width: 45%"> <div class="row no-gutters"> <div class="col-md-4">` +
-    `<img src="${imgLink}"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
+  return `<div class="card mb-3 ml-3" id="singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
+    `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
     `<p class="card-text">${description}</p><p class="card-text">` +
     `<a href='#' onclick='playAlbum(${id})' class='btn btn-primary'> <i class="fa fa-plus"></i> Aggiungi ai tuoi Albums</a>` +
     `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'><i class="fa fa-pencil"></i> Anteprima</button>` +
-    `</p> <p class="card-text"><a href="#" class="text-secondary" onclick="setCurrentUser(${author})">Creato da ${author}</a></p> </div> </div> </div> </div>`;
+    `</p> <p class="card-text"><a href="profile.html?user=${author}" class="text-secondary"">Creato da ${author}</a></p> </div> </div> </div> </div>`;
 }
 
 //  Album Preview

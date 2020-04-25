@@ -1,0 +1,12 @@
+.singleCard {
+    width:75%;
+}
+
+#cardImg {
+    width: 80%;
+    margin: 10%;
+}
+
+.userCards {
+    padding-left: 10%;
+}
