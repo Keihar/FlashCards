@@ -8,6 +8,7 @@ $(document).ready(function() {
             try {
                 let user = JSON.parse(data);
                 let row = document.getElementById("row");
+                console.table(user);
           
                 user.albums.forEach(album => {
                   if (album.imgLink == null) {
@@ -27,11 +28,13 @@ $(document).ready(function() {
 
 function getCard(id, name, description, imgLink) {
 
+  //  Truncate the description if it's too long
   var descMaxLength = 32;
   if (description.length > descMaxLength) {
     description = description.substring(0, descMaxLength) + "...";
   }
   
+  //  
   let str = `<div class="card mb-3 ml-3" style="width: 45%"> <div class="row no-gutters"> <div class="col-md-4">`+
   `<img src="${imgLink}"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> `+
   `<p class="card-text">${description}</p><p class="card-text">`+

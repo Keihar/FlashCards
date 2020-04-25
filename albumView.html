@@ -26,12 +26,6 @@
   <link rel="icon" href="images/000-icon.svg">
   <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
-  <style>
-    img {
-      width: 100px;
-      height: 100px;
-    }
-  </style>
 </head>
 
 <body>
@@ -156,11 +150,14 @@
     <div class="row mb-4">
       <div class="col-sm-6" id="card1">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body mt-0">
             <form id="modifyAlbum" action="PHP/modifyAlbum.php">
               <div class="row no-gutters">
-                <div class="col-md-4 text-center">
-                  <img id="currentIcon" class='profilePic ml-4' src='' onclick="$('#iconModal').modal('show');">
+                <div class="col-md-4 text-center" style="display: flex;
+                align-items: center;
+                flex-wrap: wrap;">
+                  <img id="currentIcon" class='profilePic ml-4' src='' onclick="$('#iconModal').modal('show');"
+                    style="display:inline; vertical-align: middle">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body pb-0">
@@ -185,7 +182,8 @@
                   </p>
                 </div>
                 <!-- Checkbox -->
-                <button type="button" class="btn-block ml-5 mr-4 mt-3" style="background:transparent; border:none;" disabled>
+                <button type="button" class="btn-block ml-5 mr-4 mt-3" style="background:transparent; border:none;"
+                  disabled>
                   <input type="checkbox" class="form-check-input" name="privato" id="privateCheck">
                   <label class="form-check-label" for="privateCheck">Album privato?</label>
                 </button>

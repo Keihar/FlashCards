@@ -51,7 +51,10 @@ textarea {
 }
 
 .navBarIcon {
-    max-width: 1.2em; 
+    width: 1.2em; 
+    height: 1.2em;
+    max-width: 1.2em;
+    max-height: 1.2em;
     margin:0; 
     margin-bottom: 0.2em;
 }
