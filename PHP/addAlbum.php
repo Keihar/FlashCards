@@ -2,7 +2,7 @@
 
 <?php
 
-    date_default_timezone_set('Europe/Rome');
+    date_default_timezone_set('Europe/London');
 
     //effettuo l'include per connettermi al DataBase
     include 'DBconnect.php';
@@ -13,7 +13,7 @@
     $descrizione = mysqli_real_escape_string($connect, $_POST['descrizione']);
     $imgLink = mysqli_real_escape_string($connect, $_POST['imgLink']);
     $privato = isset($_POST['privato']) ? 1 : 0;
-    //
+    
 
     //Prendo l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
@@ -26,7 +26,7 @@
         $email = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $data = date('Y-m-d');
+    $data = date('Y-m-d H:i:s');
     
     //inserisco nuovo album
     $insert_album_query = "INSERT INTO Album(nome, descrizione, data, imgLink, privato, email) VALUES ('$nome_album', '$descrizione','$data', '$imgLink','$privato','$email')";

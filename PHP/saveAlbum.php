@@ -12,8 +12,6 @@
 
     $insert_saved_str = "INSERT INTO album_salvati(emailUtente, idAlbum) VALUES ('$email', '$id_album')";
     $insert_saved = mysqli_query($connect, $insert_saved_str);
-
-
     
 
 ?>

@@ -25,7 +25,7 @@ else{
 }
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
+    $sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 
     $preleva_motto_str = "SELECT motto FROM Utente WHERE Utente.nome='$user'";
