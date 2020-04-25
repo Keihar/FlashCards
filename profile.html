@@ -28,7 +28,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow titleBar">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="dashboard.html">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-nowrap d-block" href="dashboard.html">
             <svg class="feather feather-files" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -107,18 +107,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link active" id="profileNavBtn" href="#">
                         <svg class="feather feather-person-lines-fill" width="1em" height="1em" viewBox="0 0 16 16"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z"
-                                clip-rule="evenodd" />
+                          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd"
+                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z"
+                            clip-rule="evenodd" />
                         </svg>
-                        Profilo
-                    </a>
+                        Profilo  <span class="sr-only">(current)</span>
+                      </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link" href="info.html">
                         <svg class="feather feather-info-circle" width="1em" height="1em" viewBox="0 0 16 16"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
@@ -127,7 +127,7 @@
                                 d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
                             <circle cx="8" cy="4.5" r="1" />
                         </svg>
-                        Informazioni <span class="sr-only">(current)</span>
+                        Informazioni
                     </a>
                 </li>
             </ul>
@@ -151,18 +151,18 @@
 
     <!-- Contents -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center bg-warning">
-            <div class="row w-100" style="min-height: 30vh"> 
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+            <div class="row w-100 ml-1 bg-warning" style="min-height: 30vh"> 
                 Copertina
             </div>
         </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <div class="row w-100 ml-1"> 
-                <div class="col col-lg-4 bg-dark">
-                  3 of 3
+                <div class="col col-lg-4 bg-info">
+                  Descrizione Utente
                 </div>
                 <div id="userCards" class="col bg-danger userCards">
-                  
+                  Elenco Album
                 </div>
               </div>
         </div>

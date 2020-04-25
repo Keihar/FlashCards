@@ -1,5 +1,4 @@
 const username = (getUrlVars()["user"]);
-console.log()
 $(document).ready(function () {
     $.ajax({
         type: "POST",

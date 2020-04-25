@@ -1,0 +1,20 @@
+#searchBar:focus + #searchBtn {
+    opacity:1;
+    display: inline-block;
+    cursor: pointer;
+}
+
+img {
+    width: 80%;
+    margin: 10%;
+}
+
+#singleCard {
+    width: 45%;
+}
+
+#searchBtn {
+    color: #0275d8;
+    border-color: #ced4da;
+    background-color: white;
+}
