@@ -58,10 +58,17 @@
         
     }    
 
-
+    $tname = $_SESSION["utente"];
+    $get_email_query = "SELECT email FROM Utente WHERE nome = '$tname'";
+    $get_email = mysqli_query($connect, $get_email_query);
+    $email = null;
+    while ($row = mysqli_fetch_assoc($get_email)) {
+        $email = $row;
+    }
 
     //array di array
     $post_data = array(
+        'richiedente' => $email["email"],
         'albums' => $albums,
         'flashcards' => $flashcards
     );    

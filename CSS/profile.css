@@ -10,3 +10,9 @@
 .userCards {
     padding-left: 10%;
 }
+
+.profileImg{
+    width: 7rem;
+    background: whitesmoke;
+    border-radius: 1rem;
+}

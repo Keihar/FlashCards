@@ -89,12 +89,12 @@ function albumPreview(id) {
 }
 
 //  Album Preview
-function saveAlbum(id, email) {
+function saveAlbum(id) {
   //  Ajax request
   $.ajax({
     type: "POST",
     url: "PHP/saveAlbum.php",
-    data: { 'id_album': id, 'email': user.albums[0].email },
+    data: { 'id_album': id, 'email': user.richiedente },
     success: function (data) {
       if (data == "success") {
         alert("Aggiunto");

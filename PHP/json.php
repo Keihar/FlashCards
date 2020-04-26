@@ -12,27 +12,29 @@ if (isset($_POST["username"])) {
 
     $user = $_POST["username"];
 
+    //query per prelevamento dei campi dell'album
+    $sql = "SELECT id, Album.nome, descrizione, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
+    $result = mysqli_query($connect, $sql);
+
 }    
 else if ($_SESSION['valid']) {
 
     //attribuisco a $user la variabile di sessione che identifica l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
 
+    $preleva_email_str = "SELECT email FROM Utente WHERE Utente.nome='$user'";
+    $preleva_email = mysqli_query($connect, $preleva_email_str);
+    $usermail = null;
+    while($row = mysqli_fetch_array($preleva_email)){
+        $usermail = mysqli_real_escape_string($connect, $row["email"]);
+    }
 
+    $sql = "SELECT Album.id, Album.nome, album.descrizione, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail'";
+    $result = mysqli_query($connect, $sql);
 }
 else{
     exit("error");
 }
-
-    //query per prelevamento dei campi dell'album
-    
-    /*$sql = "SELECT id, Album.nome, descrizione, imgLink FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
-    $result = mysqli_query($connect, $sql);*/
-
-    $sql = "SELECT Album.id AS id, Album.nome, descrizione, imgLink, Utente.nome AS username FROM Album INNER JOIN Utente ON (utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) WHERE Utente.nome = '$user' OR  Album.email = emailUtente";
-    $result = mysqli_query($connect, $sql);
-
-    $creatore_query = "SELECT Utente.nome AS creatore FROM Album INNER JOIN Utente ON (Utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) WHERE Album.email = emailUtente";
 
     $preleva_motto_str = "SELECT motto FROM Utente WHERE Utente.nome='$user'";
     $preleva_motto = mysqli_query($connect, $preleva_motto_str);
@@ -77,7 +79,6 @@ else{
             'nome' => $rows['nome'],
             'descrizione' => $rows['descrizione'],
             'imgLink' => $rows['imgLink'],
-            //restituisco username creatore!
             'username' => $rows['username']
         ));
     }

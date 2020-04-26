@@ -16,7 +16,7 @@ $(document).ready(function() {
                 console.log("User logged found.");
               } 
               catch (error) {
-                window.location.href = "login.html";
+                //window.location.href = "login.html";
               }
               document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
               document.getElementById("profileNavBtn").href = "profile.html?user=" + user.nome;
