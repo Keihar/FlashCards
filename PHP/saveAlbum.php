@@ -5,10 +5,14 @@
 
     //inizializzo la sessione
     session_start();
-    
 
     $id_album = mysqli_real_escape_string($connect, $_POST["id_album"]);
     $email = mysqli_real_escape_string($connect, $_POST["email"]);
+    
+    $result_str = "SELECT * FROM album_salvati WHERE emailUtente LIKE '$email' AND idAlbum = '$id_album')";
+    $result = mysqli_query($connect, $result_str);
+
+    if (!$result) { exit("saveExisting"); }
 
     $insert_saved_str = "INSERT INTO album_salvati(emailUtente, idAlbum) VALUES ('$email', '$id_album')";
     $insert_saved = mysqli_query($connect, $insert_saved_str);

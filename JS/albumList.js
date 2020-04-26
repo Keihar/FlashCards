@@ -8,6 +8,7 @@ $(document).ready(function() {
             try {
                 let user = JSON.parse(data);
                 let row = document.getElementById("row");
+                row.innerHTML = "";
                 console.table(user);
           
                 user.albums.forEach(album => {

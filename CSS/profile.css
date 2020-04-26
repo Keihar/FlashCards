@@ -11,8 +11,33 @@
     padding-left: 10%;
 }
 
+.profileLeft {
+    text-align: center;
+}
+
 .profileImg{
+    display: flex;
     width: 7rem;
     background: whitesmoke;
     border-radius: 1rem;
+    margin-top: -3.5rem;
+    border: 2px solid black
+}
+
+.imgContainer {
+    width: 100%; 
+    text-align: center;
+}
+
+.userName {
+    margin-top: 0.5em;
+    font-size: 2em;
+}
+
+.userName > p {
+    margin-bottom: 0;
+}
+
+.userMotto {
+    font-size: 1em;
 }
