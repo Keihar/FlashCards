@@ -169,7 +169,7 @@
             <em id="motto">"Questa è molto bella come frase"</em>
           </div>
           <div class="userBtns mt-2">
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" id="followBtn">
               <svg class="bi bi-person-plus-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                 <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
@@ -215,48 +215,18 @@
               </ul>
               <div class="tab-content w-100" id="myTabContent" style="height: 200px; overflow-y: scroll;">
                 <div class="tab-pane fade show active w-100" id="friends" role="tabpanel" aria-labelledby="friends-tab">
-                  <ul class="list-group list-group-flush w-100">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Cras justo odio
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Cras justo odio
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Cras justo odio
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Dapibus ac facilisis in
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Morbi leo risus
-                    </li>
+                  <ul class="list-group list-group-flush w-100" id="friendsUL">
+       
                   </ul>
                 </div>
                 <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
-                  <ul class="list-group list-group-flush w-100">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Cras justo odio
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Dapibus ac facilisis in
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Morbi leo risus
-                    </li>
+                  <ul class="list-group list-group-flush w-100" id="followersUL">
+   
                   </ul>
                 </div>
                 <div class="tab-pane fade" id="followed" role="tabpanel" aria-labelledby="followed-tab">
-                  <ul class="list-group list-group-flush w-100">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Cras justo odio
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Dapibus ac facilisis in
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Morbi leo risus
-                    </li>
+                  <ul class="list-group list-group-flush w-100" id="followedUL">
+
                   </ul>
                 </div>
               </div>

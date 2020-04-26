@@ -16,8 +16,9 @@
     $username = mysqli_escape_string($connect, $_POST["username"]);
 
     //prendo email utente
-    $get_email_str = "SELECT email FROM follow INNER JOIN Utente ON (follow.seguente = Utente.email) WHERE Utente.nome = '$username'";
+    $get_email_str = "SELECT email FROM utente WHERE Utente.nome = '$username'";
     $get_email = mysqli_query($connect, $get_email_str);
+    $email = null;
 
     while($row = mysqli_fetch_array($get_email)){
         $email = mysqli_real_escape_string($connect, $row["email"]);
