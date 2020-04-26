@@ -13,9 +13,7 @@
     //inizializzo la sessione
     session_start();
 
-    //$username = mysqli_escape_string($connect, $_POST["username"]);
-
-    $username = "Alessandro";
+    $username = mysqli_escape_string($connect, $_POST["username"]);
 
     //prendo email utente
     $get_email_str = "SELECT email FROM follow INNER JOIN Utente ON (follow.seguente = Utente.email) WHERE Utente.nome = '$username'";
@@ -128,5 +126,3 @@
     $output = json_encode($post_data);
 
     echo $output;
-
-?>
