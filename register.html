@@ -2,93 +2,57 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="vendors/jquery-3.5.0.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="vendors/popper.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="vendors/jquery-3.5.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="vendors/popper.min.js"></script>
+	<script src="vendors/bootstrap/bootstrap.min.js"></script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-  <!-- Personal CSS -->
-  <title>Registrati</title>
-  <link rel="icon" href="images/000-icon.svg">
-  <link rel="stylesheet" href="CSS/universal.css">
+	<!-- Personal CSS -->
+	<title>Accedi</title>
+	<link rel="icon" href="images/000-icon.svg">
+	<link rel="stylesheet" href="CSS/universal.css">
+	<link rel="stylesheet" href="CSS/signin.css">
 </head>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow titleBar">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
-      <img src="images/000-icon.svg" class="navBarIcon">
-      FlashCards
-    </a>
-    <div class="spacer"> </div>
-  </nav>
-  <!-- Contenitore -->
-  <div class="container">
-    <div class="myTitle" style="width: 200px;">
-      <h1>FlashCards </h1>
-      <h3>Registrati</h3>
-    </div>
-    <div class="wrapper">
-      <form id="registerForm" action="PHP/register.php">
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Indirizzo Email</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
-            placeholder="Inserisci email" maxlength="50" required>
-          <p id="emailHelp" class="text-danger">Questa Email è già utilizzata.</p>
-        </div>
+<body class="text-center">
 
-        <!-- Username -->
-        <div class="form-group">
-          <label for="username">Nome Utente</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Nome Utente" 
-          maxlength="16" required>
-          <p id="usernameHelp" class="text-danger">Questo Username è già utilizzato.</p>
-        </div>
+	<form class="form-signin bg-light shadow-lg" id="registerForm" action="PHP/register.php">
+		<img class="mb-2" src="images\000-icon.svg" alt="" width="100" height="100">
+		<h1 class="h3 mb-4">Registrati</h1>
+		<div id="alertBox"></div>
+		<label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="">
+    
+    <input type="text" name="username" id="username" class="form-control" placeholder="Nome utente" required="">
 
-        <!-- Motto -->
-        <div class="form-group">
-          <label for="motto">Motto</label>
-          <input type="text" class="form-control" id="motto" name="motto" placeholder="Motto" 
-          maxlength="24" required>
-        </div>
+    <input type="text" name="motto" id="motto" class="form-control" placeholder="Motto" required="">
+    
+    <label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required="">
 
-        <!-- Password -->
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-          maxlength="255" required>
-        </div>
+    <button class="btn btn-lg btn-primary btn-block submitBtn" type="submit">Registrati</button>
+		<p class="mt-5 mb-3 text-muted"> <a href="login.html">Hai già un account?</a></p>
+	</form>
+</body>
 
-        <!-- Link -->
-        <div class="form-group">
-          <a href="login.html"> Sei già registrato? </a>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Registrati</button>
-      </form>
-    </div>
-  </div>
+</html>
   <!-- Optional JavaScript -->
   <script>
     $("#registerForm").submit(function (e) {
-      let emailAlert = document.getElementById("emailHelp");
-      let usernameAlert = document.getElementById("usernameHelp");
-      emailAlert.style.display = "none";
-      usernameAlert.style.display = "none";
+      let emailAlert = document.getElementById("alertBox");
 
       e.preventDefault();
       var form = $(this);
@@ -104,14 +68,23 @@
             window.location.href = "login.html";
           }
           else if (data == "username_taken") {
-            usernameAlert.style.display = "block";
+            emailAlert.innerHTML = getAlert("Nome utente già in uso!");
           }
           else{
-            emailAlert.style.display = "block";
+            emailAlert.innerHTML = getAlert("Email già utilizzata!");
           }
         }
       });
     });
+
+    function getAlert(str) {
+      return `<div class="alert alert-danger" role="alert">
+          ${str}
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>`;
+    }
   </script>
 </body>
 

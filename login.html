@@ -2,73 +2,46 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="vendors/jquery-3.5.0.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="vendors/popper.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" id="bootstrap-css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="vendors/jquery-3.5.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="vendors/popper.min.js"></script>
+	<script src="vendors/bootstrap/bootstrap.min.js"></script>
 
-  <!-- Personal CSS -->
-  <title>Accedi</title>
-  <link rel="icon" href="images/000-icon.svg">
-  <link rel="stylesheet" href="CSS/universal.css">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<!-- Personal CSS -->
+	<title>Accedi</title>
+	<link rel="icon" href="images/000-icon.svg">
+	<link rel="stylesheet" href="CSS/universal.css">
+	<link rel="stylesheet" href="CSS/signin.css">
 </head>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow titleBar">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
-      <img src="images/000-icon.svg" class="navBarIcon">
-      FlashCards 
-    </a>
-    <div class="spacer"> </div>
-  </nav>
-  <!-- Contenitore -->
-  <div class="container">
-    <div class="myTitle" style="width: 200px;">
-      <h1>FlashCards </h1>
-      <h3>Accedi</h3>
-    </div>
-    <div class="wrapper">
-      <form id="loginForm" action="PHP/login.php">
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Indirizzo Email</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
-            placeholder="Inserisci email" maxlength="50" required>
-          <p id="emailHelp" class="text-danger">Email o password non corrette.</p>
-        </div>
+<body class="text-center">
 
-        <!-- Password -->
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-          maxlength="255" required>
-        </div>
-
-        <!-- Link -->
-        <div class="form-group">
-          <a href="register.html"> Non sei registrato? </a>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Accedi</button>
-      </form>
-    </div>
-  </div>
-  <!-- Personal JS -->
-  <script src="JS/login.js"></script>
+	<form class="form-signin bg-light shadow-lg" id="loginForm" action="PHP/login.php">
+		<img class="mb-2" src="images\000-icon.svg" alt="" width="100" height="100">
+		<h1 class="h3 mb-4">Accedi</h1>
+		<div id="alertBox"></div>
+		<label for="inputEmail" class="sr-only">Email address</label>
+		<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="">
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required="">
+		<button class="btn btn-lg btn-primary btn-block submitBtn" type="submit">Accedi</button>
+		<p class="mt-5 mb-3 text-muted"> <a href="register.html">Sei già registrato?</a></p>
+	</form>
 </body>
+<!-- Personal JS -->
+<script src="JS/login.js"></script>
 
 </html>
