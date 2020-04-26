@@ -5,6 +5,7 @@
 
     //Ottengo i 3 campi da inserire successivamente nel DB
     $email = mysqli_real_escape_string($connect, $_POST["email"]);
+    $imgProfilo = "";
     $nome = mysqli_real_escape_string($connect, $_POST["username"]);
     $motto = mysqli_real_escape_string($connect, $_POST["motto"]);
     $psw = mysqli_real_escape_string($connect, $_POST["password"]);
@@ -21,7 +22,7 @@
     }
     else{
         //query per inserire nella tabella Utente i campi
-        $inserisci_utente_str = "INSERT INTO Utente VALUES ('$email', '$nome', '$motto', '$psw_criptata');";
+        $inserisci_utente_str = "INSERT INTO Utente VALUES ('$email', '$imgProfilo', '$nome', '$motto', '$psw_criptata');";
         $inserisci_utente = mysqli_query($connect, $inserisci_utente_str);
 
         if(!$inserisci_utente){
