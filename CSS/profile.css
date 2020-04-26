@@ -7,12 +7,27 @@
     margin: 10%;
 }
 
+#userCards {
+    border-radius: 0em 0em 1.5rem 0em;
+}
+
+#userCards > .title {
+    text-align: left;
+    margin: 2em;
+}
+
+.coverImage {
+    border-radius: 1.5rem 1.5rem 0em 0em;
+    background: #f5b953;
+}
+
 .userCards {
     padding-left: 10%;
 }
 
 .profileLeft {
     text-align: center;
+    border-radius: 0em 0em 0em 1.5rem;
 }
 
 .profileImg{
@@ -40,4 +55,8 @@
 
 .userMotto {
     font-size: 1em;
+}
+
+.textIcon {
+    margin-bottom: 0.16em;
 }
