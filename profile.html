@@ -37,13 +37,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-dark bg-primary fixed-top flex-md-nowrap p-0 shadow titleBar">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-nowrap d-block" href="dashboard.html">
-      <svg class="feather feather-files" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M3 2h8a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1H3z"
-          clip-rule="evenodd" />
-        <path d="M5 0h8a2 2 0 012 2v10a2 2 0 01-2 2v-1a1 1 0 001-1V2a1 1 0 00-1-1H5a1 1 0 00-1 1H3a2 2 0 012-2z" />
-      </svg>
+      <img src="images/000-icon.svg" class="navBarIcon">
       FlashCards
     </a>
     <div style="width: 95%;"> </div>
@@ -166,8 +160,8 @@
           <div class="userBtns mt-2" id="userBtns">
             <!-- Follow -->
             <button type="button" class="btn btn-primary" id="followBtn" style="display: none">
-              <svg class="bi bi-person-plus-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
+              <svg class="bi bi-person-plus-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16"
+                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z"
                   clip-rule="evenodd" />
@@ -213,12 +207,20 @@
                     d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
                     clip-rule="evenodd" />
                 </svg>
+                <a class="float-right align-items-center text-muted" href="#" aria-label="Add a new report" data-toggle="tooltip" data-placement="bottom"
+                title="Gli amici sono coloro che seguono e sono seguiti da una persona, probabilmente si vogliono bene!">
+                  <svg class="bi bi-question-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                    <path d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                  </svg>
+                </a>
               </div>
               <ul class="nav w-100 nav-tabs nav-justified" id="myTab" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="friends-tab" data-toggle="tab" href="#friends" role="tab"
                     aria-controls="friends" aria-selected="true">
-                    <span id="nfriends"></span><br>Amici
+                    <span id="nfriends"></span><br>
+                    <span>Amici</span>
                   </a>
                 </li>
                 <li class="nav-item">

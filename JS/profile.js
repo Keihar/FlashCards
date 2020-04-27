@@ -180,7 +180,8 @@ function follow(user) {
         url: "PHP/followPerson.php",
         data: { 'username': user },
         success: function () {
-            location.reload();
+            $("#followBtn").hide();
+            $("#unfollowBtn").show();
         }
     })
 }
@@ -191,7 +192,8 @@ function unfollow(user) {
         url: "PHP/unfollowPerson.php",
         data: { 'username': user },
         success: function () {
-            location.reload();
+            $("#unfollowBtn").hide();
+            $("#followBtn").show();
         }
     })
 }
@@ -217,7 +219,7 @@ $("#modifyUser").submit(function (e) {
                 editAlert("La password inserita è incorretta")
                 return;
             }
-            window.location.reload();
+            window.location.href = "profile.html?user=" + $("#name").val();
         }
     });
 });
@@ -239,3 +241,8 @@ document.getHTML = function (who, deep) {
     el = null;
     return txt;
 }
+
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });

@@ -6,6 +6,7 @@ $(document).ready(function() {
         return false;
       }
     });
+
     $.ajax({
         type: "POST",
         url: "PHP/json.php",
