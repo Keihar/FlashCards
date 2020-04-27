@@ -53,15 +53,23 @@ $(document).ready(function () {
                     let img = document.createElement('img');
                     img.className += "listIcon";
                     img.setAttribute('src', tmp)   
-                    addUL("friendsUL", document.getHTML(img) + " " + friend.nome_amico)
+                    addUL("friendsUL", document.getHTML(img) + "&nbsp;" + friend.nome_amico)
                 });
 
                 cuser.seguaci.forEach(friend => {
-                    addUL("followersUL", icon + " " + friend.nome_seguace)
+                    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": friend.imgProfilo;
+                    let img = document.createElement('img');
+                    img.className += "listIcon";
+                    img.setAttribute('src', tmp) 
+                    addUL("followersUL", document.getHTML(img) + "&nbsp;" + friend.nome_seguace)
                 });
 
                 cuser.seguiti.forEach(friend => {
-                    addUL("followedUL", icon + " " + friend.nome_seguito)
+                    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": friend.imgProfilo;
+                    let img = document.createElement('img');
+                    img.className += "listIcon";
+                    img.setAttribute('src', tmp) 
+                    addUL("followedUL", document.getHTML(img) + "&nbsp;" + friend.nome_seguito)
                 });
 
             // }
@@ -151,7 +159,7 @@ function changeIcon(dir, filename) {
 function addUL(parent, str) {
     var ul = document.getElementById(parent);
     var li = document.createElement("li");
-    $(li).addClass("list-group-item d-flex justify-content-between align-items-center");
+    $(li).addClass("list-group-item d-flex align-items-left");
     $(li).html(str);
     ul.appendChild(li);
 }

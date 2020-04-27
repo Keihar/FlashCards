@@ -108,7 +108,7 @@
         foreach ($json_array_amici as &$rows) {
             array_push($amici, array(
                 'nome_amico' => $rows["nome_amico"],
-                'profilo_amico' => $rows["profilo_amico"]
+                'imgProfilo' => $rows["profilo_amico"]
             ));
         }
 
