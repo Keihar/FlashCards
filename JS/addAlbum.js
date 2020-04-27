@@ -11,7 +11,7 @@ $("#addAlbum").submit(function (e) {
       success: function (data) {
           console.log(data);
         if (data.trim() == "success") {
-          $('#exampleModal').modal('show');
+          window.location.reload();
         }
         else {
           alert("Errore nell'aggiunta")

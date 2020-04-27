@@ -40,16 +40,20 @@ $(document).ready(function () {
                 console.log(data);
                 cuser = JSON.parse(data);
 
+                document.getElementById("nfriends").innerHTML = cuser.nAmici;
+                document.getElementById("nfollowers").innerHTML = cuser.nSeguaci;
+                document.getElementById("nfollowed").innerHTML = cuser.nSeguiti;
+
                 cuser.amici.forEach(friend => {
                     addUL("friendsUL", friend.nome_amico)
                 });
 
-                cuser.amici.forEach(friend => {
-                    addUL("followersUL", friend.nome_amico)
+                cuser.seguaci.forEach(friend => {
+                    addUL("followersUL", friend.nome_seguace)
                 });
 
-                cuser.amici.forEach(friend => {
-                    addUL("followedUL", friend.nome_amico)
+                cuser.seguiti.forEach(friend => {
+                    addUL("followedUL", friend.nome_seguito)
                 });
 
             // }
