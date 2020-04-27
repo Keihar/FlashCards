@@ -49,8 +49,8 @@
         //ciclo che assegna per ogni array i campi
         foreach ($json_array_seguiti as &$rows) {
             array_push($seguiti, array(
-                'nome_seguito' => $rows["nome_seguito"],
-                'profilo_seguito' => $rows["profilo_seguito"]
+                'nome' => $rows["nome_seguito"],
+                'profilo' => $rows["profilo_seguito"]
             ));
         }
 
@@ -78,8 +78,8 @@
         //ciclo che assegna per ogni array i campi
         foreach ($json_array_seguaci as &$rows) {
             array_push($seguaci, array(
-                'nome_seguace' => $rows["nome_seguente"],
-                'profilo_seguace' => $rows["profilo_seguente"]
+                'nome' => $rows["nome_seguente"],
+                'imgProfilo' => $rows["profilo_seguente"]
             ));
         }
 
@@ -107,7 +107,7 @@
         //ciclo che assegna per ogni array i campi
         foreach ($json_array_amici as &$rows) {
             array_push($amici, array(
-                'nome_amico' => $rows["nome_amico"],
+                'nome' => $rows["nome_amico"],
                 'imgProfilo' => $rows["profilo_amico"]
             ));
         }

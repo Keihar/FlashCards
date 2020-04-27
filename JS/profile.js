@@ -9,30 +9,30 @@ $(document).ready(function () {
         url: "PHP/json.php",
         data: { 'username': username },
         success: function (data) {
-                user = JSON.parse(data);
-                console.table(user);
+            user = JSON.parse(data);
+            console.table(user);
 
-                // Set Username
-                let tmp = user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": user.imgProfilo;
-                document.getElementById("profileImage").src = tmp;
-                document.getElementById("currentIcon").src = tmp;
-                setBackground();
-                document.getElementById("userCardName").innerHTML = "" + user.nome;
-                document.getElementById("mottoCardName").innerHTML = `"${user.motto}"`;
-                document.getElementById("nalbum").innerHTML = "" + user.albums[0].nalbum;
-                document.getElementById("nflashcard").innerHTML = "" + user.albums[0].nflashcard;
-                $("#followBtn").click(function(){ follow(user.nome) });  
+            // Set Username
+            let tmp = user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "" ? "images\\profilesCovers\\dog.svg" : user.imgProfilo;
+            document.getElementById("profileImage").src = tmp;
+            document.getElementById("currentIcon").src = tmp;
+            setBackground();
+            document.getElementById("userCardName").innerHTML = "" + user.nome;
+            document.getElementById("mottoCardName").innerHTML = `"${user.motto}"`;
+            document.getElementById("nalbum").innerHTML = "" + user.albums[0].nalbum;
+            document.getElementById("nflashcard").innerHTML = "" + user.albums[0].nflashcard;
+            $("#followBtn").click(function () { follow(user.nome) });
 
-                let row = document.getElementById("userCards");
-                user.albums.forEach(album => {
-                    if (album.imgLink == null) {
-                        album.imgLink = "images\\albumCovers\\000-icon.svg";
-                    }
-                    row.innerHTML += "" + getPCard(album.id, album.nome, album.descrizione,
-                        album.imgLink, username, user.albums);
-                });
+            let row = document.getElementById("userCards");
+            user.albums.forEach(album => {
+                if (album.imgLink == null) {
+                    album.imgLink = "images\\albumCovers\\000-icon.svg";
+                }
+                row.innerHTML += "" + getPCard(album.id, album.nome, album.descrizione,
+                    album.imgLink, username, user.albums);
+            });
 
-                checkLocalProfile();
+            checkLocalProfile();
         }
     })
 
@@ -41,64 +41,59 @@ $(document).ready(function () {
         url: "PHP/getFriends.php",
         data: { 'username': username },
         success: function (data) {
-                console.log(data);
-                cuser = JSON.parse(data);
+            console.log(data);
+            cuser = JSON.parse(data);
 
-                document.getElementById("nfriends").innerHTML = cuser.nAmici;
-                document.getElementById("nfollowers").innerHTML = cuser.nSeguaci;
-                document.getElementById("nfollowed").innerHTML = cuser.nSeguiti;
+            document.getElementById("nfriends").innerHTML = cuser.nAmici;
+            document.getElementById("nfollowers").innerHTML = cuser.nSeguaci;
+            document.getElementById("nfollowed").innerHTML = cuser.nSeguiti;
 
-                cuser.amici.forEach(friend => {
-                    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": friend.imgProfilo;
-                    let img = document.createElement('img');
-                    img.className += "listIcon";
-                    img.setAttribute('src', tmp)   
-                    addUL("friendsUL", document.getHTML(img) + "&nbsp;" + friend.nome_amico)
-                });
+            cuser.amici.forEach(friend => {
+                friendsSetter(friend, "friendsUL")
+            });
 
-                cuser.seguaci.forEach(friend => {
-                    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": friend.imgProfilo;
-                    let img = document.createElement('img');
-                    img.className += "listIcon";
-                    img.setAttribute('src', tmp) 
-                    addUL("followersUL", document.getHTML(img) + "&nbsp;" + friend.nome_seguace)
-                });
+            cuser.seguaci.forEach(friend => {
+                friendsSetter(friend, "followersUL")
+            });
 
-                cuser.seguiti.forEach(friend => {
-                    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": friend.imgProfilo;
-                    let img = document.createElement('img');
-                    img.className += "listIcon";
-                    img.setAttribute('src', tmp) 
-                    addUL("followedUL", document.getHTML(img) + "&nbsp;" + friend.nome_seguito)
-                });
-
-            // }
-            // catch {
-            //     alert("Errore nell'ottenimento del profilo")
-            // }
+            cuser.seguiti.forEach(friend => {
+                friendsSetter(friend, "followedUL")
+            });
         }
     })
 });
+
+function friendsSetter(friend, ULName) {
+    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ? "images\\profilesCovers\\dog.svg" : friend.imgProfilo;
+    let img = document.createElement('img');
+    img.className += "listIcon";
+    img.setAttribute('src', tmp)
+    let a = document.createElement('a');
+    a.href = "profile.html?user=" + friend.nome;
+    a.id = ULName + friend.nome;
+    addUL(ULName, document.getHTML(img) + "&nbsp;" + document.getHTML(a))
+    $("#" + a.id).html("" + friend.nome);
+}
 
 function getPCard(id, name, description, imgLink, author) {
 
     //  Truncate strings that exceeds the max length
     var descMaxLength = 32;
     if (description.length > descMaxLength) {
-      description = description.substring(0, descMaxLength) + "...";
+        description = description.substring(0, descMaxLength) + "...";
     }
-    author = author != letUserName ?  author : "te";
+    author = author != letUserName ? author : "te";
     //  Returns the formatted HTML
     return `<div class="card mb-3 mx-auto singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
-      `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
-      `<p class="card-text">${description}</p><p class="card-text">` +
-      `<button onclick='saveAlbum(${id})' class='btn btn-primary'> <i class="fa fa-plus"></i> Aggiungi ai tuoi Albums</button>` +
-      `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'><i class="fa fa-pencil"></i> Anteprima</button>` +
-      `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
+        `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
+        `<p class="card-text">${description}</p><p class="card-text">` +
+        `<button onclick='saveAlbum(${id})' class='btn btn-primary'> <i class="fa fa-plus"></i> Aggiungi ai tuoi Albums</button>` +
+        `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'><i class="fa fa-pencil"></i> Anteprima</button>` +
+        `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
 }
 
 function checkLocalProfile() {
-    if(username != letUserName){ 
+    if (username != letUserName) {
         let btns = `<button type="button" class="btn btn-primary" id="followBtn">
             <svg class="bi bi-person-plus-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
@@ -111,7 +106,7 @@ function checkLocalProfile() {
             </svg> Messaggio
         </button>`;
         $("#userBtns").html(btns);
-        return; 
+        return;
     }
     let editBtn = `<button type="button" class="btn btn-outline-primary" id="editBtn" data-toggle="modal" data-target="#editProfileModal">
         <svg class="bi bi-gear-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -142,10 +137,10 @@ function setProfileImages() {
 
 function setBackground() {
     var img = document.createElement('img');
-    let path = document.getElementById("profileImage").src;    
-    
+    let path = document.getElementById("profileImage").src;
+
     img.setAttribute('src', path);
-    img.addEventListener('load', function() {
+    img.addEventListener('load', function () {
         var vibrant = new Vibrant(img);
         var swatches = vibrant.swatches()
         document.getElementById("coverImg").style.background = swatches["Vibrant"].getHex();
@@ -165,18 +160,17 @@ function addUL(parent, str) {
 }
 
 function follow(user) {
-    //  Ajax request
     $.ajax({
-      type: "POST",
-      url: "PHP/followPerson.php",
-      data: { 'username': user },
-      success: function (data) {
-        $("#followBtn").hide();
-        $("#unfollowBtn").show();
-        console.log(data)
-      }
+        type: "POST",
+        url: "PHP/followPerson.php",
+        data: { 'username': user },
+        success: function (data) {
+            $("#followBtn").hide();
+            $("#unfollowBtn").show();
+            console.log(data)
+        }
     })
-  }
+}
 
 $("#modifyUser").submit(function (e) {
     e.preventDefault();
@@ -190,17 +184,17 @@ $("#modifyUser").submit(function (e) {
     }
 
     $.ajax({
-      type: "POST",
-      url: url,
-      data: form.serialize(),
-      success: function (data) {
-        console.log(data)
-        if (data.trim() == "wrongPassword") {
-            editAlert("La password inserita è incorretta")
-            return;
+        type: "POST",
+        url: url,
+        data: form.serialize(),
+        success: function (data) {
+            console.log(data)
+            if (data.trim() == "wrongPassword") {
+                editAlert("La password inserita è incorretta")
+                return;
+            }
+            window.location.reload();
         }
-        window.location.reload();
-      }
     });
 });
 
@@ -209,15 +203,15 @@ function editAlert(str) {
     $("#editAlert").show()
 }
 
-document.getHTML= function(who, deep){
-    if(!who || !who.tagName) return '';
-    var txt, ax, el= document.createElement("div");
+document.getHTML = function (who, deep) {
+    if (!who || !who.tagName) return '';
+    var txt, ax, el = document.createElement("div");
     el.appendChild(who.cloneNode(false));
-    txt= el.innerHTML;
-    if(deep){
-        ax= txt.indexOf('>')+1;
-        txt= txt.substring(0, ax)+who.innerHTML+ txt.substring(ax);
+    txt = el.innerHTML;
+    if (deep) {
+        ax = txt.indexOf('>') + 1;
+        txt = txt.substring(0, ax) + who.innerHTML + txt.substring(ax);
     }
-    el= null;
+    el = null;
     return txt;
 }
