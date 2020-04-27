@@ -92,7 +92,7 @@ else{
     $post_data = array(
         'nome' => $user,
         'motto' => $motto,
-        'imgProfio' => $imgProfilo,
+        'imgProfilo' => $imgProfilo,
         'albums' => $albums
     );
 

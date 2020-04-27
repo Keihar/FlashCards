@@ -2,6 +2,7 @@ const username = (getUrlVars()["user"]);
 var user;
 
 $(document).ready(function () {
+    $("#editAlert").hide()
     $.ajax({
         type: "POST",
         url: "PHP/json.php",
@@ -11,12 +12,15 @@ $(document).ready(function () {
                 console.table(user);
 
                 // Set Username
+                let tmp = user.imgProfilo != null ? user.imgProfilo : "images\\profilesCovers\\001-bee.svg";
+                document.getElementById("profileImage").src = tmp;
+                document.getElementById("currentIcon").src = tmp;
                 setBackground();
                 document.getElementById("userCardName").innerHTML = "" + user.nome;
                 document.getElementById("mottoCardName").innerHTML = `"${user.motto}"`;
                 document.getElementById("nalbum").innerHTML = "" + user.albums[0].nalbum;
                 document.getElementById("nflashcard").innerHTML = "" + user.albums[0].nflashcard;
-                $("#followBtn").click(function(){ follow(user.nome) });
+                $("#followBtn").click(function(){ follow(user.nome) });  
 
                 let row = document.getElementById("userCards");
                 user.albums.forEach(album => {
@@ -125,25 +129,13 @@ function setProfileImages() {
 
 function setBackground() {
     var img = document.createElement('img');
-    let path = document.getElementById("profileImage").src;
+    let path = document.getElementById("profileImage").src;    
+    
     img.setAttribute('src', path);
-
     img.addEventListener('load', function() {
         var vibrant = new Vibrant(img);
         var swatches = vibrant.swatches()
         document.getElementById("coverImg").style.background = swatches["Vibrant"].getHex();
-        for (var swatch in swatches)
-            if (swatches.hasOwnProperty(swatch) && swatches[swatch])
-                console.log(swatch, swatches[swatch].getHex())
-    
-        /*
-         * Results into:
-         * Vibrant #7a4426
-         * Muted #7b9eae
-         * DarkVibrant #348945
-         * DarkMuted #141414
-         * LightVibrant #f3ccb4
-         */
     });
 }
 
@@ -171,4 +163,34 @@ function follow(user) {
     })
   }
 
+$("#modifyUser").submit(function (e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $("#imgLink").val(document.getElementById("currentIcon").src);
+
+    if ($("#psw1").val() != $("#psw2").val()) {
+        editAlert("Le due nuove password non combaciano")
+        return;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function (data) {
+        console.log(data)
+        if (data.trim() == "wrongPassword") {
+            editAlert("La password inserita è incorretta")
+            return;
+        }
+        window.location.reload();
+      }
+    });
+});
+
+function editAlert(str) {
+    $("#editAlert").html(str)
+    $("#editAlert").show()
+}
   

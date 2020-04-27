@@ -60,3 +60,12 @@
 .textIcon {
     margin-bottom: 0.16em;
 }
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 65vh;
+    overflow-y: auto;
+}

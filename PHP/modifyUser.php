@@ -9,15 +9,12 @@
         $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
         $password = mysqli_real_escape_string($connect, $_POST["password"]);
 
-        $check_password_query = "SELECT password FROM Utente WHERE password = '$password' AND nome = '$user'";
+        $check_password_query = "SELECT * FROM Utente WHERE password = '$password' AND nome = '$user'";
         $check_password = mysqli_query($connect, $check_password_query);
-
-        if (mysqli_num_rows($check_password)==0) {
+        
+        if (mysqli_num_rows($check_password) != 1) {
             exit ("wrongPassword");
         }
-
-
-
 
         $imgProfilo = mysqli_real_escape_string($connect, $_POST["imgProfilo"]);
         $nome = mysqli_real_escape_string($connect, $_POST["nome"]);
