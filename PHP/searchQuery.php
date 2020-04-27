@@ -32,7 +32,7 @@
         $flashcards = array(); // $foo is here again
         unset($json_array2); // $foo is gone
         $json_array2 = array();
-        $preleva_flashcard_str = "SELECT * FROM Flashcard WHERE id_album = ".$rows["id"]."";
+        $preleva_flashcard_str = "SELECT * FROM Flashcard WHERE id_album = ".$rows["id"]." LIMIT 10";
         $preleva_flashcard = mysqli_query($connect, $preleva_flashcard_str);
         while($riga = mysqli_fetch_assoc($preleva_flashcard)){
             $json_array2[] = $riga;
@@ -69,8 +69,7 @@
     //array di array
     $post_data = array(
         'richiedente' => $email["email"],
-        'albums' => $albums,
-        'flashcards' => $flashcards
+        'albums' => $albums
     );    
 
 
