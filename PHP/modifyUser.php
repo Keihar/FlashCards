@@ -25,11 +25,20 @@
     
             $new_password = mysqli_real_escape_string($connect, $_POST["newPassword"]);
     
-            $new_password_ = md5($new_password);
+            if($new_password != ""){
+
+                $new_password_ = md5($new_password);
     
-            //Grazie a ON UPDATE CASCADE è possibile effettuare le modifiche in cascata anche per le altre tabelle
-            $modify_user_str = "UPDATE Utente SET imgProfilo='$imgProfilo', nome='$nome', motto='$motto', password='$new_password_' WHERE nome='$user'";
-            $modify_user = mysqli_query($connect, $modify_user_str);
+
+                $modify_user_str = "UPDATE Utente SET imgProfilo='$imgProfilo', nome='$nome', motto='$motto', password='$new_password_' WHERE nome='$user'";
+                $modify_user = mysqli_query($connect, $modify_user_str);
+            }
+            else{
+
+                $modify_user_str = "UPDATE Utente SET imgProfilo='$imgProfilo', nome='$nome', motto='$motto', password='$password_' WHERE nome='$user'";
+                $modify_user = mysqli_query($connect, $modify_user_str);
+            }
+
         }
         else{
             exit("wrongPassword");
