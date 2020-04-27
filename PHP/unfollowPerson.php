@@ -9,9 +9,7 @@ session_start();
 include 'DBconnect.php';
 
 $user = $_SESSION["utente"];
-//$unfollow = mysqli_real_escape_string($connect, $_POST["username"]);
-
-$unfollow = "Ferra";
+$unfollow = mysqli_real_escape_string($connect, $_POST["username"]);
 
 $seguente_query_str = "SELECT email FROM Utente WHERE nome='$user'";
 $seguente_query = mysqli_query($connect, $seguente_query_str);
