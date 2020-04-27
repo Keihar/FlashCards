@@ -35,7 +35,3 @@ if(!$unfollow_query){
 else{
     echo "success";
 }
-
-
-
-?>

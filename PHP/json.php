@@ -17,7 +17,7 @@ if (isset($_POST["username"])) {
     $user = $_POST["username"];
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user'";
+    $sql = "SELECT id, Album.nome, descrizione, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' AND privato=0";
     $result = mysqli_query($connect, $sql);
 
 }    
