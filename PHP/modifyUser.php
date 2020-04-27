@@ -39,6 +39,8 @@
                 $modify_user = mysqli_query($connect, $modify_user_str);
             }
 
+            $_SESSION["utente"] = $nome;
+
         }
         else{
             exit("wrongPassword");
