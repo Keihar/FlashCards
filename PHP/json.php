@@ -1,5 +1,9 @@
 <?php
 
+date_default_timezone_set('Europe/London');
+
+$data = date('Y-m-d H:i:s');
+
 //faccio partire la sessione
 session_start();
 
@@ -29,7 +33,7 @@ else if ($_SESSION['valid']) {
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $sql = "SELECT Album.id, Album.nome, album.descrizione, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail'";
+    $sql = "SELECT Album.id, Album.nome, album.descrizione, Album.data, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, Album.data, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 }
 else{
