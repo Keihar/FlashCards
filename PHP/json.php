@@ -40,11 +40,12 @@ else{
     exit("error");
 }
 
-    $preleva_motto_str = "SELECT motto FROM Utente WHERE Utente.nome='$user'";
+    $preleva_motto_str = "SELECT motto, imgProfilo FROM Utente WHERE Utente.nome='$user'";
     $preleva_motto = mysqli_query($connect, $preleva_motto_str);
 
     while($row = mysqli_fetch_array($preleva_motto)){
         $motto = mysqli_real_escape_string($connect, $row["motto"]);
+        $imgProfilo = mysqli_real_escape_string($connect, $row["imgProfilo"]);
     }
 
     //query per conto degli album
@@ -91,6 +92,7 @@ else{
     $post_data = array(
         'nome' => $user,
         'motto' => $motto,
+        'imgProfio' => $imgProfilo,
         'albums' => $albums
     );
 
