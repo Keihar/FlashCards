@@ -50,7 +50,7 @@
         foreach ($json_array_seguiti as &$rows) {
             array_push($seguiti, array(
                 'nome' => $rows["nome_seguito"],
-                'profilo' => $rows["profilo_seguito"]
+                'imgProfilo' => $rows["profilo_seguito"]
             ));
         }
 
