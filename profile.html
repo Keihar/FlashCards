@@ -14,6 +14,9 @@
   <script src="vendors/popper.min.js"></script>
   <script src="vendors/bootstrap/bootstrap.min.js"></script>
 
+  <!-- Vibrant -->
+  <script src="vendors/vibrant.min.js"></script>
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -138,7 +141,7 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
     <!-- Cover -->
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center rounded-top">
-      <div class="row w-100 ml-1 border border-bottom-0 coverImage" style="min-height: 30vh">
+      <div id="coverImg" class="row w-100 ml-1 border border-bottom-0 coverImage" style="min-height: 30vh">
         
       </div>
     </div>
@@ -147,26 +150,16 @@
         <!-- Profile Left -->
         <div class="col col-lg-4 align-items-center border profileLeft">
           <div class="imgContainer">
-            <img class="profileImg mx-auto" src="images\profilesCovers\001-bee.svg" alt="Profile Image">
+            <img id="profileImage" class="profileImg mx-auto" src="images\profilesCovers\005-puppy.svg" alt="Profile Image">
           </div>
           <div class="userName">
-            <p id="userCardName">Nome Utente</p>
+            <p id="userCardName">Caricamento...</p>
           </div>
           <div class="userMotto">
-            <em id="motto">"Questa è molto bella come frase"</em>
+            <em id="mottoCardName">"Caricamento..."</em>
           </div>
-          <div class="userBtns mt-2">
-            <button type="button" class="btn btn-primary" id="followBtn">
-              <svg class="bi bi-person-plus-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-              </svg> Segui
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              <svg class="bi bi-envelope-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M.05 3.555L8 8.414l7.95-4.859A2 2 0 0014 2H2A2 2 0 00.05 3.555zM16 4.697l-5.875 3.59L16 11.743V4.697zm-.168 8.108L9.157 8.879 8 9.586l-1.157-.707-6.675 3.926A2 2 0 002 14h12a2 2 0 001.832-1.195zM0 11.743l5.875-3.456L0 4.697v7.046z"/>
-              </svg> Messaggio
-            </button>
+          <div class="userBtns mt-2" id="userBtns">
+            
           </div>
           <div class="row mx-4 mt-4">
             <div class="card text-center w-100 mx-3 mb-4">
@@ -284,6 +277,89 @@
       </div>
     </div>
   </div>
+
+  <!-- EditProfile -->
+  <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="addAlbum" action="PHP/modifyUser.php">
+            <div class="modal-header">
+              <h5 class="modal-title">Nuovo Album</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body align-items-center text-justify w-100 mt-0">
+              <div class="col w-100">
+                <img id="currentIcon" class='profilePic' src='images\albumCovers\000-icon.svg'
+                  onclick="$('#iconModal').modal('show');" style="width: 30%; margin-left: 35%;">
+              </div>
+              <div class="col w-100">
+                <div class="card-body mb-0">
+
+                  <!-- Hidden Img Input -->
+                  <input type="text" id="imgLink" name="imgLink" class="d-none">
+
+                  <!-- Nome -->
+                  <p class="card-text">
+                    <label for="name">Nome Utente *</label>
+                    <input type="text" class="form-control" id="name" name="nome" placeholder="Nome utente"
+                      maxlength="50" required>
+                  </p>
+
+                  <!-- Motto -->
+                  <p class="card-text">
+                    <label for="motto">Motto *</label>
+                    <input type="text" class="form-control" id="motto" name="motto" placeholder="Motto"
+                      maxlength="50" required>
+                  </p> 
+
+                  <!-- New Password -->
+                  <p class="card-text">
+                    <label for="psw1">Nuova Password</label>
+                    <input type="password" class="form-control" id="psw1" name="psw1" placeholder="Password"
+                      maxlength="50">
+                  </p> 
+
+                  <!-- Psw Confirm -->
+                  <p class="card-text">
+                    <label for="psw2">Conferma con la vecchia password *</label>
+                    <input type="password" class="form-control" id="psw2" name="psw2" placeholder="Conferma password"
+                      maxlength="50" required>
+                  </p> 
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+              <button type="submit" class="btn btn-primary">Salva</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Icons Modal -->
+    <div class="modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="iconModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="iconModalLabel">Scegli un'immagine di profilo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="icons">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- Personal JS -->
   <script src="JS/sessionCheck.js"></script>

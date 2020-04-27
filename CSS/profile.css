@@ -18,7 +18,7 @@
 
 .coverImage {
     border-radius: 1.5rem 1.5rem 0em 0em;
-    background: #f5b953;
+    background: white; /*#f5b953*/
 }
 
 .userCards {

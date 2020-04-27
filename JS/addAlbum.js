@@ -36,4 +36,5 @@ $.ajax({
 
 function changeIcon(filename) {
   document.getElementById('currentIcon').src = dir + filename;
+  document.getElementById('imgLink').src = dir + filename;
 }
