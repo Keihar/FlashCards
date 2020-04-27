@@ -54,7 +54,7 @@ function getCard(id, name, description, imgLink, author) {
   if (description.length > descMaxLength) {
     description = description.substring(0, descMaxLength) + "...";
   }
-  let localAuth = author != letUserName ?  author : "te";
+  let localAuth = author != sessionUsername ?  author : "te";
   //  Returns the formatted HTML
   return `<div class="card mb-3 ml-3" id="singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
     `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +

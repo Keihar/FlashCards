@@ -78,8 +78,6 @@ else{
     //ciclo che assegna per ogni array i campi
     foreach ($json_array as &$rows) {
         array_push($albums, array(
-            'nalbum' => $nalbum,
-            'nflashcard' => $nflashcard,
             'id' => $rows['id'],
             'nome' => $rows['nome'],
             'descrizione' => $rows['descrizione'],
@@ -93,6 +91,8 @@ else{
         'nome' => $user,
         'motto' => $motto,
         'imgProfilo' => $imgProfilo,
+        'nalbum' => $nalbum,
+        'nflashcard' => $nflashcard,
         'albums' => $albums
     );
 

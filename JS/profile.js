@@ -9,25 +9,31 @@ $(document).ready(function () {
         url: "PHP/json.php",
         data: { 'username': username },
         success: function (data) {
-            user = JSON.parse(data);
-            console.table(user);
+            try { user = JSON.parse(data) } 
+            catch (error) { console.error("Errore nell'ottenimento del profilo")}
+
+            console.table(data);
 
             // Set Username
-            let tmp = user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "" ? "images\\profilesCovers\\dog.svg" : user.imgProfilo;
-            document.getElementById("profileImage").src = tmp;
-            document.getElementById("currentIcon").src = tmp;
+            if(user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "")
+                user.imgProfilo = "images\\profilesCovers\\dog.svg"
+            
+            document.getElementById("profileImage").src = user.imgProfilo;
+            document.getElementById("currentIcon").src = user.imgProfilo;
             setBackground();
-            document.getElementById("userCardName").innerHTML = "" + user.nome;
-            document.getElementById("mottoCardName").innerHTML = `"${user.motto}"`;
-            document.getElementById("nalbum").innerHTML = "" + user.albums[0].nalbum;
-            document.getElementById("nflashcard").innerHTML = "" + user.albums[0].nflashcard;
+
+            $("#userCardName").html("" + user.nome);
+            $("#mottoCardName").html(`"${user.motto}"`);
+            $("#nalbum").html(user.nalbum);
+            $("#nflashcard").html(user.nflashcard);
+
             $("#followBtn").click(function () { follow(user.nome) });
+            $("#unfollowBtn").click(function () { unfollow(user.nome) });
 
             let row = document.getElementById("userCards");
             user.albums.forEach(album => {
-                if (album.imgLink == null) {
+                if (album.imgLink == null)
                     album.imgLink = "images\\albumCovers\\000-icon.svg";
-                }
                 row.innerHTML += "" + getPCard(album.id, album.nome, album.descrizione,
                     album.imgLink, username, user.albums);
             });
@@ -41,22 +47,23 @@ $(document).ready(function () {
         url: "PHP/getFriends.php",
         data: { 'username': username },
         success: function (data) {
-            console.log(data);
-            cuser = JSON.parse(data);
+            try { fuser = JSON.parse(data) } 
+            catch (error) { console.error("Errore nell'ottenimento degli amici")}
 
-            document.getElementById("nfriends").innerHTML = cuser.nAmici;
-            document.getElementById("nfollowers").innerHTML = cuser.nSeguaci;
-            document.getElementById("nfollowed").innerHTML = cuser.nSeguiti;
+            checkForUnfollowBtn(fuser.seguaci);
 
-            cuser.amici.forEach(friend => {
+            $("#nfriends").html("" + fuser.nAmici);
+            fuser.amici.forEach(friend => {
                 friendsSetter(friend, "friendsUL")
             });
 
-            cuser.seguaci.forEach(friend => {
+            $("#nfollowers").html("" + fuser.nSeguaci);
+            fuser.seguaci.forEach(friend => {
                 friendsSetter(friend, "followersUL")
             });
 
-            cuser.seguiti.forEach(friend => {
+            $("#nfollowed").html("" + fuser.nSeguiti);
+            fuser.seguiti.forEach(friend => {
                 friendsSetter(friend, "followedUL")
             });
         }
@@ -64,15 +71,33 @@ $(document).ready(function () {
 });
 
 function friendsSetter(friend, ULName) {
-    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ? "images\\profilesCovers\\dog.svg" : friend.imgProfilo;
+    if(friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "") 
+        friend.imgProfilo = "images\\profilesCovers\\dog.svg"
+
     let img = document.createElement('img');
     img.className += "listIcon";
-    img.setAttribute('src', tmp)
+    img.setAttribute('src', friend.imgProfilo)
+
     let a = document.createElement('a');
     a.href = "profile.html?user=" + friend.nome;
     a.id = ULName + friend.nome;
+
     addUL(ULName, document.getHTML(img) + "&nbsp;" + document.getHTML(a))
     $("#" + a.id).html("" + friend.nome);
+}
+
+function checkForUnfollowBtn(array) {
+    
+    if (username == sessionUsername) {
+        return;
+    }
+    array.forEach(friend => {
+        if (friend.nome == sessionUsername) {
+            $("#followBtn").hide();
+            $("#unfollowBtn").show();
+            return;
+        }
+    });
 }
 
 function getPCard(id, name, description, imgLink, author) {
@@ -82,7 +107,10 @@ function getPCard(id, name, description, imgLink, author) {
     if (description.length > descMaxLength) {
         description = description.substring(0, descMaxLength) + "...";
     }
-    author = author != letUserName ? author : "te";
+
+    //  Personalized info in own profile
+    author = author != sessionUsername ? author : "te";
+
     //  Returns the formatted HTML
     return `<div class="card mb-3 mx-auto singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
         `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
@@ -92,31 +120,18 @@ function getPCard(id, name, description, imgLink, author) {
         `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
 }
 
+//  Adapt the page depending on the user
 function checkLocalProfile() {
-    if (username != letUserName) {
-        let btns = `<button type="button" class="btn btn-primary" id="followBtn">
-            <svg class="bi bi-person-plus-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-            <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg> Segui
-        </button>
-        <button type="button" class="btn btn-outline-secondary">
-            <svg class="bi bi-envelope-fill textIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M.05 3.555L8 8.414l7.95-4.859A2 2 0 0014 2H2A2 2 0 00.05 3.555zM16 4.697l-5.875 3.59L16 11.743V4.697zm-.168 8.108L9.157 8.879 8 9.586l-1.157-.707-6.675 3.926A2 2 0 002 14h12a2 2 0 001.832-1.195zM0 11.743l5.875-3.456L0 4.697v7.046z"/>
-            </svg> Messaggio
-        </button>`;
-        $("#userBtns").html(btns);
-        return;
+    if (username != sessionUsername) {
+        $("#followBtn").show();
+        $("#messageBtn").show();
     }
-    let editBtn = `<button type="button" class="btn btn-outline-primary" id="editBtn" data-toggle="modal" data-target="#editProfileModal">
-        <svg class="bi bi-gear-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 01-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 01.872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 012.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 012.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 01.872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 01-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 01-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 100-5.86 2.929 2.929 0 000 5.858z" clip-rule="evenodd"/>
-    </svg> Modifica Profilo
-    </button>`;
-    $("#userBtns").html(editBtn);
-    setProfileImages();
-    $("#name").val(user.nome);
-    $("#motto").val(user.motto);
+    else{
+        $("#editBtn").show();
+        setProfileImages();
+        $("#name").val(user.nome);
+        $("#motto").val(user.motto);
+    }
 }
 
 function setProfileImages() {
@@ -164,10 +179,19 @@ function follow(user) {
         type: "POST",
         url: "PHP/followPerson.php",
         data: { 'username': user },
-        success: function (data) {
-            $("#followBtn").hide();
-            $("#unfollowBtn").show();
-            console.log(data)
+        success: function () {
+            location.reload();
+        }
+    })
+}
+
+function unfollow(user) {
+    $.ajax({
+        type: "POST",
+        url: "PHP/unfollowPerson.php",
+        data: { 'username': user },
+        success: function () {
+            location.reload();
         }
     })
 }

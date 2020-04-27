@@ -1,4 +1,4 @@
-var letUserName;
+var sessionUsername;
 $(document).ready(function() {
     // Blocks breaks in TextAreas
     $("textarea").keypress(function(event) {
@@ -20,7 +20,7 @@ $(document).ready(function() {
                 //window.location.href = "login.html";
               }
               document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
-              letUserName = user.nome;
+              sessionUsername = user.nome;
               document.getElementById("profileNavBtn").href = "profile.html?user=" + user.nome;
         }
     });
