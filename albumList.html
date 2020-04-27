@@ -10,15 +10,15 @@
   <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="vendors/jquery-3.5.0.min.js"></script>
-  <script src="vendors/popper.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="vendors/jquery-3.5.0.min.js" defer></script>
+  <script src="vendors/popper.min.js" defer></script>
+  <script src="vendors/bootstrap/bootstrap.min.js" defer></script>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
   <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/42cdbffcd9.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/42cdbffcd9.js" crossorigin="anonymous" defer></script>
   <link rel="stylesheet" href="vendors/font-awesome.min.css">
 
   <!-- Personal CSS -->
@@ -32,6 +32,12 @@
       margin: 10%;
     }
   </style>
+
+  
+  <!-- Personal JS -->
+  <script src="JS/sessionCheck.js" defer></script>
+  <script src="JS/albumList.js" defer></script>
+  <script src="JS/addAlbum.js" defer></script>
 </head>
 
 <body>
@@ -262,11 +268,6 @@
     </div>
     </form>
   </main>
-
-  <!-- Personal JS -->
-  <script src="JS/sessionCheck.js"></script>
-  <script src="JS/albumList.js"></script>
-  <script src="JS/addAlbum.js"></script>
 
 </body>
 
