@@ -36,7 +36,7 @@
     background: whitesmoke;
     border-radius: 1rem;
     margin-top: -3.5rem;
-    border: 2px solid black
+    border: 2px solid #ced4da
 }
 
 .imgContainer {
@@ -68,4 +68,13 @@
 .modal-body{
     height: 65vh;
     overflow-y: auto;
+}
+
+.listIcon {
+    width:1em;
+    float: left;
+}
+
+li {
+    text-align: justify; float: right;
 }

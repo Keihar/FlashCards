@@ -3,6 +3,7 @@ var user;
 
 $(document).ready(function () {
     $("#editAlert").hide()
+    //$("#unfollowBtn").hide()
     $.ajax({
         type: "POST",
         url: "PHP/json.php",
@@ -12,7 +13,7 @@ $(document).ready(function () {
                 console.table(user);
 
                 // Set Username
-                let tmp = user.imgProfilo != null ? user.imgProfilo : "images\\profilesCovers\\001-bee.svg";
+                let tmp = user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": user.imgProfilo;
                 document.getElementById("profileImage").src = tmp;
                 document.getElementById("currentIcon").src = tmp;
                 setBackground();
@@ -48,15 +49,19 @@ $(document).ready(function () {
                 document.getElementById("nfollowed").innerHTML = cuser.nSeguiti;
 
                 cuser.amici.forEach(friend => {
-                    addUL("friendsUL", friend.nome_amico)
+                    let tmp = friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "" ?"images\\profilesCovers\\dog.svg": friend.imgProfilo;
+                    let img = document.createElement('img');
+                    img.className += "listIcon";
+                    img.setAttribute('src', tmp)   
+                    addUL("friendsUL", document.getHTML(img) + " " + friend.nome_amico)
                 });
 
                 cuser.seguaci.forEach(friend => {
-                    addUL("followersUL", friend.nome_seguace)
+                    addUL("followersUL", icon + " " + friend.nome_seguace)
                 });
 
                 cuser.seguiti.forEach(friend => {
-                    addUL("followedUL", friend.nome_seguito)
+                    addUL("followedUL", icon + " " + friend.nome_seguito)
                 });
 
             // }
@@ -147,7 +152,7 @@ function addUL(parent, str) {
     var ul = document.getElementById(parent);
     var li = document.createElement("li");
     $(li).addClass("list-group-item d-flex justify-content-between align-items-center");
-    li.appendChild(document.createTextNode(str));
+    $(li).html(str);
     ul.appendChild(li);
 }
 
@@ -158,6 +163,8 @@ function follow(user) {
       url: "PHP/followPerson.php",
       data: { 'username': user },
       success: function (data) {
+        $("#followBtn").hide();
+        $("#unfollowBtn").show();
         console.log(data)
       }
     })
@@ -193,4 +200,16 @@ function editAlert(str) {
     $("#editAlert").html(str)
     $("#editAlert").show()
 }
-  
+
+document.getHTML= function(who, deep){
+    if(!who || !who.tagName) return '';
+    var txt, ax, el= document.createElement("div");
+    el.appendChild(who.cloneNode(false));
+    txt= el.innerHTML;
+    if(deep){
+        ax= txt.indexOf('>')+1;
+        txt= txt.substring(0, ax)+who.innerHTML+ txt.substring(ax);
+    }
+    el= null;
+    return txt;
+}
