@@ -7,8 +7,15 @@
     session_start();
 
     $id_album = mysqli_real_escape_string($connect, $_POST["id_album"]);
-    $email = mysqli_real_escape_string($connect, $_POST["email"]);
-    
+    $user = mysqli_real_escape_string($connect, $_SESSION["utente"]);
+
+    $get_email_query = "SELECT email FROM Utente WHERE nome = '$user'";
+    $get_email = mysqli_query($connect, $get_email_query);
+
+    while($row = mysqli_fetch_array($get_email)){
+        $email = mysqli_real_escape_string($connect, $row["email"]);
+    }
+
     $result_str = "SELECT id FROM album_salvati WHERE emailUtente = '$email' AND idAlbum = '$id_album'";
     $result = mysqli_query($connect, $result_str);
 
