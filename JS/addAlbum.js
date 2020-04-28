@@ -1,4 +1,6 @@
-$("#addAlbum").submit(function (e) {
+$(document).ready(function () {
+  //  Ajax AddAlbum
+  $("#addAlbum").submit(function (e) {
     $("#imgLink").val($("#currentIcon").attr('src'));
     e.preventDefault();
     var form = $(this);
@@ -20,18 +22,19 @@ $("#addAlbum").submit(function (e) {
     });
   });
 
-var dir = "images/albumCovers";
-var fileextension = ".svg";
-$.ajax({
-    //This will retrieve the contents of the folder if the folder is configured as 'browsable'
-    url: dir,
-    success: function (data) {
-        //List all .png file names in the page
-        $(data).find("a:contains(" + fileextension + ")").each(function () {
-            var filename = this.href.replace(window.location.host, "").replace("http://", "");
-            $("#icons").append(`<img class="img-thumbnail imgList" data-dismiss="modal" src="${dir}${filename}" onclick="changeIcon('${filename}');">`);
-        });
-    }
+  var dir = "images/albumCovers";
+  var fileextension = ".svg";
+  $.ajax({
+      //This will retrieve the contents of the folder if the folder is configured as 'browsable'
+      url: dir,
+      success: function (data) {
+          //List all .png file names in the page
+          $(data).find("a:contains(" + fileextension + ")").each(function () {
+              var filename = this.href.replace(window.location.host, "").replace("http://", "");
+              $("#icons").append(`<img class="img-thumbnail imgList" data-dismiss="modal" src="${dir}${filename}" onclick="changeIcon('${filename}');">`);
+          });
+      }
+  });
 });
 
 function changeIcon(filename) {

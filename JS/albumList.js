@@ -1,3 +1,5 @@
+var selectedAlbum = "";
+var tooltipShow = false;
 
 $(document).ready(function () {
   $(function () {
@@ -37,6 +39,15 @@ $(document).ready(function () {
 
     }
   });
+
+  $('body').on('click', function (e) {
+    $('[data-toggle=popover]').each(function () {
+      if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        $(this).popover('hide');
+      }
+    });
+    
+  });
 });
 
 function getCard(id, name, description, imgLink, author) {
@@ -58,7 +69,6 @@ function getCard(id, name, description, imgLink, author) {
     `</p> <a class="card-text text-secondary"href="profile.html?user=${author}"> Creato da ${localAuth}</a> </div> </div> </div> </div>`;
   return str;
 }
-var selectedAlbum = "";
 
 function deleteAlbumConfirm(id) {
   selectedAlbum = id;
@@ -80,7 +90,6 @@ function deleteAlbum() {
   });
 }
 
-var tooltipShow = false;
 function playAlbum(id) {
   $.ajax({
     type: "GET",
@@ -112,11 +121,3 @@ function playAlbum(id) {
     }
   });
 }
-
-$('body').on('click', function (e) {
-  $('[data-toggle=popover]').each(function () {
-    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-      $(this).popover('hide');
-    }
-  });
-});

@@ -1,4 +1,5 @@
-$("#loginForm").submit(function (e) {
+$(document).ready(function() {
+  $("#loginForm").submit(function (e) {
     let emailAlert = document.getElementById("alertBox");
     e.preventDefault();
     var form = $(this);
@@ -24,3 +25,4 @@ $("#loginForm").submit(function (e) {
       }
     });
   });
+});

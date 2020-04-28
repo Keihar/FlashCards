@@ -202,32 +202,6 @@ function unfollow(user) {
     })
 }
 
-$("#modifyUser").submit(function (e) {
-    e.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
-    $("#imgLink").val(document.getElementById("currentIcon").src);
-
-    if ($("#psw1").val() != $("#psw2").val()) {
-        editAlert("Le due nuove password non combaciano")
-        return;
-    }
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize(),
-        success: function (data) {
-            console.log(data)
-            if (data.trim() == "wrongPassword") {
-                editAlert("La password inserita è incorretta")
-                return;
-            }
-            window.location.href = "profile.html?user=" + $("#name").val();
-        }
-    });
-});
-
 function editAlert(str) {
     $("#editAlert").html(str)
     $("#editAlert").show()

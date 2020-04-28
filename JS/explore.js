@@ -1,6 +1,20 @@
 //  Variable that memorizes the JSON avaible for all functions
 var spinner = `<div class="d-flex justify-content-center w-100"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>`;
 
+$(document).ready(function() {
+  //  Enter shortcut for search bar
+  $(function () {
+    $("#searchBar").keypress(function (e) {
+      if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+        $('#searchBtn').click();
+        return false;
+      } else {
+        return true;
+      }
+    });
+  });
+});
+
 // Search
 function search() {
   //  Get the query
@@ -121,7 +135,6 @@ function albumPreview(id, array) {
       //  Setting title and description
       document.getElementById("modal-title").innerHTML = "" + album.nome;
       document.getElementById("modal-body").innerHTML = "" + album.descrizione;
-      
 
       //  Adds backs and fronts to the table
       let tableBody = document.getElementById("tableBody");
@@ -171,18 +184,6 @@ function saveAlbum(id, email = user.richiedente) {
     }
   })
 }
-
-//  Enter shortcut for search bar
-$(function () {
-  $("#searchBar").keypress(function (e) {
-    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-      $('#searchBtn').click();
-      return false;
-    } else {
-      return true;
-    }
-  });
-});
 
 //  DROPDOWN HANDLER
 

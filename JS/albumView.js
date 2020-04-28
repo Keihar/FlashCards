@@ -1,33 +1,108 @@
 var albumID = "";
 var modifyingRow = false;
+var dir = "images/albumCovers";
+var fileextension = ".svg";
 
-$.ajax({
-  type: "GET",
-  url: "PHP/getCurrentAlbum.php",
-  data: "",
-  success: function (data) {
-    let album = JSON.parse(data);
-    albumID = album.id;
-    $("#albumName").val(album.nome.replace('\\',''));
-    $("#albumDescription").html(album.descrizione.replace('\\',''));
+$(document).ready(function() {
+  //GetCurrent
+  $.ajax({
+    type: "GET",
+    url: "PHP/getCurrentAlbum.php",
+    data: "",
+    success: function (data) {
+      let album = JSON.parse(data);
+      albumID = album.id;
+      $("#albumName").val(album.nome.replace('\\',''));
+      $("#albumDescription").html(album.descrizione.replace('\\',''));
+  
+      document.getElementById("privateCheck").checked = album.privato == 1;
+  
+      if (album.imgLink == null)
+        album.imgLink = "images\\albumCovers\\000-icon.svg";
+  
+      $("#currentIcon").attr('src', album.imgLink);
+      let tableBody = document.getElementById("tableBody");
+      album.flashcards.forEach(flashcard => {
+        tableBody.innerHTML += "<tr>" +
+          `<td>${flashcard.fronte.replace('\\','')}</td>` +
+          `<td>${flashcard.retro.replace('\\','')}</td>` +
+          `<td> <button type="button" onclick="modifyRow(this, ${flashcard.id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
+          `<td> <button type="button" onclick="deleteRow(this, ${flashcard.id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
+        "</tr>";
+      });
+    }
+  });
 
-    document.getElementById("privateCheck").checked = album.privato == 1;
+  
+  $("#flashcardsForm").submit(function (e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
 
-    if (album.imgLink == null)
-      album.imgLink = "images\\albumCovers\\000-icon.svg";
-
-    $("#currentIcon").attr('src', album.imgLink);
-    let tableBody = document.getElementById("tableBody");
-    album.flashcards.forEach(flashcard => {
-      tableBody.innerHTML += "<tr>" +
-        `<td>${flashcard.fronte.replace('\\','')}</td>` +
-        `<td>${flashcard.retro.replace('\\','')}</td>` +
-        `<td> <button type="button" onclick="modifyRow(this, ${flashcard.id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
-        `<td> <button type="button" onclick="deleteRow(this, ${flashcard.id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
-      "</tr>";
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function (data) {
+        console.log(data);
+        if (isNaN(data)) {
+          alert("Errore nell'aggiunta")
+        }
+        else {
+          let id = "" + data;
+          let front = document.getElementById("frontCard");
+          let back = document.getElementById("backCard");
+          let row = "<tr>" +
+            `<td>${front.value}</td>` +
+            `<td>${back.value}</td>` +
+            `<td> <button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
+            `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
+            "</tr>";
+          front.value = "";
+          back.value = "";
+          $(document.getElementById("tableList")).find('tbody').append(row);
+        }
+      }
     });
-  }
-});
+  });
+
+  $("#modifyAlbum").submit(function (e) {
+    document.getElementById("imgLink").value = document.getElementById('currentIcon').src;
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function (data) {
+        console.log(data);
+        if (data != "success") {
+          alert("Errore nella modifica")
+        }
+        else {
+          window.location.href = "albumList.html";
+        }
+      }
+    });
+  });
+
+  
+  $.ajax({
+    //This will retrieve the contents of the folder if the folder is configured as 'browsable'
+    url: dir,
+    success: function (data) {
+        //List all .png file names in the page
+        $(data).find("a:contains(" + fileextension + ")").each(function () {
+            var filename = this.href.replace(window.location.host, "").replace("http://", "");
+            $("#icons").append(`<img class="img-thumbnail imgList" data-dismiss="modal" src="${dir}${filename}" onclick="changeIcon('${filename}');">`);
+        });
+    }
+  });
+
+})
+
 
 function deleteRow(btn, id) {
   var row = btn.parentNode.parentNode;
@@ -88,74 +163,6 @@ function saveNewRow(id) {
     }
   });
 }
-
-$("#flashcardsForm").submit(function (e) {
-  e.preventDefault();
-  var form = $(this);
-  var url = form.attr('action');
-
-  $.ajax({
-    type: "POST",
-    url: url,
-    data: form.serialize(),
-    success: function (data) {
-      console.log(data);
-      if (isNaN(data)) {
-        alert("Errore nell'aggiunta")
-      }
-      else {
-        let id = "" + data;
-        let front = document.getElementById("frontCard");
-        let back = document.getElementById("backCard");
-        let row = "<tr>" +
-          `<td>${front.value}</td>` +
-          `<td>${back.value}</td>` +
-          `<td> <button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
-          `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
-          "</tr>";
-        front.value = "";
-        back.value = "";
-        $(document.getElementById("tableList")).find('tbody').append(row);
-      }
-    }
-  });
-});
-
-$("#modifyAlbum").submit(function (e) {
-  document.getElementById("imgLink").value = document.getElementById('currentIcon').src;
-  e.preventDefault();
-  var form = $(this);
-  var url = form.attr('action');
-
-  $.ajax({
-    type: "POST",
-    url: url,
-    data: form.serialize(),
-    success: function (data) {
-      console.log(data);
-      if (data != "success") {
-        alert("Errore nella modifica")
-      }
-      else {
-        window.location.href = "albumList.html";
-      }
-    }
-  });
-});
-
-var dir = "images/albumCovers";
-var fileextension = ".svg";
-$.ajax({
-    //This will retrieve the contents of the folder if the folder is configured as 'browsable'
-    url: dir,
-    success: function (data) {
-        //List all .png file names in the page
-        $(data).find("a:contains(" + fileextension + ")").each(function () {
-            var filename = this.href.replace(window.location.host, "").replace("http://", "");
-            $("#icons").append(`<img class="img-thumbnail imgList" data-dismiss="modal" src="${dir}${filename}" onclick="changeIcon('${filename}');">`);
-        });
-    }
-});
 
 function changeIcon(filename) {
   document.getElementById('currentIcon').src = dir + filename;
