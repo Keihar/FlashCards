@@ -23,28 +23,32 @@ function search() {
     data: { 'query': query, 'scope': scope },
     success: function (data) {
 
-      try { user = JSON.parse(data);}
+      try { user = JSON.parse(data);
+        row.innerHTML = ""; }
       catch (error) { console.error(data);
         row.innerHTML = "<div class='mb-3 col'> Errore nella ricerca.</div>" }
-
-      //  Zero results
-      if (user.albums.length == 0)
-        row.innerHTML = "<div class='mb-3 col'> Nessun risultato.</div>"
-      else
-        row.innerHTML = "";
 
       //  Print every album
       console.table(user);
       if (scope == "user") {
-        user.albums.forEach(album => {
-          if (album.imgLink == null) {
-            album.imgLink = "images\\albumCovers\\000-icon.svg";
+        //  Zero results
+        if (user.users.length == 0)
+          row.innerHTML = "<div class='mb-3 col'> Nessun utente trovato.</div>"
+
+        //  Prints Users
+        user.users.forEach(utente => {
+          if (utente.imgProfilo == null) {
+            utente.imgProfilo = "images\\profilesCovers\\dog.svg";
           }
-          row.innerHTML += "" + getCard(album.id, album.nome, album.descrizione,
-            album.imgLink, album.nomeutente);
+          row.innerHTML += "" + getUserCard(utente.nome, utente.motto, utente.imgProfilo);
         });
       }
       else {
+        //  Zero results
+        if (user.albums.length == 0)
+          row.innerHTML = "<div class='mb-3 col'> Nessun album trovato.</div>"
+
+        //  Prints Albums
         user.albums.forEach(album => {
           if (album.imgLink == null) {
             album.imgLink = "images\\albumCovers\\000-icon.svg";
@@ -88,8 +92,8 @@ function getUserCard(name, motto, imgLink) {
   //  Returns the formatted HTML
   return `<div class="card mb-3 ml-3" id="singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
     `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
-    `<p class="card-text">${motto}</p><p class="card-text">` +
-    `<a href="profile.html?user=${name}}" class='btn btn-primary'>Visita</a>` +
+    `<p class="card-text"><em class="text-secondary">"${motto}"</em></p><p class="card-text">` +
+    `<a href="profile.html?user=${name}" class='btn btn-primary'><i class="fa fa-arrow-right"></i>Visita</a>` +
     `</p> </div> </div> </div> </div>`;
 }
 
