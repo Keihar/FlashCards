@@ -61,11 +61,11 @@
     margin-bottom: 0.16em;
 }
 
-/* Important part */
-.modal-dialog{
+.profile-modal-dialog{
     overflow-y: initial !important
 }
-.modal-body{
+
+.profile-modal-body{
     height: 65vh;
     overflow-y: auto;
 }
@@ -77,4 +77,9 @@
 
 li {
     text-align: left; 
+}
+
+#currentIcon {
+    margin-top: 1em;
+    margin-bottom: 1em;
 }

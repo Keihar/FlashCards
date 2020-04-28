@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -50,7 +51,8 @@ function getCard(id, name, description, imgLink, author) {
   let str = `<div class="card mb-3 ml-3" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"> <div class="col-md-4">`+
   `<img src="${imgLink}" alt="" class="listImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> `+
   `<p class="card-text">${description}</p><p class="card-text">`+
-  `<button id="playAlbum${id}" onclick='playAlbum(${id})' class='btn btn-primary'> <i class="fa fa-arrow-right"></i> Avvia</button>` +
+  `<button id="playAlbum${id}" onclick='playAlbum(${id})' class='btn btn-primary' data-container="body" data-toggle="popover" data-placement="bottom" data-content="L'`+
+  `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>` +
   `<button id="viewAlbum${id}" onclick='viewAlbum(${id})' class='btn btn-outline-secondary ml-1'><i class="fa fa-pencil"></i> Modifica</button>` +
   `<button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-outline-danger ml-1' data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i> Elimina</button>`+
   `</p> <a class="card-text text-secondary"href="profile.html?user=${author}"> Creato da ${localAuth}</a> </div> </div> </div> </div>`;
@@ -115,7 +117,7 @@ function playAlbum(id) {
               let user = JSON.parse(data);
               let cards = user.flashcards;
               if (cards.length < 2) {
-                alert("L'album deve contenere almeno due FlashCards!")
+                $('#playAlbum'+id).popover('show')
               }
               else {
                 window.location.href = "playGarden.html";

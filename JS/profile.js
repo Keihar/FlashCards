@@ -242,8 +242,3 @@ document.getHTML = function (who, deep) {
     el = null;
     return txt;
 }
-
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  });

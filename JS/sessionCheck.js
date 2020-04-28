@@ -1,6 +1,16 @@
 var sessionUsername;
 var user;
 
+//  Enables PopOvers
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+//  Enables Tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
 $(document).ready(function() {
     // Blocks breaks in TextAreas
     $("textarea").keypress(function(event) {
