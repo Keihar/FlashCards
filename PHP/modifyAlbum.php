@@ -1,5 +1,7 @@
 <?php
 
+    date_default_timezone_set('Europe/London');
+
     //includo codice per la connessione al DataBase
     include 'DBconnect.php';
 
@@ -15,8 +17,10 @@
     $imgLink = mysqli_real_escape_string($connect, $_POST["imgLink"]);
     $privato = isset($_POST['privato']) ? 1 : 0;;
 
+    $data = date('Y-m-d H:i:s');
+
     //query per modificare l'album
-    $update_query = "UPDATE Album SET nome='$nome', descrizione='$descrizione', imgLink='$imgLink', privato='$privato' WHERE id='$id_album'";
+    $update_query = "UPDATE Album SET nome='$nome', descrizione='$descrizione', data = '$data', imgLink='$imgLink', privato='$privato' WHERE id='$id_album'";
     $update = mysqli_query($connect, $update_query);
 
     //controllo se la query è andata a buon fine per utilizzare l'ajax
