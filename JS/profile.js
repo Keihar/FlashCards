@@ -12,7 +12,7 @@ $(document).ready(function () {
             try { user = JSON.parse(data) } 
             catch (error) { console.error("Errore nell'ottenimento del profilo") }
 
-            console.table(data);
+            console.table(user);
 
             // Set Username
             if(user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "")
@@ -117,7 +117,7 @@ function getPCard(id, name, description, imgLink, author) {
         `<p class="card-text">${description}</p><p class="card-text">` +
         `<button onclick='saveAlbum(${id},"${author}")' id="btn${id}" class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
         `<button onclick='saveAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
-        `<button data-toggle="modal" data-target="#previewModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'>Anteprima</button>` +
+        `<button data-toggle="modal" data-target="#previewModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
         `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
 }
 

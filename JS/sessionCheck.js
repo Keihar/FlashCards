@@ -29,7 +29,7 @@ $(document).ready(function() {
                 console.log("User logged found.");
               } 
               catch (error) {
-                //window.location.href = "login.html";
+                console.error(data);
               }
               document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
               sessionUsername = user.nome;

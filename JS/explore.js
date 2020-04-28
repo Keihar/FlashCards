@@ -77,7 +77,7 @@ function getCard(id, name, description, imgLink, author) {
     `<p class="card-text">${description}</p><p class="card-text">` +
     `<button id="btn${id}" onclick='saveAlbum(${id},"${sessionUsername}")' class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
     `<button id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
-    `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'>Anteprima</button>` +
+    `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
     `</p> <p class="card-text"><a href="profile.html?user=${author}" class="text-secondary"">Creato da ${localAuth}</a></p> </div> </div> </div> </div>`;
 }
 
@@ -98,8 +98,8 @@ function getUserCard(name, motto, imgLink) {
 }
 
 //  Album Preview
-function albumPreview(id) {
-  user.albums.forEach(album => {
+function albumPreview(id, array) {
+  array.forEach(album => {
     if (album.id == id) {
       //  Setting default image if its's null
       album.imgLink = album.imgLink == null ? "images\\albumCovers\\000-icon.svg": album.imgLink;
@@ -112,6 +112,15 @@ function albumPreview(id) {
       let tableBody = document.getElementById("tableBody");
       tableBody.innerHTML = "";
       console.table(album.flashcards);
+
+      if (album.flashcards.length < 1) {
+        $("#noflashcards").show();
+        $("#tableList").hide();
+      }
+      else {
+        $("#noflashcards").hide();
+        $("#tableList").show();
+      }
       album.flashcards.forEach(flashcard => {
           tableBody.innerHTML += "<tr>" +
             `<td>${flashcard.fronte.replace('\\', '')}</td>` +
@@ -137,7 +146,7 @@ function saveAlbum(id, email = user.richiedente) {
           break;
       
         case "saveExisting":
-          alert("L'album è già presente");
+          alert("L'album è già presente nella tua libreria!");
           break;
 
         default:

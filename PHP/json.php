@@ -77,12 +77,28 @@ else{
 
     //ciclo che assegna per ogni array i campi
     foreach ($json_array as &$rows) {
+        $json_array2 = array();
+        $flashcards = array();
+        $preleva_flashcard_str = "SELECT * FROM Flashcard WHERE id_album = ".$rows["id"]." LIMIT 10";
+        $preleva_flashcard = mysqli_query($connect, $preleva_flashcard_str);
+        while($riga = mysqli_fetch_assoc($preleva_flashcard)){
+            $json_array2[] = $riga;
+        }
+        foreach($json_array2 as &$righe){
+            array_push($flashcards, array(
+                'id_album' => $righe['id_album'], 
+                'id_flashcard' => $righe['id'],
+                'fronte' => $righe['fronte'],
+                'retro' => $righe['retro']
+            ));
+        }
         array_push($albums, array(
             'id' => $rows['id'],
             'nome' => $rows['nome'],
             'descrizione' => $rows['descrizione'],
             'imgLink' => $rows['imgLink'],
-            'username' => $rows['username']
+            'username' => $rows['username'],
+            'flashcards' => $flashcards
         ));
     }
 
