@@ -76,7 +76,7 @@ function getCard(id, name, description, imgLink, author) {
     `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
     `<p class="card-text">${description}</p><p class="card-text">` +
     `<button id="btn${id}" onclick='saveAlbum(${id},"${sessionUsername}")' class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
-    `<button id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
+    `<button id="nbtn${id}" class='btn btn-outline-primary' onclick="removeAlbum(${id})" style="display:none;">Rimuovi dai tuoi Album</button>` +
     `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
     `</p> <p class="card-text"><a href="profile.html?user=${author}" class="text-secondary"">Creato da ${localAuth}</a></p> </div> </div> </div> </div>`;
 }
@@ -107,6 +107,7 @@ function albumPreview(id, array) {
       //  Setting title and description
       document.getElementById("modal-title").innerHTML = "" + album.nome;
       document.getElementById("modal-body").innerHTML = "" + album.descrizione;
+      
 
       //  Adds backs and fronts to the table
       let tableBody = document.getElementById("tableBody");

@@ -21,6 +21,8 @@ $(document).ready(function() {
                 $("#row").html($("#row").html() + getCard(album.id, album.nome, album.descrizione,
                   album.imgLink, album.username));
               });
+
+              markBtns();
         }
     });
 });

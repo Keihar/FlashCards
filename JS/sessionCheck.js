@@ -109,3 +109,34 @@ function getUrlVars()
 
     return vars;
 }
+
+function markBtns() {
+  let btns = $('div').find('button:contains("Aggiungi ai tuoi Album")');
+  console.table(user.salvati)
+  for (let i = 0; i < btns.length; i++) {
+    user.salvati.forEach(num => {
+      if ($(btns[i]).attr('id') == ("btn" + String(num.id))) {
+        $(btns[i]).html("Rimuovi dai tuoi Album");
+        $(btns[i]).removeClass("btn-primary").addClass("btn-outline-primary");
+        $(btns[i]).attr("onclick", `removeAlbum(${num.id})`)
+      }
+    });
+  }   
+}
+
+
+function removeAlbum(id) {
+  $.ajax({
+      type: "POST",
+      url: "PHP/removeAlbum.php",
+      data: { 'id': id },
+      success: function (data) {
+        if (data != "success") {
+          console.error("Errore nella rimozione")
+        } 
+        else {
+          window.location.reload();
+        }
+      }
+    });
+}

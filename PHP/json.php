@@ -109,7 +109,7 @@ else{
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $preleva_salvati_query = "SELECT id FROM album_salvati WHERE emailUtente='$usermail'";
+    $preleva_salvati_query = "SELECT idAlbum FROM album_salvati WHERE emailUtente='$usermail'";
     $preleva_salvati = mysqli_query($connect, $preleva_salvati_query);
 
     $json_salvati = array();
@@ -122,7 +122,7 @@ else{
 
     foreach($json_salvati as &$righe){
         array_push($salvati, array(
-            'id' => $righe['id'] 
+            'id' => $righe['idAlbum'] 
         ));
     }
 

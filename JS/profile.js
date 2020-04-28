@@ -66,6 +66,9 @@ $(document).ready(function () {
             fuser.seguiti.forEach(friend => {
                 friendsSetter(friend, "followedUL")
             });
+
+            markBtns();
+            hideBtns();
         }
     })
 });
@@ -241,4 +244,9 @@ document.getHTML = function (who, deep) {
     }
     el = null;
     return txt;
+}
+
+function hideBtns() {
+    if (username == sessionUsername)
+        $('.card').find('button').hide();
 }
