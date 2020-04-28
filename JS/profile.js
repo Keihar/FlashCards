@@ -115,8 +115,9 @@ function getPCard(id, name, description, imgLink, author) {
     return `<div class="card mb-3 mx-auto singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
         `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
         `<p class="card-text">${description}</p><p class="card-text">` +
-        `<button onclick='saveAlbum(${id})' class='btn btn-primary'> <i class="fa fa-plus"></i> Aggiungi ai tuoi Albums</button>` +
-        `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'><i class="fa fa-pencil"></i> Anteprima</button>` +
+        `<button onclick='saveAlbum(${id},"${author}")' id="btn${id}" class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
+        `<button onclick='saveAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
+        `<button data-toggle="modal" data-target="#previewModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'>Anteprima</button>` +
         `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
 }
 

@@ -1,20 +1,25 @@
+
 $(document).ready(function() {
-    console.log( "ready!" );
     $.ajax({
         type: "POST",
-        url: "PHP/json.php",
+        url: "PHP/dashboardJSON.php",
         data: "",
         success: function (data) {
-            console.log(data);
+            let user;
             try {
-                let user = JSON.parse(data); 
-                // Set Username
-                document.getElementById("userCardName").innerHTML = "" + user.nome;
-                document.getElementById("motto").innerHTML = `"${user.motto}"`;
-                document.getElementById("nalbum").innerHTML = "" + user.albums[0].nalbum;
-                document.getElementById("nflashcard").innerHTML = "" + user.albums[0].nflashcard;
-            } catch{}
+                user = JSON.parse(data);
+                console.log("User logged found.");
+              } 
+              catch (error) {
+                //window.location.href = "login.html";
+              }
+              user.albums.forEach(album => {
+                if (album.imgLink == null) {
+                  album.imgLink = "images\\albumCovers\\000-icon.svg";
+                }
+                $("#row").html("" + getCard(album.id, album.nome, album.descrizione,
+                  album.imgLink, album.username));
+              });
         }
     });
 });
-

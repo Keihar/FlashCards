@@ -1,4 +1,6 @@
 var sessionUsername;
+var user;
+
 $(document).ready(function() {
     // Blocks breaks in TextAreas
     $("textarea").keypress(function(event) {
@@ -12,7 +14,6 @@ $(document).ready(function() {
         url: "PHP/json.php",
         data: "",
         success: function (data) {
-            var user;
             try {
                 user = JSON.parse(data);
                 console.log("User logged found.");

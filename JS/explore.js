@@ -1,5 +1,4 @@
 //  Variable that memorizes the JSON avaible for all functions
-var user;
 var spinner = `<div class="d-flex justify-content-center w-100"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>`;
 
 // Search
@@ -16,7 +15,7 @@ function search() {
   $.ajax({
     type: "POST",
     url: "PHP/searchQuery.php",
-    data: { 'query': query },
+    data: { 'query': query, 'scope': $("#dropdownBtn").attr('name') },
     success: function (data) {
       try {
         user = JSON.parse(data);
@@ -55,12 +54,15 @@ function getCard(id, name, description, imgLink, author) {
     description = description.substring(0, descMaxLength) + "...";
   }
   let localAuth = author != sessionUsername ?  author : "te";
+
   //  Returns the formatted HTML
+
   return `<div class="card mb-3 ml-3" id="singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
     `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
     `<p class="card-text">${description}</p><p class="card-text">` +
-    `<a href='#' onclick='saveAlbum(${id},${user.nome})' class='btn btn-primary'> <i class="fa fa-plus"></i> Aggiungi ai tuoi Albums</a>` +
-    `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'><i class="fa fa-pencil"></i> Anteprima</button>` +
+    `<button onclick='saveAlbum(${id},"${sessionUsername}")' id="btn${id}" class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
+    `<button id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
+    `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id})' class='btn btn-secondary ml-1'>Anteprima</button>` +
     `</p> <p class="card-text"><a href="profile.html?user=${author}" class="text-secondary"">Creato da ${localAuth}</a></p> </div> </div> </div> </div>`;
 }
 
@@ -99,7 +101,8 @@ function saveAlbum(id, email = user.richiedente) {
     success: function (data) {
       switch (data) {
         case "success":
-          alert("Album Salvato");
+          $("#btn" + id).hide();
+          $("#nbtn" + id).show();
           break;
       
         case "saveExisting":
@@ -114,7 +117,6 @@ function saveAlbum(id, email = user.richiedente) {
   })
 }
 
-
 //  Enter shortcut for search bar
 $(function () {
   $("#searchBar").keypress(function (e) {
@@ -126,3 +128,27 @@ $(function () {
     }
   });
 });
+
+//  DROPDOWN HANDLER
+
+function dropClick(str) {
+  $(".dropdown-item.active").removeClass("active");
+  $("#dropdownBtn").attr('name', str);
+
+  switch (str) {
+    case "userAndAlbum":
+      $("#userAndAlbumDrop").addClass("active");
+      $("#dropdownBtn").html("Album e Utenti");
+      break;
+    
+    case "album":
+      $("#albumDrop").addClass("active"); 
+      $("#dropdownBtn").html("Album");     
+      break;
+
+    case "user":
+      $("#userDrop").addClass("active");   
+      $("#dropdownBtn").html("Utenti");   
+      break;
+  }
+}
