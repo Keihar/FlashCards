@@ -6,8 +6,11 @@
 
     $stringa = mysqli_real_escape_string($connect, $_POST["query"]);
     $user = $_SESSION["utente"];
+    $scope = mysqli_real_escape_string($connect, $_POST["scope"]);
 
-    $search_for_string_query = "SELECT id, Album.nome AS nome, descrizione, imgLink, privato, Album.email AS email, Utente.nome AS username FROM Album INNER JOIN Utente ON (Album.email = Utente.email) WHERE (Album.nome LIKE '%$stringa%' OR Utente.nome LIKE '%$stringa%') AND privato=0 AND Album.email = Utente.email AND Utente.nome != '$user' LIMIT 10";
+    if($scope == "album"){
+
+    $search_for_string_query = "SELECT id, Album.nome AS nome, descrizione, imgLink, privato, Album.email AS email, Utente.nome AS username FROM Album INNER JOIN Utente ON (Album.email = Utente.email) WHERE (Album.nome LIKE '%$stringa%') AND privato=0 AND Album.email = Utente.email AND Utente.nome != '$user' LIMIT 10";
     $search_for_string = mysqli_query($connect, $search_for_string_query);
 
     //istanzio array che mi servirà per splittare le righe
@@ -72,6 +75,34 @@
         'albums' => $albums
     );    
 
+}
+else if($scope == "user"){
+
+    $search_for_string_query = "SELECT nome, imgProfilo, motto FROM Utente WHERE (nome LIKE '%$stringa%') AND Utente.nome != '$user' LIMIT 10";
+    $search_for_string = mysqli_query($connect, $search_for_string_query);
+
+    $json_utenti_array = array();
+
+    while ($row = mysqli_fetch_assoc($search_for_string)) {
+        $json_utenti_array[] = $row;
+    }
+
+    //istanzio l'array per creare la matrice
+    $users = array();
+
+    foreach ($json_utenti_array as &$rows) {
+        array_push($users, array(
+            'nome' => $rows['nome'],
+            'imgProfilo' => $rows['imgProfilo'],
+            'motto' => $rows['motto']
+        ));        
+    }   
+
+    $post_data = array(
+        'users' => $users
+    );
+
+}
 
     //codifica in json
     $output = json_encode($post_data);
