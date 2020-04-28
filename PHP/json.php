@@ -101,6 +101,32 @@ else{
             'flashcards' => $flashcards
         ));
     }
+    
+    $preleva_email_str = "SELECT email FROM Utente WHERE Utente.nome='$user'";
+    $preleva_email = mysqli_query($connect, $preleva_email_str);
+    $usermail = null;
+    while($row = mysqli_fetch_array($preleva_email)){
+        $usermail = mysqli_real_escape_string($connect, $row["email"]);
+    }
+
+    $preleva_salvati_query = "SELECT id FROM album_salvati WHERE emailUtente='$usermail'";
+    $preleva_salvati = mysqli_query($connect, $preleva_salvati_query);
+
+    $json_salvati = array();
+
+    while($riga = mysqli_fetch_assoc($preleva_salvati)){
+        $json_salvati[] = $riga;
+    }
+
+    $salvati = array();
+
+    foreach($json_salvati as &$righe){
+        array_push($salvati, array(
+            'id' => $righe['id'] 
+        ));
+    }
+
+
 
     //array di array
     $post_data = array(
@@ -109,7 +135,8 @@ else{
         'imgProfilo' => $imgProfilo,
         'nalbum' => $nalbum,
         'nflashcard' => $nflashcard,
-        'albums' => $albums
+        'albums' => $albums,
+        'salvati' => $salvati
     );
 
     //codifica in json
