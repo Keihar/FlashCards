@@ -8,7 +8,8 @@ $(document).ready(function() {
             let user;
             try {
                 user = JSON.parse(data);
-                console.log("User logged found.");
+                console.table(user);
+                $("#row").html("");
               } 
               catch (error) {
                 //window.location.href = "login.html";
@@ -17,7 +18,7 @@ $(document).ready(function() {
                 if (album.imgLink == null) {
                   album.imgLink = "images\\albumCovers\\000-icon.svg";
                 }
-                $("#row").html("" + getCard(album.id, album.nome, album.descrizione,
+                $("#row").html($("#row").html() + getCard(album.id, album.nome, album.descrizione,
                   album.imgLink, album.username));
               });
         }
