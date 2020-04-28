@@ -160,3 +160,32 @@ $.ajax({
 function changeIcon(filename) {
   document.getElementById('currentIcon').src = dir + filename;
 }
+
+//  Files Support
+function handleFileSelect()
+{               
+  if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+    alert('The File APIs are not fully supported in this browser.');
+    return;
+  }   
+
+  var input = document.getElementById('fileinput');
+  if (!input.files) {
+    alert("This browser doesn't seem to support the `files` property of file inputs.");
+  }
+  else if (!input.files[0]) {
+    alert("Please select a file before clicking 'Load'");               
+  }
+  else {
+    var file = input.files[0];
+    var fr = new FileReader();
+    fr.onload = receivedText;
+    //fr.readAsText(file);
+    //fr.readAsBinaryString(file); //as bit work with base64 for example upload to server
+    fr.readAsDataURL(file);
+  }
+}
+
+function receivedText() {
+  document.getElementById('editor').appendChild(document.createTextNode(fr.result));
+}    

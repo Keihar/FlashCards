@@ -1,44 +1,44 @@
 const username = (getUrlVars()["user"]);
-var user;
-
+let profileJson;
 $(document).ready(function () {
     $("#editAlert").hide()
-    //$("#unfollowBtn").hide()
+    $("#unfollowBtn").hide()
     $.ajax({
         type: "POST",
         url: "PHP/json.php",
         data: { 'username': username },
         success: function (data) {
-            try { user = JSON.parse(data) } 
+            try { profileJson = JSON.parse(data) } 
             catch (error) { console.error("Errore nell'ottenimento del profilo") }
 
             console.table(user);
 
             // Set Username
-            if(user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "")
-                user.imgProfilo = "images\\profilesCovers\\dog.svg"
+            if(user.imgProfilo == undefined || profileJson.imgProfilo == "" || profileJson.imgProfilo == "")
+                profileJson.imgProfilo = "images\\profilesCovers\\dog.svg"
             
-            $("#profileImage").attr('src', user.imgProfilo);
-            $("#currentIcon").attr('src', user.imgProfilo);
+            $("#profileImage").attr('src', profileJson.imgProfilo);
+            $("#currentIcon").attr('src', profileJson.imgProfilo);
             setBackground();
 
-            $("#userCardName").html("" + user.nome);
-            $("#mottoCardName").html(`"${user.motto}"`);
-            $("#nalbum").html(user.nalbum);
-            $("#nflashcard").html(user.nflashcard);
+            $("#userCardName").html("" + profileJson.nome);
+            $("#mottoCardName").html(`"${profileJson.motto}"`);
+            $("#nalbum").html(profileJson.nalbum);
+            $("#nflashcard").html(profileJson.nflashcard);
 
-            $("#followBtn").click(function () { follow(user.nome) });
-            $("#unfollowBtn").click(function () { unfollow(user.nome) });
+            $("#followBtn").click(function () { follow(profileJson.nome) });
+            $("#unfollowBtn").click(function () { unfollow(profileJson.nome) });
 
             let row = document.getElementById("userCards");
-            user.albums.forEach(album => {
+            profileJson.albums.forEach(album => {
                 if (album.imgLink == null)
                     album.imgLink = "images\\albumCovers\\000-icon.svg";
                 row.innerHTML += "" + getPCard(album.id, album.nome, album.descrizione,
-                    album.imgLink, username, user.albums);
+                    album.imgLink, username, profileJson.albums);
             });
 
             checkLocalProfile();
+            markBtns(user.salvati);
         }
     })
 
@@ -47,23 +47,23 @@ $(document).ready(function () {
         url: "PHP/getFriends.php",
         data: { 'username': username },
         success: function (data) {
-            try { fuser = JSON.parse(data) } 
+            try { friendsJson = JSON.parse(data) } 
             catch (error) { console.error("Errore nell'ottenimento degli amici")}
 
-            checkForUnfollowBtn(fuser.seguaci);
+            checkForUnfollowBtn(friendsJson.seguaci);
 
-            $("#nfriends").html("" + fuser.nAmici);
-            fuser.amici.forEach(friend => {
+            $("#nfriends").html("" + friendsJson.nAmici);
+            friendsJson.amici.forEach(friend => {
                 friendsSetter(friend, "friendsUL")
             });
 
-            $("#nfollowers").html("" + fuser.nSeguaci);
-            fuser.seguaci.forEach(friend => {
+            $("#nfollowers").html("" + friendsJson.nSeguaci);
+            friendsJson.seguaci.forEach(friend => {
                 friendsSetter(friend, "followersUL")
             });
 
-            $("#nfollowed").html("" + fuser.nSeguiti);
-            fuser.seguiti.forEach(friend => {
+            $("#nfollowed").html("" + friendsJson.nSeguiti);
+            friendsJson.seguiti.forEach(friend => {
                 friendsSetter(friend, "followedUL")
             });
 

@@ -1,5 +1,5 @@
 //  Variable that memorizes the JSON avaible for all functions
-var spinner = `<div class="d-flex justify-content-center w-100"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>`;
+var spinner = `<div class="d-flex justify-content-center w-100"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>`;
 
 // Search
 function search() {
@@ -56,6 +56,20 @@ function search() {
           row.innerHTML += "" + getCard(album.id, album.nome, album.descrizione,
             album.imgLink, album.nomeutente);
         });
+        $.ajax({
+          type: "POST",
+          url: "PHP/json.php",
+          data: "",
+          success: function (data) {
+              try {
+                  user = JSON.parse(data);
+                  markBtns(user.salvati);
+                } 
+                catch (error) {
+                  console.error(data);
+                }
+          }
+        }); 
       }
     }
   });

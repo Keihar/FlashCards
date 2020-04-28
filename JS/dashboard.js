@@ -5,16 +5,16 @@ $(document).ready(function() {
         url: "PHP/dashboardJSON.php",
         data: "",
         success: function (data) {
-            let user;
+            let duser;
             try {
-                user = JSON.parse(data);
-                console.table(user);
+                duser = JSON.parse(data);
+                console.table(duser);
                 $("#row").html("");
               } 
               catch (error) {
                 //window.location.href = "login.html";
               }
-              user.albums.forEach(album => {
+              duser.albums.forEach(album => {
                 if (album.imgLink == null) {
                   album.imgLink = "images\\albumCovers\\000-icon.svg";
                 }
@@ -22,7 +22,10 @@ $(document).ready(function() {
                   album.imgLink, album.username));
               });
 
-              markBtns();
+              markBtns(user.salvati);
+              $("#loadingDashboardCards").hide();
+              $("#loadingDashboardNews").hide();
         }
     });
+    
 });

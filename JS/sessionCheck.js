@@ -110,11 +110,11 @@ function getUrlVars()
     return vars;
 }
 
-function markBtns() {
+function markBtns(salvati) {
   let btns = $('div').find('button:contains("Aggiungi ai tuoi Album")');
-  console.table(user.salvati)
+  console.table(salvati)
   for (let i = 0; i < btns.length; i++) {
-    user.salvati.forEach(num => {
+    salvati.forEach(num => {
       if ($(btns[i]).attr('id') == ("btn" + String(num.id))) {
         $(btns[i]).html("Rimuovi dai tuoi Album");
         $(btns[i]).removeClass("btn-primary").addClass("btn-outline-primary");
