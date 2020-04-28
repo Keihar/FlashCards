@@ -141,19 +141,16 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false" name="userAndAlbum" id="dropdownBtn">
-            Album e Utenti
+          aria-expanded="false" name="album" id="dropdownBtn">
+            Album
           </button>
           <div class="dropdown-menu">
-            <button id="userAndAlbumDrop" class="dropdown-item active" onclick="dropClick('userAndAlbum')">
-              Album e Utenti
-            </button>
-            <button id="albumDrop" class="dropdown-item" onclick="dropClick('album')">Album</button>
+            <button id="albumDrop" class="dropdown-item active" onclick="dropClick('album')">Album</button>
             <button id="userDrop" class="dropdown-item" onclick="dropClick('user')">Utenti</button>
           </div>
         </div>
         <input id="searchBar" type="text" class="form-control form-control-lg border-right-0"
-          placeholder="Cerca un album..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+          placeholder="Cerca un album" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button id="searchBtn" class="btn btn-outline-light border-left-0" onclick="search()">
             <svg class="bi bi-search" style="padding-bottom: 0.2em" width="1em" height="1em" viewBox="0 0 16 16"

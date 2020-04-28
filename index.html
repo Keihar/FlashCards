@@ -198,8 +198,7 @@
             }
 
             $("#registerForm").submit(function (e) {
-                let emailAlert = document.getElementById("emailHelp");
-                emailAlert.style.display = "none";
+                $("#emailHelp").hide();
 
                 e.preventDefault();
                 var form = $(this);

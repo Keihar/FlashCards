@@ -8,14 +8,15 @@ $.ajax({
   success: function (data) {
     let album = JSON.parse(data);
     albumID = album.id;
-    document.getElementById("albumName").value = album.nome.replace('\\','');
-    document.getElementById("albumDescription").innerHTML = album.descrizione.replace('\\','');
-    let check = album.privato == 1;
-    document.getElementById("privateCheck").checked = check;
-    if (album.imgLink == null) {
+    $("#albumName").val(album.nome.replace('\\',''));
+    $("#albumDescription").html(album.descrizione.replace('\\',''));
+
+    document.getElementById("privateCheck").checked = album.privato == 1;
+
+    if (album.imgLink == null)
       album.imgLink = "images\\albumCovers\\000-icon.svg";
-    }
-    document.getElementById('currentIcon').src = album.imgLink;
+
+    $("#currentIcon").attr('src', album.imgLink);
     let tableBody = document.getElementById("tableBody");
     album.flashcards.forEach(flashcard => {
       tableBody.innerHTML += "<tr>" +
@@ -23,7 +24,7 @@ $.ajax({
         `<td>${flashcard.retro.replace('\\','')}</td>` +
         `<td> <button type="button" onclick="modifyRow(this, ${flashcard.id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
         `<td> <button type="button" onclick="deleteRow(this, ${flashcard.id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
-        "</tr>";
+      "</tr>";
     });
   }
 });
@@ -61,8 +62,8 @@ function modifyRow(btn, id) {
 }
 
 function saveNewRow(id) {
-  let newFront = document.getElementById("newFront").value;
-  let newBack = document.getElementById("newBack").value;
+  let newFront = $("#newFront").val();
+  let newBack = $("#newBack").val()
 
   $.ajax({
     type: "POST",

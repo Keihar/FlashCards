@@ -10,7 +10,7 @@ $(document).ready(function () {
         data: { 'username': username },
         success: function (data) {
             try { user = JSON.parse(data) } 
-            catch (error) { console.error("Errore nell'ottenimento del profilo")}
+            catch (error) { console.error("Errore nell'ottenimento del profilo") }
 
             console.table(data);
 
@@ -18,8 +18,8 @@ $(document).ready(function () {
             if(user.imgProfilo == undefined || user.imgProfilo == "" || user.imgProfilo == "")
                 user.imgProfilo = "images\\profilesCovers\\dog.svg"
             
-            document.getElementById("profileImage").src = user.imgProfilo;
-            document.getElementById("currentIcon").src = user.imgProfilo;
+            $("#profileImage").attr('src', user.imgProfilo);
+            $("#currentIcon").attr('src', user.imgProfilo);
             setBackground();
 
             $("#userCardName").html("" + user.nome);

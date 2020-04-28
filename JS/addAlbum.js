@@ -1,5 +1,5 @@
 $("#addAlbum").submit(function (e) {
-    document.getElementById("imgLink").value = document.getElementById('currentIcon').src;
+    $("#imgLink").val($("#currentIcon").attr('src'));
     e.preventDefault();
     var form = $(this);
     var url = form.attr('action');
@@ -35,6 +35,6 @@ $.ajax({
 });
 
 function changeIcon(filename) {
-  document.getElementById('currentIcon').src = dir + filename;
-  document.getElementById('imgLink').src = dir + filename;
+  $("#currentIcon").attr('src', dir + filename); ù
+  $("#imgLink").attr('src', dir + filename); 
 }
