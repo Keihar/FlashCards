@@ -121,12 +121,13 @@
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
         <span>Pubblicità</span>
         <a class="d-flex align-items-center text-muted" href="addAlbum.html" aria-label="Add a new report">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-plus-circle">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="16"></line>
-            <line x1="8" y1="12" x2="16" y2="12"></line>
+          <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+              clip-rule="evenodd" />
+            <path
+              d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
+            <circle cx="8" cy="4.5" r="1" />
           </svg>
         </a>
       </h6>
@@ -195,7 +196,8 @@
             <form id="flashcardsForm" action="PHP/addFlashcard.php">
               <div class="form-group clearfix">
                 <h5 class="float-left">Aggiungi FlashCards</h5>
-                <button type="button" class="btn btn-secondary bnt-sm float-right" data-toggle="modal" data-target="#uploadModal">
+                <button type="button" class="btn btn-secondary bnt-sm float-right" data-toggle="modal"
+                  data-target="#uploadModal">
                   <i class="fas fa-file-import"></i> Importa
                 </button>
               </div>
@@ -207,7 +209,7 @@
                 <label for="backCard">Retro:</label>
                 <textarea name="retro" class="form-control" rows="3" id="backCard" maxlength="255"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Aggiungi</button>              
+              <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Aggiungi</button>
             </form>
           </div>
         </div>
@@ -257,31 +259,33 @@
       </div>
     </div>
 
-    
+
     <!-- File Modal -->
     <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="uploadModalLabel">Importa FlashCards</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body"> 
-            Importa le Flashcards da un file <kbd>.csv</kbd> o <kbd>.json</kbd>
-            <div class="input-group mt-3">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="myFile">
-                <label class="custom-file-label" for="myFile">Scegli un file</label>
+          <form action="importFiles.php">
+            <div class="modal-header">
+              <h5 class="modal-title" id="uploadModalLabel">Importa FlashCards</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Importa le Flashcards da un file <kbd>.csv</kbd> o <kbd>.json</kbd>
+              <div class="input-group mt-3">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="myFile">
+                  <label class="custom-file-label" for="myFile">Scegli un file</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Chiudi</button>
-            <button type="button" class="btn btn-secondary">Importa</button>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Chiudi</button>
+              <button type="button" class="btn btn-secondary">Importa</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

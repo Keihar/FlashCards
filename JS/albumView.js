@@ -88,6 +88,23 @@ $(document).ready(function() {
     });
   });
 
+  $("#importFiles").submit(function (e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var file_data = $("#myFile").prop("files")[0];
+    var form_data = new FormData();               
+    form_data.append("file", file_data) 
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form_data,
+      success: function (data) {
+        alert(data);
+      }
+    });
+  });
   
   $.ajax({
     //This will retrieve the contents of the folder if the folder is configured as 'browsable'

@@ -33,7 +33,7 @@
     }
   </style>
 
-  
+
   <!-- Personal JS -->
   <script src="JS/sessionCheck.js" defer></script>
   <script src="JS/albumList.js" defer></script>
@@ -130,12 +130,13 @@
         <span>Pubblicità</span>
         <a class="d-flex align-items-center text-muted" data-toggle="tooltip" data-placement="right"
           title="Tooltip on top">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-plus-circle">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="16"></line>
-            <line x1="8" y1="12" x2="16" y2="12"></line>
+          <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+              clip-rule="evenodd" />
+            <path
+              d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
+            <circle cx="8" cy="4.5" r="1" />
           </svg>
         </a>
       </h6>
@@ -217,8 +218,9 @@
                   <!-- Nome -->
                   <p class="card-text">
                     <label for="name">Nome Album</label>
-                    <input type="text" class="form-control banBadChar" id="name" name="nome_album" placeholder="Nome Album"
-                      maxlength="50" data-placement="top" data-content="Carattere non ammesso." data-trigger="none" required>
+                    <input type="text" class="form-control banBadChar" id="name" name="nome_album"
+                      placeholder="Nome Album" maxlength="50" data-placement="top" data-content="Carattere non ammesso."
+                      data-trigger="none" required>
                   </p>
 
                   <!-- Hidden Input -->
@@ -245,7 +247,7 @@
           </form>
         </div>
       </div>
-    </div>   
+    </div>
   </main>
 
 </body>
