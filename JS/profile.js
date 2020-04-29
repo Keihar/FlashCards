@@ -1,5 +1,6 @@
 const username = (getUrlVars()["user"]);
 let profileJson;
+
 $(document).ready(function () {
     $("#editAlert").hide()
     $("#unfollowBtn").hide()
@@ -11,10 +12,10 @@ $(document).ready(function () {
             try { profileJson = JSON.parse(data) } 
             catch (error) { console.error("Errore nell'ottenimento del profilo") }
 
-            console.table(user);
+            console.table(profileJson);
 
             // Set Username
-            if(user.imgProfilo == undefined || profileJson.imgProfilo == "" || profileJson.imgProfilo == "")
+            if(profileJson.imgProfilo == undefined || profileJson.imgProfilo == "" || profileJson.imgProfilo == "")
                 profileJson.imgProfilo = "images\\profilesCovers\\dog.svg"
             
             $("#profileImage").attr('src', profileJson.imgProfilo);
@@ -38,7 +39,7 @@ $(document).ready(function () {
             });
 
             checkLocalProfile();
-            markBtns(user.salvati);
+            markBtns(profileJson.salvati);
         }
     })
 
@@ -222,5 +223,5 @@ document.getHTML = function (who, deep) {
 
 function hideBtns() {
     if (username == sessionUsername)
-        $('.card').find('button').hide();
+        $('.userBtns').find('button').hide();
 }

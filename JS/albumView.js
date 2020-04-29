@@ -100,7 +100,6 @@ $(document).ready(function() {
         });
     }
   });
-
 })
 
 
@@ -196,3 +195,4 @@ function handleFileSelect()
 function receivedText() {
   document.getElementById('editor').appendChild(document.createTextNode(fr.result));
 }    
+

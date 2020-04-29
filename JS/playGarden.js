@@ -54,8 +54,9 @@ $(document).ready(function() {
                 let user = JSON.parse(data);
                 cards = user.flashcards;
                 let img = `<img src="${user.imgLink}" id="cardImg" alt="" style="height: 1em">`;
-                document.getElementById("albumTitle").innerHTML = img + " " + user.nome;
+                document.getElementById("albumTitle").innerHTML = img + " " + (user.nome).replace(/[^\w\d\s\']/gi, "");
                 document.getElementById("frontCard").innerHTML = "" + cards[0].fronte;
+                $('#flipBtn').prop('disabled', false);
             } 
             catch (error) {}
         }

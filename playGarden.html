@@ -150,7 +150,9 @@
           <div class="flipper" id="myCard2">
             <div class="front card border bg-light justify-content-center align-self-center">
               <!-- front content -->
-              <p id="frontCard" class="text-center"></p>
+              <p id="frontCard" class="text-center">
+                Caricamento...
+              </p>
             </div>
             <div class="back card border bg-light justify-content-center align-self-center">
               <!-- back content -->
@@ -162,7 +164,9 @@
     </div>
     <div class="d-flex justify-content-center col align-self-center pb-3">
       <div class="m-2">
-        <button class="btn btn-primary btn-lg" onclick="flip()"><i class="fas fa-sync-alt"></i> Gira</button>
+        <button class="btn btn-primary btn-lg" onclick="flip()" id="flipBtn" disabled="">
+          <i class="fas fa-sync-alt"></i> Gira
+        </button>
       </div>
       <div class="m-2">
         <button id="nextBtn" class="btn btn-primary btn-lg" onclick="nextCard()" disabled><i class="fa fa-forward"></i>

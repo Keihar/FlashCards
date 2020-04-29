@@ -36,6 +36,31 @@ $(document).ready(function() {
               document.getElementById("profileNavBtn").href = "profile.html?user=" + user.nome;
         }
     });
+
+    $(".banBadChar").each(function( index ) {
+        $(this).keypress(function (e) {
+          var keyCode = e.keyCode || e.which;
+
+          //Regex for Valid Characters i.e. Alphabets and Numbers.
+          var regex = /[^\w\d\s\']/gi;
+
+          //Validate TextBox value against the Regex.
+          var isValid = regex.test(String.fromCharCode(keyCode));
+          if (isValid) {
+            $(this).popover('show')
+          
+          }
+          else {
+            $(this).popover('hide')
+          }
+          return !isValid;
+      });
+
+      $(this).click(function (e) {
+        $(this).popover('hide')
+      });
+    })
+
 });
 
 function logout() {

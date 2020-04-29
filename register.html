@@ -36,7 +36,8 @@
 		<label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Indirizzo email" required="">
     
-    <input type="text" name="username" id="username" class="form-control" placeholder="Nome utente" required="">
+    <input type="text" name="username" id="username" class="form-control banBadChar" placeholder="Nome utente" 
+    data-placement="bottom" data-content="Solo ammessi solo numeri e lettere" required="">
 
     <input type="text" name="motto" id="motto" class="form-control" placeholder="Motto" required="">
     
@@ -86,6 +87,27 @@
           </button>
         </div>`;
     }
+    
+    $(".banBadChar").each(function( index ) {
+        $(this).keypress(function (e) {
+          var keyCode = e.keyCode || e.which;
+
+          $("#lblError").html("");
+
+          //Regex for Valid Characters i.e. Alphabets and Numbers.
+          var regex = /^[A-Za-z0-9]+$/;
+
+          //Validate TextBox value against the Regex.
+          var isValid = regex.test(String.fromCharCode(keyCode));
+          if (!isValid) {
+            $(this).popover('show')
+          }
+          else {
+            $(this).popover('hide')
+          }
+          return isValid;
+      })
+    })
   </script>
 </body>
 
