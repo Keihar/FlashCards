@@ -38,6 +38,6 @@ $(document).ready(function () {
 });
 
 function changeIcon(filename) {
-  $("#currentIcon").attr('src', dir + filename); ù
+  $("#currentIcon").attr('src', dir + filename);
   $("#imgLink").attr('src', dir + filename); 
 }

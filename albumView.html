@@ -26,6 +26,7 @@
   <link rel="icon" href="images/000-icon.svg">
   <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
+  <link rel="stylesheet" href="CSS/albumView.css">
 
   <!-- Personal JS -->
   <script src="JS/sessionCheck.js" defer></script>
@@ -119,8 +120,8 @@
       </ul>
 
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Pubblicità</span>
-        <a class="d-flex align-items-center text-muted" href="addAlbum.html" aria-label="Add a new report">
+        <span>Pubblicità</span><a class="d-flex align-items-center text-muted" data-toggle="tooltip"
+          data-placement="right" title="Le pubblicità supportano il nostro sito e le funzionalità gratuite che offre!">
           <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
@@ -140,10 +141,12 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
     <h2 class="mb-4" id=>Modifica Album</h2>
     <div class="row mb-4">
+      
+      <!-- Modify Album -->
       <div class="col-sm-6" id="card1">
-        <div class="card">
-          <div class="card-body mt-0">
-            <form id="modifyAlbum" action="PHP/modifyAlbum.php">
+        <div class="card bg-light">
+          <form id="modifyAlbum" action="PHP/modifyAlbum.php">
+            <div class="card-body mt-0">
               <div class="row no-gutters">
                 <div class="col-md-4 text-center" style="display: flex;
                 align-items: center;
@@ -156,7 +159,7 @@
                     <h5 class="card-title">Generali</h5>
                     <!-- Nome -->
                     <p class="card-text">
-                      <label for="name">Nome Album</label>
+                      <label for="name">Nome Album <span class="text-danger">*</span></label>
                       <input type="text" class="form-control" id="albumName" name="nome" placeholder="Nome Album"
                         maxlength="50" required>
                     </p>
@@ -168,7 +171,7 @@
                 <br>
                 <div class="card-body p-0 d-block">
                   <p class="card-body pb-0 pt-0 mb-0">
-                    <label for="desc">Descrizione</label>
+                    <label for="desc">Descrizione <span class="text-danger">*</span></label>
                     <textarea class="form-control" name="descrizione" id="albumDescription" rows="4" maxlength="255"
                       required></textarea>
                   </p>
@@ -185,33 +188,37 @@
                 <button type="submit" class="btn btn-primary btn-block ml-4 mr-4 mb-3 mt-3"><i class="far fa-save"></i>
                   Salva</button>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
+
       <!-- Add Flashcards -->
       <div class="col-sm-6" id="card2">
-        <div class="card">
-          <div class="card-body">
-            <form id="flashcardsForm" action="PHP/addFlashcard.php">
+        <div class="card bg-light">
+          <form id="flashcardsForm" class="h-100" action="PHP/addFlashcard.php">
+            <div class="card-body h-100">
               <div class="form-group clearfix">
                 <h5 class="float-left">Aggiungi FlashCards</h5>
-                <button type="button" class="btn btn-secondary bnt-sm float-right" data-toggle="modal"
+                <button type="button" class="btn btn-secondary btn-sm float-right" data-toggle="modal"
                   data-target="#uploadModal">
                   <i class="fas fa-file-import"></i> Importa
                 </button>
               </div>
               <div class="form-group">
-                <label for="frontCard">Fronte:</label>
-                <textarea name="fronte" class="form-control" rows="3" id="frontCard" maxlength="255"></textarea>
+                <label for="frontCard">Fronte: <span class="text-danger">*</span></label>
+                <textarea name="fronte" class="form-control" rows="4" id="frontCard" maxlength="255"
+                  required></textarea>
               </div>
               <div class="form-group">
-                <label for="backCard">Retro:</label>
-                <textarea name="retro" class="form-control" rows="3" id="backCard" maxlength="255"></textarea>
+                <label for="backCard">Retro: <span class="text-danger">*</span></label>
+                <textarea name="retro" class="form-control" rows="4" id="backCard" maxlength="255" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Aggiungi</button>
-            </form>
-          </div>
+              <div class="flashSubmit">
+                <button type="submit" class="btn btn-primary w-100 text-center mt-2"><i class="fa fa-plus"></i> Aggiungi</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -272,13 +279,44 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              Importa le Flashcards da un file <kbd>.csv</kbd> o <kbd>.json</kbd>
+            <div class="modal-body pb-0">
+              Importa le Flashcards da un file <strong>.csv</strong> o <strong>.json</strong>
+              <p>
+                <a href="#" class="badge badge-pill badge badge-primary"
+                  onclick="$('#collapseExample').collapse('toggle')">
+                  <strong>+</strong> Più informazioni
+                </a>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <ul>
+                    <li>
+                      I file JSON devono avere il seguente formato:
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </li>
+                    <li>
+                      Mentre i file CSV questo:
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <div class="input-group mt-3">
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="myFile">
                   <label class="custom-file-label" for="myFile">Scegli un file</label>
                 </div>
+              </div>
+              <div class="alert alert-danger mb-0 my-3" role="alert">
+                Il formato del file non è valido.
               </div>
             </div>
             <div class="modal-footer">

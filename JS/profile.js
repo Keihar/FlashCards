@@ -36,10 +36,9 @@ $(document).ready(function () {
                     album.imgLink = "images\\albumCovers\\000-icon.svg";
                 row.innerHTML += "" + getPCard(album.id, album.nome, album.descrizione,
                     album.imgLink, username, profileJson.albums);
-            });
-
+            });         
+            markBtns(user.salvati);    
             checkLocalProfile();
-            markBtns(profileJson.salvati);
         }
     })
 
@@ -68,10 +67,36 @@ $(document).ready(function () {
                 friendsSetter(friend, "followedUL")
             });
 
-            markBtns();
             hideBtns();
         }
     })
+
+    $("#modifyUser").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        $("#imgLink").val(document.getElementById("currentIcon").src);
+    
+        if ($("#psw1").val() != $("#psw2").val()) {
+            editAlert("Le due nuove password non combaciano")
+            return;
+        }
+    
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (data) {
+                console.log(data)
+                if (data.trim() == "wrongPassword") {
+                    editAlert("La password inserita è incorretta")
+                    return;
+                }
+                window.location.reload();
+            }
+        });
+    });
+
 });
 
 function friendsSetter(friend, ULName) {
@@ -120,7 +145,7 @@ function getPCard(id, name, description, imgLink, author) {
         `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
         `<p class="card-text">${description}</p><p class="card-text">` +
         `<button onclick='saveAlbum(${id},"${author}")' id="btn${id}" class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
-        `<button onclick='saveAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
+        `<button onclick='removeAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
         `<button data-toggle="modal" data-target="#previewModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
         `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
 }
@@ -136,6 +161,7 @@ function checkLocalProfile() {
         setProfileImages();
         $("#name").val(user.nome);
         $("#motto").val(user.motto);
+        $("#userCards").find("button").addClass("d-none");
     }
 }
 
@@ -187,6 +213,7 @@ function follow(user) {
         success: function () {
             $("#followBtn").hide();
             $("#unfollowBtn").show();
+            $("#nfollowers").html(parseInt($("#nfollowers").html()) + 1);
         }
     })
 }
@@ -199,6 +226,7 @@ function unfollow(user) {
         success: function () {
             $("#unfollowBtn").hide();
             $("#followBtn").show();
+            $("#nfollowers").html(parseInt($("#nfollowers").html()) - 1);
         }
     })
 }

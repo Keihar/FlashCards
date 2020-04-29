@@ -136,8 +136,11 @@ function getUrlVars()
 }
 
 function markBtns(salvati) {
+  if (salvati == undefined) {
+    console.error("Error while retrieving saved albums");
+    return;
+  }
   let btns = $('div').find('button:contains("Aggiungi ai tuoi Album")');
-  console.table(salvati)
   for (let i = 0; i < btns.length; i++) {
     salvati.forEach(num => {
       if ($(btns[i]).attr('id') == ("btn" + String(num.id))) {

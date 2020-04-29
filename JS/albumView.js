@@ -1,27 +1,38 @@
+//Global Variables
 var albumID = "";
 var modifyingRow = false;
 var dir = "images/albumCovers";
 var fileextension = ".svg";
 
 $(document).ready(function() {
-  //GetCurrent
+  //Get Current Album (Session)
   $.ajax({
     type: "GET",
     url: "PHP/getCurrentAlbum.php",
     data: "",
     success: function (data) {
-      let album = JSON.parse(data);
+      //  Verify the integrity of the received data
+      let album;
+      try { album = JSON.parse(data) } 
+      catch (error) { console.error("Errore nell'ottenimento dell'album di sessione.") }
+
+      //  Sets file global variable
       albumID = album.id;
+
+      //  Place the sanitized title and description
       $("#albumName").val(album.nome.replace('\\',''));
       $("#albumDescription").html(album.descrizione.replace('\\',''));
-  
-      document.getElementById("privateCheck").checked = album.privato == 1;
-  
-      if (album.imgLink == null)
+      $("privateCheck").prop('checked', album.privato == 1);
+      
+      //  Set a default image if the received is null
+      if (album.imgLink == null || album.imgLink == "")
         album.imgLink = "images\\albumCovers\\000-icon.svg";
-  
+      
+      //  Sets the icon
       $("#currentIcon").attr('src', album.imgLink);
       let tableBody = document.getElementById("tableBody");
+
+      //  Places the FlashCards into the table
       album.flashcards.forEach(flashcard => {
         tableBody.innerHTML += "<tr>" +
           `<td>${flashcard.fronte.replace('\\','')}</td>` +
@@ -33,7 +44,7 @@ $(document).ready(function() {
     }
   });
 
-  
+  //  Add Flashcard request
   $("#flashcardsForm").submit(function (e) {
     e.preventDefault();
     var form = $(this);
@@ -44,30 +55,35 @@ $(document).ready(function() {
       url: url,
       data: form.serialize(),
       success: function (data) {
-        console.log(data);
-        if (isNaN(data)) {
-          alert("Errore nell'aggiunta")
-        }
-        else {
-          let id = "" + data;
-          let front = document.getElementById("frontCard");
-          let back = document.getElementById("backCard");
-          let row = "<tr>" +
-            `<td>${front.value}</td>` +
-            `<td>${back.value}</td>` +
-            `<td> <button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>` +
-            `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>` +
-            "</tr>";
-          front.value = "";
-          back.value = "";
-          $(document.getElementById("tableList")).find('tbody').append(row);
-        }
+        //  Verify the integrity of the received data 
+        if (isNaN(data)) { alert("Errore nell'aggiunta della Flashcard."); return;}
+
+        //  Take to received id to set the funztions later
+        let id = String(data);
+
+        //  Adds the row to the table
+        $("#tableList").find('tbody').append(
+          `<tr>`+
+          `<td>${$("#frontCard").val()}</td>`+
+          `<td>${$("#backCard").val()}</td>`+
+          `<td> <button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>`+
+          `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>`+
+          `</tr>`
+        );
+
+        //  Flush the textareas
+        $("#frontCard").val("")
+        $("#backCard").val("");
       }
     });
   });
 
+  //  Modify Album
   $("#modifyAlbum").submit(function (e) {
-    document.getElementById("imgLink").value = document.getElementById('currentIcon').src;
+
+    //  Set the hidden input value equals to the chosen img
+    $("#imgLink").val($("#currentIcon").attr('src'));
+
     e.preventDefault();
     var form = $(this);
     var url = form.attr('action');
@@ -77,17 +93,14 @@ $(document).ready(function() {
       url: url,
       data: form.serialize(),
       success: function (data) {
-        console.log(data);
-        if (data != "success") {
-          alert("Errore nella modifica")
-        }
-        else {
-          window.location.href = "albumList.html";
-        }
+        //  Verify the response of the received data 
+        if (data != "success") { alert("Errore nella modifica") }
+        else { window.location.href = "albumList.html"; }
       }
     });
   });
 
+  //  Validate the file through the PHP
   $("#importFiles").submit(function (e) {
     e.preventDefault();
     var form = $(this);
@@ -105,21 +118,41 @@ $(document).ready(function() {
       }
     });
   });
-  
+
+  //  Retrieve the contents of the folder
   $.ajax({
-    //This will retrieve the contents of the folder if the folder is configured as 'browsable'
     url: dir,
     success: function (data) {
-        //List all .png file names in the page
+        //  List all .png file names in the page
         $(data).find("a:contains(" + fileextension + ")").each(function () {
             var filename = this.href.replace(window.location.host, "").replace("http://", "");
-            $("#icons").append(`<img class="img-thumbnail imgList" data-dismiss="modal" src="${dir}${filename}" onclick="changeIcon('${filename}');">`);
+            $("#icons").append(
+              `<img src="${dir}${filename}" onclick="changeIcon('${filename}')" class="img-thumbnail imgList" data-dismiss="modal">`
+            );
         });
     }
   });
+
+  //  Label changer when file is chosen
+  $('#myFile').on('change',function(){
+    //  Get the file name
+    let fileName = $(this).val();;
+
+    //  Remove the path
+    try {
+      myVal = fileName.split('\\');
+      fileName = myVal[myVal.length - 1]
+    } catch(e){}
+    
+    //Replace the "Scegli un file" label
+    $(this).next('.custom-file-label').html(fileName);
+  })
+
 })
 
+/*  ---End of the OnReady---  */
 
+//  Deletes a row from the table
 function deleteRow(btn, id) {
   var row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
@@ -128,31 +161,31 @@ function deleteRow(btn, id) {
     url: "PHP/deleteFlashcard.php",
     data: { 'id': id },
     success: function (data) {
-      if (data != "success") {
-        alert("Errore nella rimozione")
-      }
+      if (data != "success") { alert("Errore nella rimozione") }
     }
   });
 }
 
+//  Modifies row through the table
 function modifyRow(btn, id) {
-  if (modifyingRow) {
-    return;
-  }
-  else {
-    modifyingRow = true;
-  }
+  //  Verifies if a row is being modfied
+  if (modifyingRow) { return; }
+  else { modifyingRow = true; }
+
+  //  Gets the parent and shows inputs
   let row = $(btn).parent().parent()[0];
   let cols = $(row).children();
-  // Fronte
+  // Front
   cols[0].innerHTML = `<div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-sm">Nuovo Fronte</span></div><input type="text" value="${cols[0].innerHTML}" id="newFront" class="form-control w-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></div>`;
-  // Retro
+  // Back
   cols[1].innerHTML = `<div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-sm">Nuovo Retro</span></div><input type="text" value="${cols[1].innerHTML}" id="newBack" class="form-control w-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></div>`;
   // Save
   cols[2].innerHTML = `<button id="saveRowBtn" class="btn btn-secondary btn-sm w" onclick="saveNewRow(${id})"><i class="far fa-save"></i> Salva</button>`;
 }
 
+//  Saves row modified through the table
 function saveNewRow(id) {
+  //  Gets the values from the inputs
   let newFront = $("#newFront").val();
   let newBack = $("#newBack").val()
 
@@ -161,25 +194,23 @@ function saveNewRow(id) {
     url: "PHP/modifyFlashcard.php",
     data: { 'id': id, 'fronte': newFront, 'retro': newBack },
     success: function (data) {
-      if (data != "success") {
-        alert("Errore nella modifica")
-      }
-      else {
-        let btn = document.getElementById("saveRowBtn");
-        let row = $(btn).parent().parent()[0];
-        let cols = $(row).children();
-        // Fronte
-        cols[0].innerHTML = "" + newFront;
-        // Retro
-        cols[1].innerHTML = "" + newBack;
-        // Save
-        cols[2].innerHTML = `<button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button>`;
-        modifyingRow = false;
-      }
+      //  Verify the response of the received data 
+      if (data != "success") { alert("Errore nella modifica della riga"); return; }
+
+      let row = $("#saveRowBtn").parent().parent()[0];
+      let cols = $(row).children();
+      // Front
+      cols[0].innerHTML = "" + newFront;
+      // Back
+      cols[1].innerHTML = "" + newBack;
+      // Save
+      cols[2].innerHTML = `<button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button>`;
+      modifyingRow = false;
     }
   });
 }
 
+//  Icon changer for the icon list modal
 function changeIcon(filename) {
   document.getElementById('currentIcon').src = dir + filename;
 }

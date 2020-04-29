@@ -12,7 +12,7 @@ $(document).ready(function() {
       success: function (data) {
         console.log(data)
         if (data != "success") {
-          emailAlert.innerHTML += `<div class="alert alert-danger" role="alert">
+          emailAlert.innerHTML = `<div class="alert alert-danger" role="alert">
           Email o password incorrette
           <button type="button" class="close" aria-label="Close" data-dismiss="alert">
             <span aria-hidden="true">&times;</span>
