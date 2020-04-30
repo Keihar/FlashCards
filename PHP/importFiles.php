@@ -8,27 +8,29 @@
 
     $myfile = $_POST["file"];
 
+    $ext = $_POST["estensione"];
+
     //(readfile("test.csv");
 
     //$myfile = "test.json";
 
 
-    if ($fh = fopen($myfile, 'r')) {
+/*    if ($fh = fopen($myfile, 'r')) {
         while (!feof($fh)) {
             $line = fgets($fh);
         }
         fclose($fh);
-    }
+    }*/
 
 
     //$myfile = "test.json";
 
-    $file_parts = pathinfo($myfile);
+    //$file_parts = pathinfo($myfile);
 
-    if($file_parts['extension'] == "csv"){
+    if($ext == "csv"){
 
-        $csv= file_get_contents($myfile);
-        $array = array_map("str_getcsv", explode("\n", $csv));
+        //$csv= file_get_contents($myfile);
+        $array = array_map("str_getcsv", explode("\n", $myfile));
         $json = json_encode($array);
         $data_array = json_decode($json, TRUE);
         $col_count = 0;
@@ -39,17 +41,17 @@
             exit("nColumnsError");
         }
         else{
-            //print_r($json); 
-            echo $json;
+            //print_r($json);
+
+            echo ($json);
         }
 
     }
         
-    else if($file_parts['extension'] == "json"){
+    else if($ext == "json"){
 
-        $data = file_get_contents($myfile);
-        $data = json_decode($data, true);
-
+        //$data = file_get_contents($myfile);
+        $data = json_decode($myfile, true);
 
         $col_count = 0;
 
