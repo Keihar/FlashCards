@@ -29,6 +29,7 @@
         $motto = $row['motto'];
         session_start();
         $_SESSION['utente'] = $username;
+        $_SESSION['email'] = $email;
         $_SESSION['motto'] = $motto;
         $_SESSION['valid'] = true;
         mysqli_close($connect);

@@ -109,7 +109,9 @@ else{
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $preleva_salvati_query = "SELECT idAlbum FROM album_salvati WHERE emailUtente='$usermail'";
+    $emaill = $_SESSION['email'];
+
+    $preleva_salvati_query = "SELECT idAlbum FROM album_salvati WHERE emailUtente='$emaill'";
     $preleva_salvati = mysqli_query($connect, $preleva_salvati_query);
 
     $json_salvati = array();
