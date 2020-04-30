@@ -2,22 +2,19 @@ const username = (getUrlVars()["user"]);
 let profileJson;
 
 $(document).ready(function () {
-    $("#editAlert").hide()
-    $("#unfollowBtn").hide()
+    console.time("Profile Charging");
     $.ajax({
         type: "POST",
         url: "PHP/json.php",
         data: { 'username': username },
         success: function (data) {
-            try { profileJson = JSON.parse(data) } 
-            catch (error) { console.error("Errore nell'ottenimento del profilo") }
+            try { profileJson = JSON.parse(data); user = JSON.parse(data); }
+            catch (error) { console.error("Errore nell'ottenimento del profilo"); return; }
 
-            console.table(profileJson);
+            getFriends();
 
-            // Set Username
-            if(profileJson.imgProfilo == undefined || profileJson.imgProfilo == "" || profileJson.imgProfilo == "")
+            if (profileJson.imgProfilo == undefined || profileJson.imgProfilo == "" || profileJson.imgProfilo == "")
                 profileJson.imgProfilo = "images\\profilesCovers\\dog.svg"
-            
             $("#profileImage").attr('src', profileJson.imgProfilo);
             $("#currentIcon").attr('src', profileJson.imgProfilo);
             setBackground();
@@ -27,28 +24,54 @@ $(document).ready(function () {
             $("#nalbum").html(profileJson.nalbum);
             $("#nflashcard").html(profileJson.nflashcard);
 
-            $("#followBtn").click(function () { follow(profileJson.nome) });
-            $("#unfollowBtn").click(function () { unfollow(profileJson.nome) });
-
             let row = document.getElementById("userCards");
             profileJson.albums.forEach(album => {
                 if (album.imgLink == null)
                     album.imgLink = "images\\albumCovers\\000-icon.svg";
                 row.innerHTML += "" + getPCard(album.id, album.nome, album.descrizione,
                     album.imgLink, username, profileJson.albums);
-            });         
-            markBtns(user.salvati);    
+            });
+            
+            markBtns(user.salvati);
             checkLocalProfile();
         }
     })
 
+    $("#modifyUser").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        $("#imgLink").val(document.getElementById("currentIcon").src);
+
+        if ($("#psw1").val() != $("#psw2").val()) {
+            editAlert("Le due nuove password non combaciano")
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (data) {
+                console.log(data)
+                if (data.trim() == "wrongPassword") {
+                    editAlert("La password inserita è incorretta")
+                    return;
+                }
+                window.location.reload();
+            }
+        });
+    });
+});
+
+async function getFriends() {
     $.ajax({
         type: "POST",
         url: "PHP/getFriends.php",
         data: { 'username': username },
         success: function (data) {
-            try { friendsJson = JSON.parse(data) } 
-            catch (error) { console.error("Errore nell'ottenimento degli amici")}
+            try { friendsJson = JSON.parse(data) }
+            catch (error) { console.error("Errore nell'ottenimento degli amici") }
 
             checkForUnfollowBtn(friendsJson.seguaci);
 
@@ -66,41 +89,12 @@ $(document).ready(function () {
             friendsJson.seguiti.forEach(friend => {
                 friendsSetter(friend, "followedUL")
             });
-
-            hideBtns();
         }
     })
-
-    $("#modifyUser").submit(function (e) {
-        e.preventDefault();
-        var form = $(this);
-        var url = form.attr('action');
-        $("#imgLink").val(document.getElementById("currentIcon").src);
-    
-        if ($("#psw1").val() != $("#psw2").val()) {
-            editAlert("Le due nuove password non combaciano")
-            return;
-        }
-    
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(),
-            success: function (data) {
-                console.log(data)
-                if (data.trim() == "wrongPassword") {
-                    editAlert("La password inserita è incorretta")
-                    return;
-                }
-                window.location.reload();
-            }
-        });
-    });
-
-});
+}
 
 function friendsSetter(friend, ULName) {
-    if(friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "") 
+    if (friend.imgProfilo == undefined || friend.imgProfilo == "" || friend.imgProfilo == "")
         friend.imgProfilo = "images\\profilesCovers\\dog.svg"
 
     let img = document.createElement('img');
@@ -116,7 +110,7 @@ function friendsSetter(friend, ULName) {
 }
 
 function checkForUnfollowBtn(array) {
-    
+
     if (username == sessionUsername) {
         return;
     }
@@ -155,10 +149,12 @@ function checkLocalProfile() {
     if (username != sessionUsername) {
         $("#followBtn").show();
         $("#messageBtn").show();
+        $("#followBtn").click(function () { follow(profileJson.nome) });
+        $("#unfollowBtn").click(function () { unfollow(profileJson.nome) });
     }
-    else{
-        $("#editBtn").show();
+    else {
         setProfileImages();
+        $("#editBtn").show();
         $("#name").val(user.nome);
         $("#motto").val(user.motto);
         $("#userCards").find("button").addClass("d-none");
@@ -181,7 +177,7 @@ function setProfileImages() {
     });
 }
 
-function setBackground() {
+async function setBackground() {
     var img = document.createElement('img');
     let path = document.getElementById("profileImage").src;
 
@@ -247,9 +243,4 @@ document.getHTML = function (who, deep) {
     }
     el = null;
     return txt;
-}
-
-function hideBtns() {
-    if (username == sessionUsername)
-        $('.userBtns').find('button').hide();
 }

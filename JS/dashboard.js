@@ -14,6 +14,7 @@ $(document).ready(function() {
               catch (error) {
                 //window.location.href = "login.html";
               }
+
               duser.albums.forEach(album => {
                 if (album.imgLink == null) {
                   album.imgLink = "images\\albumCovers\\000-icon.svg";

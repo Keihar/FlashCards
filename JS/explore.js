@@ -142,6 +142,7 @@ function albumPreview(id, array) {
       console.table(album.flashcards);
 
       if (album.flashcards.length < 1) {
+        $("#tableList tr").remove();
         $("#noflashcards").show();
         $("#tableList").hide();
       }
