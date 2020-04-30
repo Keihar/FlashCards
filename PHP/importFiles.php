@@ -1,78 +1,42 @@
 <?php
 
-    //faccio partire la sessione
-    session_start();
+$myfile = $_POST["file"];
 
-    //includo codice per connessione al DataBase
-    include 'DBconnect.php';
+$ext = $_POST["estensione"];
 
-    $myfile = $_POST["file"];
+if ($ext == "csv") {
 
-    $ext = $_POST["estensione"];
-
-    //(readfile("test.csv");
-
-    //$myfile = "test.json";
-
-
-/*    if ($fh = fopen($myfile, 'r')) {
-        while (!feof($fh)) {
-            $line = fgets($fh);
-        }
-        fclose($fh);
-    }*/
-
-
-    //$myfile = "test.json";
-
-    //$file_parts = pathinfo($myfile);
-
-    if($ext == "csv"){
-
-        //$csv= file_get_contents($myfile);
-        $array = array_map("str_getcsv", explode("\n", $myfile));
-        $json = json_encode($array);
-        $data_array = json_decode($json, TRUE);
-        $col_count = 0;
-        foreach($data_array as $row) {
-            $col_count = max($col_count, sizeof($row));
-        }
-        if($col_count != 2){
-            exit("nColumnsError");
-        }
-        else{
-            //print_r($json);
-
-            echo ($json);
-        }
-
+    //$csv= file_get_contents($myfile);
+    $array = array_map("str_getcsv", explode("\n", $myfile));
+    $json = json_encode($array);
+    $data_array = json_decode($json, TRUE);
+    $col_count = 0;
+    foreach ($data_array as $row) {
+        $col_count = max($col_count, sizeof($row));
     }
-        
-    else if($ext == "json"){
-
-        //$data = file_get_contents($myfile);
-        $data = json_decode($myfile, true);
-
-        $col_count = 0;
-
-        foreach($data as $row) {
-            $col_count = max($col_count, sizeof($row));
-        }
-        if($col_count != 2){
-            exit("nColumnsError");
-        }
-        else{
-            $data = json_encode($data);
-            //print_r($data);
-            echo $data;
-        }
-
-
-
+    if ($col_count != 2) {
+        exit("nColumnsError");
+    } else {
+        //print_r($json);
+        echo ($json);
     }
-    else{
-        exit("extensionError");
+} else if ($ext == "json") {
+
+    //$data = file_get_contents($myfile);
+    $data = json_decode($myfile, true);
+
+    $col_count = 0;
+
+    foreach ($data as $row) {
+        $col_count = max($col_count, sizeof($row));
     }
-
-
-?>
+    if ($col_count != 2) {
+        exit("nColumnsError");
+    } else {
+        $data = json_encode($data);
+        //print_r($data);
+        echo $data;
+    }
+} else {
+    exit("extensionError");
+}

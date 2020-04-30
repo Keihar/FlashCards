@@ -17,7 +17,6 @@
         $email_seguente = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-
     $seguito_query_str = "SELECT email FROM Utente WHERE nome='$follow'";
     $seguito_query = mysqli_query($connect, $seguito_query_str);
 
@@ -35,10 +34,5 @@
         echo "success";
     }
 
-
-
-
-
-
-
-?>
+    //chiudo la connessione
+    mysqli_close($connect);

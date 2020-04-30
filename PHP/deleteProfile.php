@@ -12,4 +12,5 @@
     $delete_utente_str = "DELETE FROM Utente WHERE email='$email'";
     $delete_utente = mysqli_query($connect, $delete_utente);
 
-?>
+    //chiudo la connessione
+    mysqli_close($connect);

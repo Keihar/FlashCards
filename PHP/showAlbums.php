@@ -4,9 +4,7 @@
 
     session_start();
 
-
     $user = $_SESSION["utente"];
-
 
     $search_for_string_query = "SELECT id, Album.nome AS nome, descrizione, imgLink, privato, Album.email AS email, Utente.nome AS username FROM Album INNER JOIN Utente ON (Album.email = Utente.email) WHERE privato=0 AND Album.email = Utente.email AND Utente.nome != '$user' ORDER BY data LIMIT 10";
     $search_for_string = mysqli_query($connect, $search_for_string_query);
@@ -29,9 +27,9 @@
         //ciclo che assegna per ogni array i campi
         foreach ($json_array as &$rows) {
             //prendo le flashcards e le piazzo nell'array
-            unset($flashcards); // $foo is gone
-            $flashcards = array(); // $foo is here again
-            unset($json_array2); // $foo is gone
+            unset($flashcards);
+            $flashcards = array();
+            unset($json_array2);
             $json_array2 = array();
             $preleva_flashcard_str = "SELECT * FROM Flashcard WHERE id_album = ".$rows["id"]." LIMIT 10";
             $preleva_flashcard = mysqli_query($connect, $preleva_flashcard_str);
@@ -76,5 +74,3 @@
     $output = json_encode($post_data);
 
     echo $output;
-
-?>

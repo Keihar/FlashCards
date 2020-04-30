@@ -36,7 +36,3 @@
 
         echo "success";
     }
-    
-
-
-?>
