@@ -105,7 +105,7 @@ function getCard(id, name, description, imgLink, author) {
     `<p class="card-text">${description}</p><p class="card-text">` +
     `<button id="btn${id}" onclick='saveAlbum(${id},"${sessionUsername}")' class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
     `<button id="nbtn${id}" class='btn btn-outline-primary' onclick="removeAlbum(${id})" style="display:none;">Rimuovi dai tuoi Album</button>` +
-    `<button data-toggle="modal" data-target="#exampleModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
+    `<button data-toggle="modal" data-target="#exampleModal" id="prevBtn${id}" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1 prevBtn'>Anteprima</button>` +
     `</p> <p class="card-text"><a href="profile.html?user=${author}" class="text-secondary"">Creato da ${localAuth}</a></p> </div> </div> </div> </div>`;
 }
 
@@ -133,8 +133,8 @@ function albumPreview(id, array) {
       album.imgLink = album.imgLink == null ? "images\\albumCovers\\000-icon.svg": album.imgLink;
 
       //  Setting title and description
-      document.getElementById("modal-title").innerHTML = "" + album.nome;
-      document.getElementById("modal-body").innerHTML = "" + album.descrizione;
+      $("#modal-title").html("" + album.nome);
+      $("#modal-body").html("" + album.descrizione);
 
       //  Adds backs and fronts to the table
       let tableBody = document.getElementById("tableBody");
@@ -142,9 +142,9 @@ function albumPreview(id, array) {
       console.table(album.flashcards);
 
       if (album.flashcards.length < 1) {
-        $("#tableList tr").remove();
         $("#noflashcards").show();
         $("#tableList").hide();
+        return;
       }
       else {
         $("#noflashcards").hide();

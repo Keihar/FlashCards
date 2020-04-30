@@ -1,7 +1,7 @@
 //Global Variables
 var albumID = "";
 var modifyingRow = false;
-var dir = "images/albumCovers";
+var profilePicDir = "images/albumCovers";
 var fileextension = ".svg";
 
 $(document).ready(function() {
@@ -100,15 +100,16 @@ $(document).ready(function() {
     });
   });
 
-  //  Retrieve the contents of the folder
+  //  Fills the profile icon-list-modal's images
   $.ajax({
-    url: dir,
+    //  Retrieve the contents of the folder
+    url: profilePicDir,
     success: function (data) {
         //  List all .png file names in the page
         $(data).find("a:contains(" + fileextension + ")").each(function () {
             var filename = this.href.replace(window.location.host, "").replace("http://", "");
             $("#icons").append(
-              `<img src="${dir}${filename}" onclick="changeIcon('${filename}')" class="img-thumbnail imgList" data-dismiss="modal">`
+              `<img src="${profilePicDir}${filename}" onclick="changeIcon('${filename}')" class="img-thumbnail imgList" data-dismiss="modal">`
             );
         });
     }
@@ -219,13 +220,16 @@ function handleFileSelect()
   }
 }
 
+//  Activated when the file is read
 function receivedText() {
   let txt = String(fr.result);
+  let ext = $("#fileToUpload").val().split('.').pop();
 
+  //  Validates the file through the PHP
   $.ajax({
     type: "POST",
     url: "PHP/importFiles.php",
-    data: {'file' : txt},
+    data: {'file' : txt, 'ext' : ext},
     success: function (data) {
       $("#fileAlert").html(data)
       $("#fileAlert").show();
