@@ -6,7 +6,7 @@
     //includo codice per connessione al DataBase
     include 'DBconnect.php';
 
-    $myfile = $_FILES;
+    $myfile = $_POST["file"];
 
     //(readfile("test.csv");
 

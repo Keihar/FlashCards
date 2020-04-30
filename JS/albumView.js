@@ -100,25 +100,6 @@ $(document).ready(function() {
     });
   });
 
-  //  Validate the file through the PHP
-  $("#importFiles").submit(function (e) {
-    e.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
-    var file_data = $("#myFile").prop("files")[0];
-    var form_data = new FormData();               
-    form_data.append("file", file_data) 
-
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: form_data,
-      success: function (data) {
-        alert(data);
-      }
-    });
-  });
-
   //  Retrieve the contents of the folder
   $.ajax({
     url: dir,
@@ -134,7 +115,7 @@ $(document).ready(function() {
   });
 
   //  Label changer when file is chosen
-  $('#myFile').on('change',function(){
+  $('#fileToUpload').on('change',function(){
     //  Get the file name
     let fileName = $(this).val();;
 
@@ -216,6 +197,7 @@ function changeIcon(filename) {
 }
 
 //  Files Support
+var fr = new FileReader();
 function handleFileSelect()
 {               
   if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
@@ -223,7 +205,7 @@ function handleFileSelect()
     return;
   }   
 
-  var input = document.getElementById('fileinput');
+  var input = document.getElementById('fileToUpload');
   if (!input.files) {
     alert("This browser doesn't seem to support the `files` property of file inputs.");
   }
@@ -232,15 +214,23 @@ function handleFileSelect()
   }
   else {
     var file = input.files[0];
-    var fr = new FileReader();
+    fr.readAsText(file);
     fr.onload = receivedText;
-    //fr.readAsText(file);
-    //fr.readAsBinaryString(file); //as bit work with base64 for example upload to server
-    fr.readAsDataURL(file);
   }
 }
 
 function receivedText() {
-  document.getElementById('editor').appendChild(document.createTextNode(fr.result));
+  let txt = String(fr.result);
+
+  $.ajax({
+    type: "POST",
+    url: "PHP/importFiles.php",
+    data: {'file' : txt},
+    success: function (data) {
+      $("#fileAlert").html(data)
+      $("#fileAlert").show();
+    }
+  });
 }    
+
 
