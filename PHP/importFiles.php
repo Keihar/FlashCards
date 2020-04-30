@@ -8,7 +8,7 @@
 
     $myfile = $_POST["file"];
 
-    $ext = $_POST["estensione"];
+    $ext = $_POST["ext"];
 
     //(readfile("test.csv");
 

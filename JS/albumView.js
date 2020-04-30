@@ -62,14 +62,7 @@ $(document).ready(function() {
         let id = String(data);
 
         //  Adds the row to the table
-        $("#tableList").find('tbody').append(
-          `<tr>`+
-          `<td>${$("#frontCard").val()}</td>`+
-          `<td>${$("#backCard").val()}</td>`+
-          `<td> <button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>`+
-          `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>`+
-          `</tr>`
-        );
+        flashToTable(front, back, id)
 
         //  Flush the textareas
         $("#frontCard").val("")
@@ -105,7 +98,6 @@ $(document).ready(function() {
     //  Retrieve the contents of the folder
     url: profilePicDir,
     success: function (data) {
-        //  List all .png file names in the page
         $(data).find("a:contains(" + fileextension + ")").each(function () {
             var filename = this.href.replace(window.location.host, "").replace("http://", "");
             $("#icons").append(
@@ -231,10 +223,65 @@ function receivedText() {
     url: "PHP/importFiles.php",
     data: {'file' : txt, 'ext' : ext},
     success: function (data) {
-      $("#fileAlert").html(data)
-      $("#fileAlert").show();
+      var json;
+      if (data == "extensionError") {
+        $("#fileAlert").html("L'estensione del file non è valida.");
+        $("#fileAlert").show();
+        return;
+      }
+      else if (data == "nColumnsError") {
+        $("#fileAlert").html("Il file non è formattato correttamente.");
+        $("#fileAlert").show();
+        return;
+      }
+      else{
+        try { json = JSON.parse(data)} 
+        catch (error) {
+          $("#fileAlert").html("Errore nella conversione del file.");
+          $("#fileAlert").show();
+          return;
+        }
+        $("#fileAlert").hide();
+        $("#importBtn").html(
+          `<div class="spinner-border spinner-border-sm text-light" role="status" ` +
+          `style="margin-bottom: 0.15em"><span class="sr-only">Loading...</span>` +
+          `</div> Caricamento...`
+        );
+
+        json.forEach(row => {
+          let front = row[0];
+          let back = row[1];
+          $.ajax({
+            type: "POST",
+            url: "PHP/addFlashcard.php",
+            data: {'fronte' : front, 'retro' : back},
+            success: function (data) {
+              //  Verify the integrity of the received data 
+              if (isNaN(data)) { alert("Errore nell'aggiunta della Flashcard."); console.error(data); return;}
+      
+              //  Take to received id to set the funztions later
+              let id = String(data);
+      
+              //  Adds the row to the table
+              flashToTable(front, back, id);
+              $('#uploadModal').modal('toggle')
+              $("#importBtn").html("Importa");
+            }});
+        });
+      }
     }
   });
-}    
+}
+
+function flashToTable(front, back, id) {
+  $("#tableList").find('tbody').append(
+    `<tr>`+
+    `<td>${front}</td>`+
+    `<td>${back}</td>`+
+    `<td> <button type="button" onclick="modifyRow(this, ${id})" class="btn btn-outline-secondary btn-sm">Modifica</button></td>`+
+    `<td> <button type="button" onclick="deleteRow(this, ${id})" class="btn btn-outline-danger btn-sm">Rimuovi</button></td>`+
+    `</tr>`
+  );
+}
 
 

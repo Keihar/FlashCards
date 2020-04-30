@@ -288,22 +288,27 @@
                 </a>
               </p>
               <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                  <ul>
+                <div class="card card-body mb-0">
+                  <ul class="mb-0">
                     <li>
                       I file JSON devono avere il seguente formato:
                       <div class="card-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
+                        [{<br/>
+                        &ensp;"fronte": "Qual è il fantastico sito di flashcards?",<br/>         
+                        &ensp;"retro": "yellow."<br/>     
+                        },<br/>     
+                        {<br/>
+                        &ensp;"fronte":"I pinguini hanno le ginocchia?",<br/>         
+                        &ensp;"retro": "Dovrebbero avercele"<br/>     
+                        }]
                       </div>
                     </li>
                     <li>
                       Mentre i file CSV questo:
                       <div class="card-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
+                        Lorem, Ipsum<br/>
+                        Dolor, Sit</br>
+                        Laboris, Nisi
                       </div>
                     </li>
                   </ul>
@@ -319,9 +324,9 @@
                 Il formato del file non è valido.
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer mt-3">
               <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Chiudi</button>
-              <button type="button" class="btn btn-secondary" onclick="handleFileSelect()">Importa</button>
+              <button type="button" id="importBtn" class="btn btn-secondary" onclick="handleFileSelect()">Importa</button>
             </div>
           </form>
         </div>
