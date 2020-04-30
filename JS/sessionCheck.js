@@ -19,7 +19,7 @@ $(document).ready(function () {
     }
   });
 
-  if(getUrlVars()["user"] != undefined)
+  if(getUrlVars()["user"] != undefined || getUrlVars()["user"] != "")
   {
     $.ajax({
       type: "POST",

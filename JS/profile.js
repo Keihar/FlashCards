@@ -32,7 +32,8 @@ $(document).ready(function () {
                     album.imgLink, username, profileJson.albums);
             });
             
-            markBtns(user.salvati);
+            
+            markBtns(profileJson.salvati);
             checkLocalProfile();
         }
     })
