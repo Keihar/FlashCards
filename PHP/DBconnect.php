@@ -9,5 +9,4 @@
     //effettuo la connessione
     $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
-    //chiudo la connessione
-    mysqli_close($connect);
+?>
