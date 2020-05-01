@@ -2,9 +2,6 @@ var selectedAlbum = "";
 var tooltipShow = false;
 
 $(document).ready(function () {
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
 
   $.ajax({
     type: "POST",
@@ -61,9 +58,15 @@ function getCard(id, name, description, imgLink, author) {
   }
   let localAuth = author != sessionUsername ? author : "te";
   //  
+  //  Enables Tooltips
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+  
   let str = `<div class="card mb-3 ml-3" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"> <div class="col-md-4">` +
     `<img src="${imgLink}" alt="" class="listImg"> </div> <div class="col-md-8"> <div class="card-body clearfix"> <h5 class="card-title">${name}` +
-    `<button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 pt-0 float-right text-danger' data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i></button></h5> ` +
+    `<span class="float-right" data-toggle="tooltip" data-placement="bottom" title="Elimina"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 pt-0 float-right text-danger' data-toggle="modal" data-target="#deleteModal">`+
+    `<i class="fa fa-times"></i></button></span></h5> ` +
     `<p class="card-text">${description}</p><p class="card-text" id="p${id}">` +
     `<button id="playAlbum${id}" onclick='playAlbum(${id})' class='btn btn-primary' data-container="body" data-toggle="popover" data-placement="bottom" data-content="L'` +
     `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>` +

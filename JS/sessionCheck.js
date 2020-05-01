@@ -141,10 +141,10 @@ function markBtns(salvati) {
     return;
   }
 
-  $('div').find('button:contains("Aggiungi ai tuoi Album")').each(function () {
+  $('div').find('button:contains("Aggiungi album")').each(function () {
     salvati.forEach(num => {
       if ($(this).attr('id') == ("btn" + String(num.id))) {
-        $(this).html("Rimuovi dai tuoi Album");
+        $(this).html(`<i class="fas fa-minus"></i> Rimuovi album`);
         $(this).removeClass("btn-primary").addClass("btn-outline-primary");
         $(this).attr("onclick", `removeAlbum(${num.id})`)
       }

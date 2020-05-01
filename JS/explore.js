@@ -105,9 +105,9 @@ function getCard(id, name, description, imgLink, author) {
   return `<div class="card mb-3 ml-3" id="singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
     `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
     `<p class="card-text">${description}</p><p class="card-text">` +
-    `<button id="btn${id}" onclick='saveAlbum(${id},"${sessionUsername}")' class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
-    `<button id="nbtn${id}" class='btn btn-outline-primary' onclick="removeAlbum(${id})" style="display:none;">Rimuovi dai tuoi Album</button>` +
-    `<button data-toggle="modal" data-target="#exampleModal" id="prevBtn${id}" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1 prevBtn'>Anteprima</button>` +
+    `<button id="btn${id}" onclick='saveAlbum(${id},"${sessionUsername}")' class='btn btn-primary'><i class="fas fa-plus"></i> Aggiungi album</button>` +
+    `<button id="nbtn${id}" class='btn btn-outline-primary' onclick="removeAlbum(${id})" style="display:none;"><i class="fas fa-minus"></i> Rimuovi album</button>` +
+    `<button data-toggle="modal" data-target="#exampleModal" id="prevBtn${id}" onclick='albumPreview(${id}, user.albums)' class='btn btn-outline-secondary ml-1 prevBtn'><i class="fas fa-search"></i> Anteprima</button>` +
     `</p> <p class="card-text"><a href="profile.html?user=${author}" class="text-secondary"">Creato da ${localAuth}</a></p> </div> </div> </div> </div>`;
 }
 
@@ -163,13 +163,13 @@ function dropClick(str) {
   switch (str) {   
     case "album":
       $("#albumDrop").addClass("active"); 
-      $("#dropdownBtn").html("Album"); 
+      $("#dropdownBtn").html(`<i class="fas fa-book"></i> Album`); 
       $("#searchBar").attr('placeholder', "Cerca un album");    
       break;
 
     case "user":
       $("#userDrop").addClass("active");   
-      $("#dropdownBtn").html("Utenti");   
+      $("#dropdownBtn").html(`<i class="fas fa-users"></i> Utenti`);   
       $("#searchBar").attr('placeholder', "Cerca un utente");  
       break;
   }

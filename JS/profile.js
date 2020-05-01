@@ -45,6 +45,8 @@ $(document).ready(function () {
         $("#imgLink").val(document.getElementById("currentIcon").src);
 
         if ($("#psw1").val() != $("#psw2").val()) {
+            $("#psw1").addClass("is-invalid");
+            $("#psw2").addClass("is-invalid");
             editAlert("Le due nuove password non combaciano")
             return;
         }
@@ -56,6 +58,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data)
                 if (data.trim() == "wrongPassword") {
+                    $("#password").addClass("is-invalid");
                     editAlert("La password inserita è incorretta")
                     return;
                 }
@@ -139,8 +142,8 @@ function getPCard(id, name, description, imgLink, author) {
     return `<div class="card mb-3 mx-auto singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
         `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
         `<p class="card-text">${description}</p><p class="card-text btnBox" id="${id}">` +
-        `<button onclick='saveAlbum(${id},"${author}")' id="btn${id}" class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
-        `<button onclick='removeAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
+        `<button onclick='saveAlbum(${id},"${author}")' id="btn${id}" class='btn btn-primary'>Aggiungi album</button>` +
+        `<button onclick='removeAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;"><i class="fas fa-minus"></i> Aggiunto ai tuoi Album</button>` +
         `<button data-toggle="modal" data-target="#previewModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
         `</p> <p class="card-text text-secondary">Creato da ${author}</p> </div> </div> </div> </div>`;
 }
