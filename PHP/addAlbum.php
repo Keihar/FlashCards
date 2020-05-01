@@ -2,19 +2,21 @@
 
 <?php
 
+    //setto la zona di prelevamento data
     date_default_timezone_set('Europe/London');
 
     //effettuo l'include per connettermi al DataBase
     include 'DBconnect.php';
     
+    //inizializzo la sessione
     session_start();
 
+    //prelevo da HTML/JavaScript le variabili che mi servono
     $nome_album = mysqli_real_escape_string($connect, $_POST['nome_album']);
     $descrizione = mysqli_real_escape_string($connect, $_POST['descrizione']);
     $imgLink = mysqli_real_escape_string($connect, $_POST['imgLink']);
     $privato = isset($_POST['privato']) ? 1 : 0;
-    //
-
+    
     //Prendo l'utente
     $user = mysqli_real_escape_string($connect, $_SESSION['utente']);
     
@@ -32,11 +34,13 @@
     $insert_album_query = "INSERT INTO Album(nome, descrizione, data, imgLink, privato, email) VALUES ('$nome_album', '$descrizione','$data', '$imgLink','$privato','$email')";
     $insert_album = mysqli_query($connect, $insert_album_query);
 
-
+    //verifico se la query è andata a buon fine
     if(!$insert_album){
         echo "error";
     }
     else{
+
+        //prendo l'ID dell'album aggiunto per settarlo come variabile di sessione
         $album_id_str = "SELECT id FROM Album WHERE nome='$nome_album' AND descrizione='$descrizione' AND email='$email'";
         $album_id_query = mysqli_query($connect, $album_id_str);
 
@@ -48,5 +52,4 @@
         echo "success";
     }
 
-    //chiudo la connessione
-    mysqli_close($connect);
+    ?>

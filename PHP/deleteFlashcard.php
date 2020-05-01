@@ -21,5 +21,5 @@
         echo "success";
     }
 
-
-?>
+    //chiudo la connessione
+    mysqli_close($connect);
