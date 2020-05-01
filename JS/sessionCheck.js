@@ -170,3 +170,38 @@ function removeAlbum(id) {
     }
   });
 }
+
+//  Album Preview
+function albumPreview(id, array) {
+  array.forEach(album => {
+    if (album.id == id) {
+      //  Setting default image if its's null
+      album.imgLink = album.imgLink == null ? "images\\albumCovers\\000-icon.svg": album.imgLink;
+
+      //  Setting title and description
+      $("#modal-title").html("" + album.nome);
+      $("#modal-body").html("" + album.descrizione);
+
+      //  Adds backs and fronts to the table
+      let tableBody = document.getElementById("tableBody");
+      tableBody.innerHTML = "";
+      console.table(album.flashcards);
+
+      if (album.flashcards.length < 1) {
+        $("#noflashcards").show();
+        $("#tableList").hide();
+        return;
+      }
+      else {
+        $("#noflashcards").hide();
+        $("#tableList").show();
+      }
+      album.flashcards.forEach(flashcard => {
+          tableBody.innerHTML += "<tr>" +
+            `<td>${flashcard.fronte.replace('\\', '')}</td>` +
+            `<td>${flashcard.retro.replace('\\', '')}</td>` +
+            "</tr>";
+      });
+    }
+  });
+}

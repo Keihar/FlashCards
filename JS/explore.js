@@ -42,8 +42,10 @@ function search() {
       catch (error) { console.error(data);
         row.innerHTML = "<div class='mb-3 col'> Errore nella ricerca.</div>" }
 
+      //  Change the reult title
+      $("#searchTitle").html("Risultati:");
+      
       //  Print every album
-      console.table(user);
       if (scope == "user") {
         //  Zero results
         if (user.users.length == 0)
@@ -125,42 +127,8 @@ function getUserCard(name, motto, imgLink) {
     `</p> </div> </div> </div> </div>`;
 }
 
-//  Album Preview
-function albumPreview(id, array) {
-  array.forEach(album => {
-    if (album.id == id) {
-      //  Setting default image if its's null
-      album.imgLink = album.imgLink == null ? "images\\albumCovers\\000-icon.svg": album.imgLink;
 
-      //  Setting title and description
-      $("#modal-title").html("" + album.nome);
-      $("#modal-body").html("" + album.descrizione);
-
-      //  Adds backs and fronts to the table
-      let tableBody = document.getElementById("tableBody");
-      tableBody.innerHTML = "";
-      console.table(album.flashcards);
-
-      if (album.flashcards.length < 1) {
-        $("#noflashcards").show();
-        $("#tableList").hide();
-        return;
-      }
-      else {
-        $("#noflashcards").hide();
-        $("#tableList").show();
-      }
-      album.flashcards.forEach(flashcard => {
-          tableBody.innerHTML += "<tr>" +
-            `<td>${flashcard.fronte.replace('\\', '')}</td>` +
-            `<td>${flashcard.retro.replace('\\', '')}</td>` +
-            "</tr>";
-      });
-    }
-  });
-}
-
-//  Album Preview
+//  Save Preview
 function saveAlbum(id, email = user.richiedente) {
   //  Ajax request
   $.ajax({

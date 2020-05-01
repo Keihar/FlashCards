@@ -65,3 +65,8 @@ img {
     background-attachment: fixed;
     background-position: center; 
 }
+
+.navbar-brand,
+.consolas{
+    font-family: 'Consolas', serif;
+}

@@ -161,7 +161,8 @@ function checkLocalProfile() {
         $("#userCards").find("button").addClass("d-none");
         $("#userCards").find(".btnBox").html(
             `<button id="playAlbum${$(".btnBox").attr('id')}" onclick='playAlbum(${$(".btnBox").attr('id')})' class='btn btn-primary' data-container="body" data-toggle="popover" data-placement="bottom" data-content="L'` +
-            `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>`
+            `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>` +
+            `<button id="viewAlbum${$(".btnBox").attr('id')}" onclick='viewAlbum(${$(".btnBox").attr('id')})' class='btn btn-outline-secondary ml-1'><i class="fa fa-pencil"></i> Modifica</button>`
         );
     }
 }
