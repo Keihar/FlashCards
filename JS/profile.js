@@ -138,7 +138,7 @@ function getPCard(id, name, description, imgLink, author) {
     //  Returns the formatted HTML
     return `<div class="card mb-3 mx-auto singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
         `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
-        `<p class="card-text">${description}</p><p class="card-text">` +
+        `<p class="card-text">${description}</p><p class="card-text btnBox" id="${id}">` +
         `<button onclick='saveAlbum(${id},"${author}")' id="btn${id}" class='btn btn-primary'>Aggiungi ai tuoi Album</button>` +
         `<button onclick='removeAlbum(${id},"${author}")' id="nbtn${id}" class='btn btn-outline-primary' style="display:none;">Aggiunto ai tuoi Album</button>` +
         `<button data-toggle="modal" data-target="#previewModal" onclick='albumPreview(${id}, user.albums)' class='btn btn-secondary ml-1'>Anteprima</button>` +
@@ -159,6 +159,11 @@ function checkLocalProfile() {
         $("#name").val(user.nome);
         $("#motto").val(user.motto);
         $("#userCards").find("button").addClass("d-none");
+        $("#userCards").find(".btnBox").html(
+            `<button id="playAlbum${$(".btnBox").attr('id')}" onclick='playAlbum(${$(".btnBox").attr('id')})' class='btn btn-primary' data-container="body" data-toggle="popover" data-placement="bottom" data-content="L'` +
+            `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>` +
+            `<button id="viewAlbum${$(".btnBox").attr('id')}" onclick='viewAlbum(${$(".btnBox").attr('id')})' class='btn btn-outline-secondary ml-1'><i class="fa fa-pencil"></i> Modifica</button>`
+        );
     }
 }
 
