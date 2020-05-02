@@ -1,5 +1,8 @@
 <?php
 
+    //setto la zona di prelevamento data
+    date_default_timezone_set('Europe/London');
+
     //includo codice per la connessione al DataBase
     include 'DBconnect.php';
 
@@ -28,8 +31,9 @@
     if (mysqli_num_rows($result)!=0) { exit("saveExisting"); }
 
     else{
+        $data = date('Y-m-d H:i:s');
 
-        $insert_saved_str = "INSERT INTO album_salvati(emailUtente, idAlbum) VALUES ('$email', '$id_album')";
+        $insert_saved_str = "INSERT INTO album_salvati(emailUtente, idAlbum, data) VALUES ('$email', '$id_album', '$data')";
         $insert_saved = mysqli_query($connect, $insert_saved_str);
     
         //se non esiste alcun utente con le credenziali inseritee
