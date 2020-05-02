@@ -70,3 +70,7 @@ img {
 .consolas{
     font-family: 'Consolas', serif;
 }
+
+#noflashcards {
+    margin-top: 1em;
+}

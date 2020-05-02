@@ -49,7 +49,7 @@ function search() {
       if (scope == "user") {
         //  Zero results
         if (user.users.length == 0)
-          row.innerHTML = "<div class='mb-3 col'> Nessun utente trovato.</div>"
+          row.innerHTML = "<div class='mb-3 col nouser'> Nessun utente trovato :(</div>"
 
         //  Prints Users
         user.users.forEach(utente => {
@@ -62,7 +62,7 @@ function search() {
       else {
         //  Zero results
         if (user.albums.length == 0)
-          row.innerHTML = "<div class='mb-3 col'> Nessun album trovato.</div>"
+          row.innerHTML = "<div class='mb-3 col nouser'> Nessun album trovato :(</div>"
 
         //  Prints Albums
         user.albums.forEach(album => {
@@ -123,7 +123,7 @@ function getUserCard(name, motto, imgLink) {
   return `<div class="card mb-3 ml-3" id="singleCard"> <div class="row no-gutters"> <div class="col-md-4">` +
     `<img src="${imgLink}" id="cardImg"> </div> <div class="col-md-8"> <div class="card-body"> <h5 class="card-title">${name}</h5> ` +
     `<p class="card-text"><em class="text-secondary">"${motto}"</em></p><p class="card-text">` +
-    `<a href="profile.html?user=${name}" class='btn btn-primary'><i class="fa fa-arrow-right"></i> Visita</a>` +
+    `<a href="profile.html?user=${name}" class='btn btn-primary btn-lg'><i class="fa fa-arrow-right"></i> Visita</a>` +
     `</p> </div> </div> </div> </div>`;
 }
 
