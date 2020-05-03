@@ -127,8 +127,6 @@ foreach ($json_salvati as &$righe) {
     ));
 }
 
-
-
 //array di array
 $post_data = array(
     'nome' => $user,
