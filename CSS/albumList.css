@@ -17,3 +17,10 @@
 .dropdown-toggle{
     max-height: 2.5em;
 }
+
+@media (max-width:1500px){
+    .card{
+        margin-right:auto!important;
+        margin-left:auto!important
+    }
+}

@@ -74,3 +74,7 @@ img {
 #noflashcards {
     margin-top: 1em;
 }
+
+.card{
+    border-color: #adb5bd;
+}

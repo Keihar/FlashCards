@@ -138,33 +138,6 @@ function getUserCard(name, motto, imgLink) {
     `</p> </div> </div> </div> </div>`;
 }
 
-
-//  Save Preview
-function saveAlbum(id, email = user.richiedente) {
-  //  Ajax request
-  $.ajax({
-    type: "POST",
-    url: "PHP/saveAlbum.php",
-    data: { 'id_album': id, 'email': email },
-    success: function (data) {
-      switch (data) {
-        case "success":
-          $("#btn" + id).hide();
-          $("#nbtn" + id).show();
-          break;
-      
-        case "saveExisting":
-          alert("L'album è già presente nella tua libreria!");
-          break;
-
-        default:
-          console.error(data) 
-          break;
-      }
-    }
-  })
-}
-
 //  DROPDOWN HANDLER
 
 function dropClick(str) {

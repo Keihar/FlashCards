@@ -28,7 +28,7 @@ $(document).ready(function () {
             album.imgLink = "images\\albumCovers\\000-icon.svg";
           }
           let HTMLString = getCard(album.id, album.nome, album.descrizione, album.imgLink,
-            album.username, "27/02/2019");
+            album.username, album.data);
           row.innerHTML += "" + HTMLString;
           if (album.username != sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
@@ -59,7 +59,10 @@ $(document).ready(function () {
 
 function getCard(id, name, description, imgLink, author, date) {
 
-  console.table(author);
+  //  Data formatted
+  let dateArray = date.substring(0, 10).split("-");
+  date = `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+
   //  Truncate the description if it's too long
   var descMaxLength = 32;
   if (description.length > descMaxLength) {

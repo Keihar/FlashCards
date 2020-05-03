@@ -1,3 +1,6 @@
+var dir = "images/albumCovers";
+var fileextension = ".svg";
+
 $(document).ready(function () {
   //  Ajax AddAlbum
   $("#addAlbum").submit(function (e) {
@@ -22,8 +25,6 @@ $(document).ready(function () {
     });
   });
 
-  var dir = "images/albumCovers";
-  var fileextension = ".svg";
   $.ajax({
       //This will retrieve the contents of the folder if the folder is configured as 'browsable'
       url: dir,
