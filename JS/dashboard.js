@@ -17,6 +17,7 @@ $(document).ready(function() {
                 album.imgLink, album.username));
             });
 
+            $(".card").addClass("mx-auto");
             // Set the onclick
             var eles = document.getElementsByClassName('prevBtn');
             for (var i=0; i < eles.length; i++){
@@ -26,7 +27,6 @@ $(document).ready(function() {
 
             markBtns(user.salvati);
             $("#loadingDashboardCards").hide();
-            $("#loadingDashboardNews").hide();
         }
     });
     

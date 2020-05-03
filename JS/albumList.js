@@ -3,6 +3,9 @@ var tooltipShow = false;
 
 $(document).ready(function () {
 
+  $( "#filter" ).change(function() {
+    filter();
+  });
   $.ajax({
     type: "POST",
     url: "PHP/json.php",
@@ -15,20 +18,25 @@ $(document).ready(function () {
         row.innerHTML = "";
         console.table(user);
 
+        //  Enables Tooltips
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+
         user.albums.forEach(album => {
           if (album.imgLink == null) {
             album.imgLink = "images\\albumCovers\\000-icon.svg";
           }
           let HTMLString = getCard(album.id, album.nome, album.descrizione, album.imgLink,
-            album.username);
+            album.username, "27/02/2019");
           row.innerHTML += "" + HTMLString;
           if (album.username != sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
               .attr("onclick", `albumPreview(${album.id}, user.albums)`)
               .attr("data-toggle", `modal`)
               .attr("data-target", `#exampleModal`);
-            $("#deleteAlbum" + album.id).attr("onclick", `removeAlbum(${album.id})`)
-              .attr("data-toggle", ``);
+            $("#deleteAlbum" + album.id).attr("onclick", `removeAlbum(${album.id})`);
+            $("#deleteSpan").attr("data-toggle", ``);
           }
         });
       }
@@ -49,8 +57,9 @@ $(document).ready(function () {
   });
 });
 
-function getCard(id, name, description, imgLink, author) {
+function getCard(id, name, description, imgLink, author, date) {
 
+  console.table(author);
   //  Truncate the description if it's too long
   var descMaxLength = 32;
   if (description.length > descMaxLength) {
@@ -58,20 +67,18 @@ function getCard(id, name, description, imgLink, author) {
   }
   let localAuth = author != sessionUsername ? author : "te";
   //  
-  //  Enables Tooltips
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  });
   
-  let str = `<div class="card mb-3 ml-3" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"> <div class="col-md-4">` +
-    `<img src="${imgLink}" alt="" class="listImg"> </div> <div class="col-md-8"> <div class="card-body clearfix"> <h5 class="card-title">${name}` +
-    `<span class="float-right" data-toggle="tooltip" data-placement="bottom" title="Elimina"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 pt-0 float-right text-danger' data-toggle="modal" data-target="#deleteModal">`+
+  let str = `<div class="card ${localAuth} mb-4 ml-4" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"><div class="card-header text-center w-100"><a class="card-text text-muted"href="profile.html?user=${author}"> Creato da ${localAuth}</a></div> <div class="col-md-4">` +
+    `<img src="${imgLink}" alt="" class="listImg"> </div> <div class="col-md-8">` +
+    `<div class="card-body clearfix mt-2"> <h5 class="card-title">${name}` +
+    `<span id="deleteSpan" class="float-right" data-toggle="modal" data-target="#deleteModal"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 pt-0 float-right text-danger' data-toggle="tooltip" data-placement="bottom" title="Elimina">`+
     `<i class="fa fa-times"></i></button></span></h5> ` +
     `<p class="card-text">${description}</p><p class="card-text" id="p${id}">` +
     `<button id="playAlbum${id}" onclick='playAlbum(${id})' class='btn btn-primary' data-container="body" data-toggle="popover" data-placement="bottom" data-content="L'` +
     `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>` +
     `<button id="viewAlbum${id}" onclick='viewAlbum(${id})' class='btn btn-outline-secondary ml-1'><i class="fa fa-pencil"></i> Modifica</button>` +
-    `</p> <a class="card-text text-secondary"href="profile.html?user=${author}"> Creato da ${localAuth}</a> </div> </div> </div> </div>`;
+    `</p></div> </div>`+
+    `<div class="card-footer w-100 text-center text-muted"> ${date}  </div></div> </div>`;
   return str;
 }
 
@@ -125,4 +132,22 @@ function playAlbum(id) {
       catch (error) { }
     }
   });
+}
+
+function filter() {
+  switch ($("#filter").val()) {
+    case "all":
+      $(".card").show();
+      break;
+
+    case "personal":
+      $(".card").hide();
+      $(".te").show();
+      break;
+
+    case "external":
+      $(".card").show();
+      $(".te").hide();
+      break;
+  }
 }

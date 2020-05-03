@@ -205,3 +205,13 @@ function albumPreview(id, array) {
     }
   });
 }
+
+function getVibrant(imgLink) {
+  var img = document.createElement('img');
+  let path = imgLink.src;
+
+  img.setAttribute('src', path);
+  var vibrant = new Vibrant(img);
+  var swatches = vibrant.swatches()
+  return swatches["Vibrant"].getHex();
+}

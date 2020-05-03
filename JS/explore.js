@@ -13,6 +13,16 @@ $(document).ready(function() {
       }
     });
   });
+
+  $.ajax({
+    type: "POST",
+    url: "PHP/suggested.php",
+    data: { },
+    success: function (data) {
+      
+    }
+  });
+
 });
 
 // Search
@@ -44,6 +54,7 @@ function search() {
 
       //  Change the reult title
       $("#searchTitle").html("Risultati:");
+      $("#searchTitleBox").addClass("mb-3");
       
       //  Print every album
       if (scope == "user") {

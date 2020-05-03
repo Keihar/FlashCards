@@ -150,3 +150,7 @@ body {
   border-radius: 0px 0px 5px 5px;
 }
   
+#singleCard{
+  min-width: 35rem; 
+  width: 35rem;
+}

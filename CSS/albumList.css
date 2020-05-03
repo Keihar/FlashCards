@@ -1,0 +1,19 @@
+.listImg {
+    width: 80%;
+    margin: 10%;
+  }
+
+.custom-select {
+    border: none;
+    font-size: 1.1em;
+}
+
+.custom-select:focus{
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.dropdown-toggle{
+    max-height: 2.5em;
+}

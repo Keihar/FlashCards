@@ -26,13 +26,7 @@
   <link rel="icon" href="images/000-icon.svg">
   <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/dashboard.css">
-  <style>
-    .listImg {
-      width: 80%;
-      margin: 10%;
-    }
-  </style>
-
+  <link rel="stylesheet" href="CSS/albumList.css">
 
   <!-- Personal JS -->
   <script src="JS/sessionCheck.js" defer></script>
@@ -149,9 +143,18 @@
 
   <!-- Contents -->
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-1 mb-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2"> La mia libreria</h1>
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3 mb-3 border-bottom">
+      
+      <div class="row w-50">
+        <h2>
+          <select class="custom-select filter mb-0" id="filter">
+            <option selected value="all">Tutti gli album</option>
+            <option value="personal">I miei album</option>
+            <option value="external">Album salvati</option>
+          </select>
+        </h2>
+      </div>      
+      <button class="btn btn-primary dropdown-toggle my-auto float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         Aggiungi
       </button>
