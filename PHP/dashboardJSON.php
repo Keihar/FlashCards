@@ -12,7 +12,7 @@ session_start();
 $user = $_SESSION["utente"];
 
 //prelevo gli album degli utenti seguiti dall'utente di sessione limitandoli a 6
-$album_seguiti_query = "SELECT album.id AS id, album.nome AS nome, album.descrizione AS descrizione, album.data AS data, album.imgLink AS imgLink, u.nome AS nome_seguito, u.imgProfilo AS profilo_seguito FROM Utente INNER JOIN follow f ON (f.seguente=Utente.email) INNER JOIN Utente u ON (u.email=f.seguito) INNER JOIN Album ON (album.email = u.email) WHERE Utente.nome='$user' ORDER BY data DESC LIMIT 6";
+$album_seguiti_query = "SELECT album.id AS id, album.nome AS nome, album.descrizione AS descrizione, album.data AS data, album.imgLink AS imgLink, u.nome AS nome_seguito, u.imgProfilo AS profilo_seguito FROM Utente INNER JOIN follow f ON (f.seguente=Utente.email) INNER JOIN Utente u ON (u.email=f.seguito) INNER JOIN Album ON (album.email = u.email) WHERE Utente.nome='$user' AND privato=0 ORDER BY data DESC LIMIT 6";
 $album_seguiti  = mysqli_query($connect, $album_seguiti_query);
 
 
