@@ -1,13 +1,27 @@
 <?php
 
+    //setto la zona di prelevamento data
+    date_default_timezone_set('Europe/London');
+
 //includo codice per la connessione al DataBase
 include 'DBconnect.php';
 
 //inizializzo la sessione
 session_start();
 
-//catcho la variabile di sessione
-$id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
+
+if(isset($_POST["id_album"])){
+
+    $id_album = mysqli_real_escape_string($connect, $_POST["id_album"]);
+
+}
+else if($_SESSION['valid']){
+    $id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
+}
+else{
+    exit("error");
+}
+
 
 //query per avere nome e descrizione dell'Album
 $preleva_nome_descr = "SELECT nome, descrizione, imgLink, privato FROM Album WHERE id=" . $id_album . "";
@@ -26,6 +40,10 @@ while ($riga = mysqli_fetch_array($result1)) {
 //query per avere id, fronte, retro delle flashcards
 $preleva_albumflash = "SELECT Flashcard.id AS id, fronte, retro FROM Album INNER JOIN Flashcard ON (Flashcard.id_album = Album.id) WHERE Album.id = " . $id_album . "";
 $result = mysqli_query($connect, $preleva_albumflash);
+
+$data = date('Y-m-d H:i:s');
+$update_data_query = "UPDATE album SET data = '$data' WHERE id='$id_album'";
+$update_data = mysqli_query($connect, $update_data_query);
 
 //istanzio array che mi servirà per splittare le righe
 $json_array = array();
@@ -52,6 +70,7 @@ $post_data = array(
     'id' => $id_album,
     'nome' => $nome,
     'descrizione' => $descrizione,
+    'data' => $data,
     'imgLink' => $imgLink,
     'privato' => $privato,
     'flashcards' => $flashcards
@@ -62,5 +81,4 @@ $output = json_encode($post_data);
 
 echo $output;
 
-//chiudo la connessione
-mysqli_close($connect);
+?>
