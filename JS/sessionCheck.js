@@ -261,3 +261,23 @@ const copyTo = str => {
     document.getSelection().addRange(selected);   // Restore the original selection
   }
 };
+
+function getFormattedDatetime(date) {
+  //  Data formatted
+  let dateTime = date.split(' ');
+  let dateArray = dateTime[0].split("-");
+  let calendar = `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`
+  let hours = dateTime[1].substring(0, 5);
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = dd + '/' + mm + '/' + yyyy;
+  let yesterday = String(parseInt(dd) - 1).padStart(2, '0') + '/' + mm + '/' + yyyy;
+
+  calendar = calendar == today ? "Oggi" : calendar;
+  calendar = calendar == yesterday ? "Ieri" : calendar;
+
+  return `${calendar} alle ${hours}`;
+}

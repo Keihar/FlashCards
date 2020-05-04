@@ -78,3 +78,9 @@ img {
 .card{
     border-color: #adb5bd;
 }
+
+.profileMiniature{
+    width: 16px;
+    margin: 0;
+    margin-bottom: 4px;
+}

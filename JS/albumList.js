@@ -57,11 +57,10 @@ $(document).ready(function () {
   });
 });
 
-function getCard(id, name, description, imgLink, author, date) {
+function getCard(id, name, description, imgLink, author, date, authorImg = "images\\profilesCovers\\dog.svg") {
 
   //  Data formatted
-  let dateArray = date.substring(0, 10).split("-");
-  date = `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+  date = getFormattedDatetime(date);
 
   //  Truncate the description if it's too long
   var descMaxLength = 32;
@@ -71,11 +70,14 @@ function getCard(id, name, description, imgLink, author, date) {
   let localAuth = author != sessionUsername ? author : "te";
   //  
   
-  let str = `<div class="card ${localAuth} mb-4 ml-4" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"><div class="card-header text-center w-100"><a class="card-text text-muted"href="profile.html?user=${author}"> Creato da ${localAuth}</a></div> <div class="col-md-4">` +
+  let str = `<div class="card ${localAuth} mb-4 ml-4" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"><div class="card-header w-100 clearfix pr-2">` +
+    `<a class="card-text text-muted align-middle" href="profile.html?user=${author}"> <img alt="" class="profileMiniature" src=${authorImg}> Creato da ${localAuth}</a>`+
+    `<div class="float-right"><button class="btn btn-link text-muted p-0 shareLink" onclick="copyTo('localhost/dashboard.html')" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Copiato negli appunti!"><i class="fas fa-link"></i></button>`+
+    `<span id="deleteSpan" data-toggle="modal" data-target="#deleteModal"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 py-0 float-right text-danger' data-toggle="tooltip" data-placement="bottom" title="Elimina">`+
+    `<i class="fa fa-times"></i></button></span></div></div> <div class="col-md-4">` +
     `<img src="${imgLink}" alt="" class="listImg"> </div> <div class="col-md-8">` +
     `<div class="card-body clearfix mt-2"> <h5 class="card-title">${name}` +
-    `<span id="deleteSpan" class="float-right" data-toggle="modal" data-target="#deleteModal"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 pt-0 float-right text-danger' data-toggle="tooltip" data-placement="bottom" title="Elimina">`+
-    `<i class="fa fa-times"></i></button></span></h5> ` +
+    `</h5> ` +
     `<p class="card-text">${description}</p><p class="card-text" id="p${id}">` +
     `<button id="playAlbum${id}" onclick='playAlbum(${id})' class='btn btn-primary' data-container="body" data-toggle="popover" data-placement="bottom" data-content="L'` +
     `album deve contenere almeno due flashcards!"> <i class="fa fa-arrow-right"></i> Avvia</button>` +
