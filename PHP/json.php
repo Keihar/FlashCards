@@ -17,8 +17,9 @@ if (isset($_POST["username"])) {
     $user = $_POST["username"];
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione, data, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' AND privato=0";
+    $sql = "SELECT Album.id AS id, Album.nome, descrizione, album_salvati.data AS data, imgLink, utente.nome as username, Utente.imgProfilo AS imgProfilo FROM Album INNER JOIN Utente ON (utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) WHERE Utente.nome = '$user' AND privato=0";
     $result = mysqli_query($connect, $sql);
+
 } else if ($_SESSION['valid']) {
 
     //attribuisco a $user la variabile di sessione che identifica l'utente
@@ -31,8 +32,9 @@ if (isset($_POST["username"])) {
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $sql = "SELECT Album.id, Album.nome, album.descrizione, Album.data AS data, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, Album.data, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' ORDER BY data DESC";
+    $sql = "SELECT Album.id, Album.nome, album.descrizione, album_salvati.data AS data, album.imgLink, utente.nome as username, Utente.imgProfilo AS imgProfilo FROM album INNER JOIN utente ON (album.email = utente.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = album.id) WHERE Utente.nome = 'Alessandro' UNION SELECT Album.id, Album.nome, descrizione, album_salvati.data AS data, imgLink, utente.nome as username, Utente.imgProfilo FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = 'alessandro@gmail.com' AND privato=0 ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
+
 } else {
     exit("error");
 }
@@ -89,14 +91,20 @@ foreach ($json_array as &$rows) {
             'retro' => $righe['retro']
         ));
     }
+
+    $autore = array(
+        'username' => $rows['username'],
+        'imgProfilo' => $rows['imgProfilo']
+    );
+
     array_push($albums, array(
         'id' => $rows['id'],
         'nome' => $rows['nome'],
         'descrizione' => $rows['descrizione'],
         'data' => $rows['data'],
         'imgLink' => $rows['imgLink'],
-        'username' => $rows['username'],
-        'flashcards' => $flashcards
+        'flashcards' => $flashcards,
+        'autore' => $autore
     ));
 }
 
