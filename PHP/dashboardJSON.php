@@ -52,6 +52,11 @@ foreach ($json_album_array as &$rows) {
         ));
     }
 
+    $autore = array(
+        'username' => $rows['nome_seguito'],
+        'imgProfilo' => $rows['profilo_seguito'],
+    );
+    
     //inserimento nell'array finale dei campi
     array_push($albums, array(
         'id' => $rows['id'],
@@ -59,8 +64,7 @@ foreach ($json_album_array as &$rows) {
         'descrizione' => $rows['descrizione'],
         'data' => $rows['data'],
         'imgLink' => $rows['imgLink'],
-        'username' => $rows['nome_seguito'],
-        'imgProfilo' => $rows['profilo_seguito'],
+        'autore' => $autore,
         'flashcards' => $flashcards
     ));
 }
