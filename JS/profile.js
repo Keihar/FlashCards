@@ -11,9 +11,11 @@ $(document).ready(function () {
             try { profileJson = JSON.parse(data); user = JSON.parse(data); }
             catch (error) { console.error("Errore nell'ottenimento del profilo"); return; }
 
+            console.log("%cProfile JSON", 'background: #222; color: lime')
+            console.table(profileJson);
             getFriends();
 
-            if (profileJson.imgProfilo == undefined || profileJson.imgProfilo == "" || profileJson.imgProfilo == "")
+            if (profileJson.imgProfilo == undefined || profileJson.imgProfilo == "")
                 profileJson.imgProfilo = "images\\profilesCovers\\dog.svg"
             $("#profileImage").attr('src', profileJson.imgProfilo);
             $("#currentIcon").attr('src', profileJson.imgProfilo);

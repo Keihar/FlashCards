@@ -18,7 +18,7 @@ $(document).ready(function() {
                 album.imgLink = "images\\albumCovers\\000-icon.svg";
               }
               $("#row").html($("#row").html() + getDashCard(album.id, album.nome, album.descrizione,
-                album.imgLink, album.username, album.data));
+                album.imgLink, album.autore.username, album.data, album.autore.imgProfilo));
             });
 
             $('.shareLink').popover({
@@ -46,7 +46,10 @@ $(document).ready(function() {
     
 });
 
-function getDashCard(id, name, description, imgLink, author, date, authorImg = "images\\profilesCovers\\dog.svg") {
+function getDashCard(id, name, description, imgLink, author, date, authorImg) {
+
+  //Set default image if null
+  if(authorImg == undefined){ authorImg = "images\\profilesCovers\\dog.svg" };
 
   //  Data formatted
   date = getFormattedDatetime(date);

@@ -40,6 +40,8 @@ function search() {
   //Get the research type
   var scope = $("#dropdownBtn").attr('name');
 
+  var suser;
+
   //  Ajax request
   $.ajax({
     type: "POST",
@@ -47,7 +49,7 @@ function search() {
     data: { 'query': query, 'scope': scope },
     success: function (data) {
 
-      try { user = JSON.parse(data);
+      try { suser = JSON.parse(data);
         row.innerHTML = ""; }
       catch (error) { console.error(data);
         row.innerHTML = "<div class='mb-3 col'> Errore nella ricerca.</div>" }
@@ -59,11 +61,11 @@ function search() {
       //  Print every album
       if (scope == "user") {
         //  Zero results
-        if (user.users.length == 0)
+        if (suser.users.length == 0)
           row.innerHTML = "<div class='mb-3 col nouser'> Nessun utente trovato :(</div>"
 
         //  Prints Users
-        user.users.forEach(utente => {
+        suser.users.forEach(utente => {
           if (utente.imgProfilo == null) {
             utente.imgProfilo = "images\\profilesCovers\\dog.svg";
           }
@@ -72,31 +74,18 @@ function search() {
       }
       else {
         //  Zero results
-        if (user.albums.length == 0)
+        if (suser.albums.length == 0)
           row.innerHTML = "<div class='mb-3 col nouser'> Nessun album trovato :(</div>"
 
         //  Prints Albums
-        user.albums.forEach(album => {
+        suser.albums.forEach(album => {
           if (album.imgLink == null) {
             album.imgLink = "images\\albumCovers\\000-icon.svg";
           }
           row.innerHTML += "" + getCard(album.id, album.nome, album.descrizione,
             album.imgLink, album.nomeutente);
         });
-        $.ajax({
-          type: "POST",
-          url: "PHP/json.php",
-          data: "",
-          success: function (data) {
-              try {
-                  user = JSON.parse(data);
-                  markBtns(user.salvati);
-                } 
-                catch (error) {
-                  console.error(data);
-                }
-          }
-        }); 
+        markBtns(user.salvati);
       }
     }
   });
