@@ -153,11 +153,22 @@
     </div>
     <div class="row">
         <div class="mb-3 px-3 bg-white rounded shadow-sm w-100" id="row">
-            <div class="media text-muted pt-3" id="suggestedBox">
+          <!-- Spinner -->
+          <div class="d-flex mb-4 w-100" id="spinner">
+            <div class="col justify-content-md-center w-100" id="row">
+              <div class="d-flex justify-content-center w-100 h-100" id="loadingDashboardCards">
+                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Template Card -->
+            <div class="media text-muted pt-3 d-none" id="suggestedBox">
               <img alt="" id="profile" class="bd-placeholder-img mr-2 rounded" width="32" height="32">
                 <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray clearfix">
                     <div class="d-flex float-right w-25 justify-content-end">
-                    <a id="visit" class="btn btn-primary btn-sm float-right">Visita</a>
+                    <a id="visit" class="btn btn-primary btn-sm float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Visita</a>
                     </div>
                     <div class="d-flex align-items-center float-left w-75">
                     <strong id="username" class="text-gray-dark">Caricamento...</strong>

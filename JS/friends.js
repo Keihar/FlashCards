@@ -12,9 +12,8 @@ $(document).ready(function() {
             catch (error) { console.error("Errore nel ricevimento degli amici"); return; }   
 
             fuser.amici.forEach(friend => {
-                $("#suggestedBox").show();
                 let box = $("#suggestedBox").clone();
-                $("#suggestedBox").hide();
+                $(box).removeClass("d-none");
 
                 $($(box).find("#username")[0]).html(friend.nome);
                 $($(box).find("#motto")[0]).html(friend.motto);
@@ -23,6 +22,8 @@ $(document).ready(function() {
 
                 $(box).prependTo("#row");
             });
+
+            $("#spinner").remove();
         }
     });
 })
