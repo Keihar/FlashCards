@@ -14,12 +14,33 @@ $(document).ready(function() {
     });
   });
 
+  //  Sets the suggested
   $.ajax({
     type: "POST",
     url: "PHP/suggested.php",
     data: { },
     success: function (data) {
-      
+      let sugUser;
+      try { sugUser = JSON.parse(data) } 
+      catch (error) { console.error("Errore nel ricevimento dei suggeriti"); return; }
+
+      if (sugUser[1] == null || sugUser[1] == undefined) {
+        $("#suggestionBox").hide();
+        $("#searchTitleBox").hide();
+        return;
+      }
+
+      sugUser.forEach(suggestion => {
+        let box = $("#suggestionBox").clone();
+        $(box).removeClass("d-none");
+
+        $($(box).find("#username")[0]).html(friend.nome);
+        $($(box).find("#motto")[0]).html(friend.motto);
+        $($(box).find("#profile")[0]).attr("src", friend.imgProfilo);
+        $($(box).find("#visit")[0]).attr("href", "profile.html?user=" + friend.nome);
+
+        $(box).prependTo("#row");
+      });
     }
   });
 
@@ -39,7 +60,6 @@ function search() {
 
   //Get the research type
   var scope = $("#dropdownBtn").attr('name');
-
   var suser;
 
   //  Ajax request
@@ -56,6 +76,7 @@ function search() {
 
       //  Change the reult title
       $("#searchTitle").html("Risultati:");
+      $("#searchTitleBox").show();
       $("#searchTitleBox").addClass("mb-3");
       
       //  Print every album
