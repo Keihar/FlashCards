@@ -17,7 +17,7 @@ if (isset($_POST["username"])) {
     $user = $_POST["username"];
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT Album.id AS id, Album.nome, descrizione, album_salvati.data AS data, imgLink, utente.nome as username, Utente.imgProfilo AS imgProfilo FROM Album INNER JOIN Utente ON (utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) WHERE Utente.nome = '$user' AND privato=0";
+    $sql = "SELECT Album.id AS id, Album.nome, descrizione, album_salvati.data AS data, imgLink, utente.nome as username, Utente.imgProfilo AS imgProfilo, idea.testo AS testo, idea.data AS data_idea  FROM Album INNER JOIN Utente ON (utente.email = Album.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = Album.id) INNER JOIN idea ON (idea.autore=Utente.nome) WHERE Utente.nome = '$user' AND privato=0";
     $result = mysqli_query($connect, $sql);
 
 } else if ($_SESSION['valid']) {
@@ -32,7 +32,7 @@ if (isset($_POST["username"])) {
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $sql = "SELECT Album.id, Album.nome, album.descrizione, album_salvati.data AS data, album.imgLink, utente.nome as username, Utente.imgProfilo AS imgProfilo FROM album INNER JOIN utente ON (album.email = utente.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = album.id) WHERE Utente.nome = 'Alessandro' UNION SELECT Album.id, Album.nome, descrizione, album_salvati.data AS data, imgLink, utente.nome as username, Utente.imgProfilo FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = 'alessandro@gmail.com' AND privato=0 ORDER BY data DESC";
+    $sql = "SELECT Album.id, Album.nome, album.descrizione, album_salvati.data AS data, album.imgLink, utente.nome as username, Utente.imgProfilo AS imgProfilo, idea.testo AS testo, idea.data AS data_idea FROM album INNER JOIN utente ON (album.email = utente.email) INNER JOIN album_salvati ON (album_salvati.idAlbum = album.id) INNER JOIN idea ON (idea.autore=Utente.nome) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, album_salvati.data AS data, imgLink, utente.nome as username, Utente.imgProfilo FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' AND privato=0 ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 
 } else {
@@ -92,9 +92,15 @@ foreach ($json_array as &$rows) {
         ));
     }
 
+    $idea = array(
+        'testo' => $rows['testo'],
+        'data_idea' => $rows['data_idea']
+    );
+
     $autore = array(
         'username' => $rows['username'],
-        'imgProfilo' => $rows['imgProfilo']
+        'imgProfilo' => $rows['imgProfilo'],
+        'idea' => $idea
     );
 
     array_push($albums, array(
