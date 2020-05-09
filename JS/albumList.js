@@ -23,6 +23,17 @@ $(document).ready(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
 
+        //  Retard the popover to make it visible
+        $('.shareLink').popover({
+          placement: 'right',
+          html: true,
+          trigger: 'focus',
+          delay: { "show": 10, "hide": 1000 },
+          content: function () {
+            return $('#content-wrapper1').html();
+          }
+        });
+
         user.albums.forEach(album => {
           if (album.imgLink == null) { album.imgLink = "images\\albumCovers\\000-icon.svg" }
           

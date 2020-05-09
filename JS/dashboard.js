@@ -35,6 +35,7 @@ $(document).ready(function () {
       markBtns(user.salvati);
 
       //  Loading Ends
+      $("#profile").attr("src", user.imgProfilo)
       $("#ideaPost").show();
       $("#spinner").remove();
     }
