@@ -14,33 +14,12 @@ $(document).ready(function() {
     });
   });
 
-  //  Sets the suggested
   $.ajax({
     type: "POST",
     url: "PHP/suggested.php",
     data: { },
     success: function (data) {
-      let sugUser;
-      try { sugUser = JSON.parse(data) } 
-      catch (error) { console.error("Errore nel ricevimento dei suggeriti"); return; }
-
-      if (sugUser[1] == null || sugUser[1] == undefined) {
-        $("#suggestionBox").hide();
-        $("#searchTitleBox").hide();
-        return;
-      }
-
-      sugUser.forEach(suggestion => {
-        let box = $("#suggestionBox").clone();
-        $(box).removeClass("d-none");
-
-        $($(box).find("#username")[0]).html(friend.nome);
-        $($(box).find("#motto")[0]).html(friend.motto);
-        $($(box).find("#profile")[0]).attr("src", friend.imgProfilo);
-        $($(box).find("#visit")[0]).attr("href", "profile.html?user=" + friend.nome);
-
-        $(box).prependTo("#row");
-      });
+      
     }
   });
 
@@ -60,7 +39,6 @@ function search() {
 
   //Get the research type
   var scope = $("#dropdownBtn").attr('name');
-  var suser;
 
   //  Ajax request
   $.ajax({
@@ -69,24 +47,23 @@ function search() {
     data: { 'query': query, 'scope': scope },
     success: function (data) {
 
-      try { suser = JSON.parse(data);
+      try { user = JSON.parse(data);
         row.innerHTML = ""; }
       catch (error) { console.error(data);
         row.innerHTML = "<div class='mb-3 col'> Errore nella ricerca.</div>" }
 
       //  Change the reult title
       $("#searchTitle").html("Risultati:");
-      $("#searchTitleBox").show();
       $("#searchTitleBox").addClass("mb-3");
       
       //  Print every album
       if (scope == "user") {
         //  Zero results
-        if (suser.users.length == 0)
+        if (user.users.length == 0)
           row.innerHTML = "<div class='mb-3 col nouser'> Nessun utente trovato :(</div>"
 
         //  Prints Users
-        suser.users.forEach(utente => {
+        user.users.forEach(utente => {
           if (utente.imgProfilo == null) {
             utente.imgProfilo = "images\\profilesCovers\\dog.svg";
           }
@@ -95,18 +72,31 @@ function search() {
       }
       else {
         //  Zero results
-        if (suser.albums.length == 0)
+        if (user.albums.length == 0)
           row.innerHTML = "<div class='mb-3 col nouser'> Nessun album trovato :(</div>"
 
         //  Prints Albums
-        suser.albums.forEach(album => {
+        user.albums.forEach(album => {
           if (album.imgLink == null) {
             album.imgLink = "images\\albumCovers\\000-icon.svg";
           }
           row.innerHTML += "" + getCard(album.id, album.nome, album.descrizione,
             album.imgLink, album.nomeutente);
         });
-        markBtns(user.salvati);
+        $.ajax({
+          type: "POST",
+          url: "PHP/json.php",
+          data: "",
+          success: function (data) {
+              try {
+                  user = JSON.parse(data);
+                  markBtns(user.salvati);
+                } 
+                catch (error) {
+                  console.error(data);
+                }
+          }
+        }); 
       }
     }
   });

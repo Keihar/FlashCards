@@ -23,30 +23,20 @@ $(document).ready(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
 
-        //  Retard the popover to make it visible
-        $('.shareLink').popover({
-          placement: 'right',
-          html: true,
-          trigger: 'focus',
-          delay: { "show": 10, "hide": 1000 },
-          content: function () {
-            return $('#content-wrapper1').html();
-          }
-        });
-
         user.albums.forEach(album => {
-          if (album.imgLink == null) { album.imgLink = "images\\albumCovers\\000-icon.svg" }
-          
-          let HTMLString = getCard(album.id, album.nome, album.descrizione,
-            album.imgLink, album.autore.username, album.data, album.autore.imgProfilo);
+          if (album.imgLink == null) {
+            album.imgLink = "images\\albumCovers\\000-icon.svg";
+          }
+          let HTMLString = getCard(album.id, album.nome, album.descrizione, album.imgLink,
+            album.username, album.data);
           row.innerHTML += "" + HTMLString;
-
-          if (album.autore.username != sessionUsername) {
+          if (album.username != sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
               .attr("onclick", `albumPreview(${album.id}, user.albums)`)
               .attr("data-toggle", `modal`)
               .attr("data-target", `#exampleModal`);
             $("#deleteAlbum" + album.id).attr("onclick", `removeAlbum(${album.id})`);
+            $("#deleteSpan").attr("data-toggle", ``);
           }
         });
       }
@@ -67,10 +57,7 @@ $(document).ready(function () {
   });
 });
 
-function getCard(id, name, description, imgLink, author, date, authorImg) {
-
-  //Set default image if null
-  if(authorImg == undefined){ authorImg = "images\\profilesCovers\\dog.svg" };
+function getCard(id, name, description, imgLink, author, date, authorImg = "images\\profilesCovers\\dog.svg") {
 
   //  Data formatted
   date = getFormattedDatetime(date);
