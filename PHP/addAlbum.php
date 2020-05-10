@@ -3,7 +3,7 @@
 <?php
 
     //setto la zona di prelevamento data
-    date_default_timezone_set('Europe/London');
+    date_default_timezone_set('Europe/Rome');
 
     //effettuo l'include per connettermi al DataBase
     include 'DBconnect.php';
