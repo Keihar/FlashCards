@@ -25,7 +25,7 @@ while ($row = mysqli_fetch_array($get_email)) {
 }
 
 //prendo amici
-$checkFollowing_query = "SELECT u.nome AS nome_seguito, u.imgProfilo AS profilo_seguito FROM Utente INNER JOIN follow f ON (f.seguente=Utente.email) INNER JOIN Utente u ON (u.email=f.seguito) WHERE Utente.email='$email'";
+$checkFollowing_query = "SELECT u.nome AS nome_seguito, u.motto as motto, u.imgProfilo AS profilo_seguito FROM Utente INNER JOIN follow f ON (f.seguente=Utente.email) INNER JOIN Utente u ON (u.email=f.seguito) WHERE Utente.email='$email'";
 $checkFollowing = mysqli_query($connect, $checkFollowing_query);
 
 $conta_seguiti_query = "SELECT COUNT(*) AS nSeguiti FROM Utente INNER JOIN follow f ON (f.seguente=Utente.email) INNER JOIN Utente u ON (u.email=f.seguito) WHERE Utente.email='$email'";
@@ -50,11 +50,12 @@ $seguiti = array();
 foreach ($json_array_seguiti as &$rows) {
     array_push($seguiti, array(
         'nome' => $rows["nome_seguito"],
-        'imgProfilo' => $rows["profilo_seguito"]
+        'imgProfilo' => $rows["profilo_seguito"],
+        'motto_seguito' => $rows["motto"]
     ));
 }
 
-$checkFollowers_query = "SELECT u.nome AS nome_seguente, u.imgProfilo AS profilo_seguente FROM Utente INNER JOIN follow f ON (f.seguito=Utente.email) INNER JOIN Utente u ON (u.email=f.seguente) WHERE Utente.email='$email'";
+$checkFollowers_query = "SELECT u.nome AS nome_seguente, u.motto as motto, u.imgProfilo AS profilo_seguente FROM Utente INNER JOIN follow f ON (f.seguito=Utente.email) INNER JOIN Utente u ON (u.email=f.seguente) WHERE Utente.email='$email'";
 $checkFollowers = mysqli_query($connect, $checkFollowers_query);
 
 $conta_seguaci_query = "SELECT COUNT(*) AS nSeguaci FROM Utente INNER JOIN follow f ON (f.seguito=Utente.email) INNER JOIN Utente u ON (u.email=f.seguente) WHERE Utente.email='$email'";
@@ -79,11 +80,12 @@ $seguaci = array();
 foreach ($json_array_seguaci as &$rows) {
     array_push($seguaci, array(
         'nome' => $rows["nome_seguente"],
-        'imgProfilo' => $rows["profilo_seguente"]
+        'imgProfilo' => $rows["profilo_seguente"],
+        'motto_seguace' => $rows["motto"]
     ));
 }
 
-$checkFriends_query = "SELECT uf.nome AS nome_amico, uf.imgProfilo AS profilo_amico FROM Utente u INNER JOIN follow f ON (f.seguente=u.email) INNER JOIN follow ff ON (ff.seguito,ff.seguente) = (f.seguente,f.seguito) INNER JOIN Utente uf ON (uf.email = f.seguito) WHERE u.email = '$email'";
+$checkFriends_query = "SELECT uf.nome AS nome_amico, uf.imgProfilo AS profilo_amico, uf.motto AS motto FROM Utente u INNER JOIN follow f ON (f.seguente=u.email) INNER JOIN follow ff ON (ff.seguito,ff.seguente) = (f.seguente,f.seguito) INNER JOIN Utente uf ON (uf.email = f.seguito) WHERE u.email = '$email'";
 $checkFriends = mysqli_query($connect, $checkFriends_query);
 
 $conta_amici_query = "SELECT COUNT(*) AS nAmici FROM Utente u INNER JOIN follow f ON (f.seguente=u.email) INNER JOIN follow ff ON (ff.seguito,ff.seguente) = (f.seguente,f.seguito) INNER JOIN Utente uf ON (uf.email = f.seguito) WHERE u.email = '$email'";
@@ -108,7 +110,8 @@ $amici = array();
 foreach ($json_array_amici as &$rows) {
     array_push($amici, array(
         'nome' => $rows["nome_amico"],
-        'imgProfilo' => $rows["profilo_amico"]
+        'imgProfilo' => $rows["profilo_amico"],
+        'motto_amico' => $rows["motto"]
     ));
 }
 
