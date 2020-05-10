@@ -108,7 +108,6 @@ function receivedText() {
             else {
                 try { json = JSON.parse(data) }
                 catch (error) {
-                    console.error(data);
                     $("#fileAlert").html("Errore nella conversione del file.");
                     $("#fileAlert").show();
                     return;

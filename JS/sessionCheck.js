@@ -11,6 +11,30 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
 
+//Outside the ready to be avaible from every file
+if (getUrlVars()["user"] != undefined || getUrlVars()["user"] != "") {
+  console.time("Session Getting")
+  $.ajax({
+    type: "POST",
+    url: "PHP/json.php",
+    data: "",
+    async: false,
+    success: function (data) {
+      try {
+        user = JSON.parse(data);
+        console.log("User logged found.");
+        document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
+        sessionUsername = user.nome;
+        document.getElementById("profileNavBtn").href = "profile.html?user=" + user.nome;
+      }
+      catch (error) {
+        console.error(data);
+      }
+    }
+  });
+  console.timeEnd("Session Getting");
+}
+
 $(document).ready(function () {
   // Blocks breaks in TextAreas
   $("textarea").keypress(function (event) {
@@ -18,27 +42,6 @@ $(document).ready(function () {
       return false;
     }
   });
-
-  if(getUrlVars()["user"] != undefined || getUrlVars()["user"] != "")
-  {
-    $.ajax({
-      type: "POST",
-      url: "PHP/json.php",
-      data: "",
-      success: function (data) {
-        try {
-          user = JSON.parse(data);
-          console.log("User logged found.");
-        }
-        catch (error) {
-          console.error(data);
-        }
-        document.getElementById("welcomeText").innerHTML = "Bentornato, " + user.nome;
-        sessionUsername = user.nome;
-        document.getElementById("profileNavBtn").href = "profile.html?user=" + user.nome;
-      }
-    });
-  }
 
   $(".banBadChar").each(function (index) {
     $(this).keypress(function (e) {
@@ -49,17 +52,13 @@ $(document).ready(function () {
 
       //Validate TextBox value against the Regex.
       var isValid = regex.test(String.fromCharCode(keyCode));
-      if (isValid) {
-        $(this).popover('show')
+      if (isValid) { $(this).popover('show') }
+      else { $(this).popover('hide') }
 
-      }
-      else {
-        $(this).popover('hide')
-      }
       return !isValid;
     });
 
-    $(this).click(function (e) {
+    $(this).click(function () {
       $(this).popover('hide')
     });
   })
@@ -135,7 +134,6 @@ function getUrlVars() {
 }
 
 function markBtns(salvati) {
-  console.time("MarkBtn");
   if (salvati == undefined) {
     console.error("Error while retrieving saved albums");
     return;
@@ -150,8 +148,6 @@ function markBtns(salvati) {
       }
     });
   });
-
-  console.timeEnd("MarkBtn");
 }
 
 
