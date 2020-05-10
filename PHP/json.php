@@ -1,6 +1,6 @@
 <?php
 
-date_default_timezone_set('Europe/London');
+date_default_timezone_set('Europe/Rome');
 
 $data = date('Y-m-d H:i:s');
 
@@ -17,7 +17,7 @@ if (isset($_POST["username"])) {
     $user = $_POST["username"];
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione, data, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' AND privato=0";
+    $sql = "SELECT id, Album.nome, descrizione, data, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' AND privato=0 ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 } else if ($_SESSION['valid']) {
 
@@ -31,7 +31,7 @@ if (isset($_POST["username"])) {
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $sql = "SELECT Album.id, Album.nome, album.descrizione, Album.data AS data, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, Album.data, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' ORDER BY data DESC";
+    $sql = "SELECT Album.id, Album.nome, album.descrizione, Album.data AS data, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, album_salvati.data, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 } else {
     exit("error");
@@ -109,7 +109,7 @@ while ($row = mysqli_fetch_array($preleva_email)) {
 
 $emaill = $_SESSION['email'];
 
-$preleva_salvati_query = "SELECT idAlbum, data FROM album_salvati WHERE emailUtente='$emaill'";
+$preleva_salvati_query = "SELECT idAlbum, album_salvati.data AS data_s FROM album_salvati WHERE emailUtente='$emaill'";
 $preleva_salvati = mysqli_query($connect, $preleva_salvati_query);
 
 $json_salvati = array();
@@ -123,7 +123,7 @@ $salvati = array();
 foreach ($json_salvati as &$righe) {
     array_push($salvati, array(
         'id' => $righe['idAlbum'],
-        'data' => $righe['data']
+        'data' => $righe['data_s']
     ));
 }
 

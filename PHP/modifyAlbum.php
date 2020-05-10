@@ -1,6 +1,6 @@
 <?php
 
-    date_default_timezone_set('Europe/London');
+    date_default_timezone_set('Europe/Rome');
 
     //includo codice per la connessione al DataBase
     include 'DBconnect.php';
