@@ -1,3 +1,5 @@
+var dir = "images/albumCovers";
+
 //  Deletes a row from the table
 function deleteRow(btn, id) {
     var row = btn.parentNode.parentNode;

@@ -60,10 +60,7 @@ textarea {
 }
 
 img {
-    background-image: url('images/loader.gif');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
+    /*background: transparent url(../images/loader.gif) no-repeat scroll center center;*/
 }
 
 .navbar-brand,
@@ -84,3 +81,4 @@ img {
     margin: 0;
     margin-bottom: 4px;
 }
+
