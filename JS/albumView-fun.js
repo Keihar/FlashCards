@@ -142,6 +142,10 @@ function receivedText() {
                         }
                     });
                 });
+
+                //  Updates the External Import Btn graphics
+                $("#importExtBtn").removeClass("btn-secondary").addClass("btn-success");
+                $("#importExtBtn").html(`<i class="fas fa-check"></i> Importa`);
             }
         }
     });

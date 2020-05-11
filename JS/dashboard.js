@@ -68,7 +68,7 @@ function getDashCard(id, name, description, imgLink, author, date, authorImg) {
     `<button id="btn${id}" onclick='saveAlbum(${id},"${sessionUsername}")' class='btn btn-primary'><i class="fas fa-plus"></i> Aggiungi album</button>` +
     `<button id="nbtn${id}" class='btn btn-outline-primary' onclick="removeAlbum(${id})" style="display:none;"><i class="fas fa-minus"></i> Rimuovi album</button>` +
     `<button data-toggle="modal" data-target="#exampleModal" id="prevBtn${id}" onclick='albumPreview(${id}, user.albums)' class='btn btn-outline-secondary ml-1 prevBtn'><i class="fas fa-search"></i> Anteprima</button>` +
-    `</p></div> </div>` + //<i class="fas fa-lightbulb"></i>
+    `</p></div> </div>` +
     `<div class="card-footer w-100 text-center text-muted"> <i class="fas fa-book"></i>&nbsp; <span>${date}</span>  </div></div> </div>`;
   return str;
 }

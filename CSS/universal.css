@@ -34,9 +34,10 @@ textarea {
 }
 
 .profilePic:hover {
-    border: 1px solid gray;
-    border-radius: 0.5em;
-    padding: 1em;
+    border: 1px solid #adb5bd;;
+    border-radius: 1em;
+    padding: 0.8em;
+    cursor: pointer;
 }
 
 .imgList {
@@ -45,9 +46,10 @@ textarea {
 }
 
 .imgList:hover {
-    border: 1px solid gray;
-    border-radius: 0.5em;
-    padding: 1em;
+    border: 1px solid #adb5bd;;
+    border-radius: 0.7em;
+    padding: 0.8em;
+    cursor: pointer;
 }
 
 .navBarIcon {
@@ -57,10 +59,6 @@ textarea {
     max-height: 1.2em;
     margin:0; 
     margin-bottom: 0.2em;
-}
-
-img {
-    /*background: transparent url(../images/loader.gif) no-repeat scroll center center;*/
 }
 
 .navbar-brand,
