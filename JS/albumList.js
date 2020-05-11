@@ -30,7 +30,7 @@ $(document).ready(function () {
           let HTMLString = getCard(album.id, album.nome, album.descrizione, album.imgLink,
             album.username, album.data);
           row.innerHTML += "" + HTMLString;
-          if (album.username != sessionUsername) {
+          if (album.username == sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
               .attr("onclick", `albumPreview(${album.id}, user.albums)`)
               .attr("data-toggle", `modal`)
