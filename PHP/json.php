@@ -17,7 +17,7 @@ if (isset($_POST["username"])) {
     $user = $_POST["username"];
 
     //query per prelevamento dei campi dell'album
-    $sql = "SELECT id, Album.nome, descrizione, data, imgLink, utente.nome as username FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' AND privato=0 ORDER BY data DESC";
+    $sql = "SELECT id, Album.nome, descrizione, data, imgLink, utente.nome as username, utente.imgProfilo AS imgProfilo FROM Album INNER JOIN Utente ON (utente.email = Album.email) WHERE Utente.nome = '$user' AND privato=0 ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 } else if ($_SESSION['valid']) {
 
@@ -31,7 +31,7 @@ if (isset($_POST["username"])) {
         $usermail = mysqli_real_escape_string($connect, $row["email"]);
     }
 
-    $sql = "SELECT Album.id, Album.nome, album.descrizione, Album.data AS data, album.imgLink, utente.nome as username FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, album_salvati.data, imgLink, utente.nome as username FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' ORDER BY data DESC";
+    $sql = "SELECT Album.id, Album.nome, album.descrizione, Album.data AS data, album.imgLink, utente.nome as username, Utente.imgProfilo as imgProfilo FROM album INNER JOIN utente ON (album.email = utente.email) WHERE Utente.nome = '$user' UNION SELECT Album.id, Album.nome, descrizione, album_salvati.data, imgLink, utente.nome as username, Utente.imgProfilo as imgProfilo FROM album_salvati INNER JOIN album ON (album.id = album_salvati.idAlbum) INNER JOIN utente ON (album.email = utente.email) WHERE emailUtente = '$usermail' ORDER BY data DESC";
     $result = mysqli_query($connect, $sql);
 } else {
     exit("error");
@@ -89,13 +89,21 @@ foreach ($json_array as &$rows) {
             'retro' => $righe['retro']
         ));
     }
+
+    $autore = array();
+
+    array_push($autore, array(
+        'username' => $rows["username"],
+        'imgProfilo' => $rows["imgProfilo"]
+    ));
+
     array_push($albums, array(
         'id' => $rows['id'],
         'nome' => $rows['nome'],
         'descrizione' => $rows['descrizione'],
         'data' => $rows['data'],
         'imgLink' => $rows['imgLink'],
-        'username' => $rows['username'],
+        'autore' => $autore,
         'flashcards' => $flashcards
     ));
 }
