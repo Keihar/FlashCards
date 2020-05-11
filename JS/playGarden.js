@@ -7,12 +7,15 @@ var isFlipping = false;
 //  Flip
 function flip() {
     if (isFlipping) { return; }
+    $('#nextBtn').prop('disabled', true)
     console.log(isFlipping);
     isFlipping = true;
     document.querySelector("#myCard").classList.toggle("flip")
     document.getElementById("backCard").innerHTML = "" + cards[currentIndex].retro;
-    $('#nextBtn').prop('disabled', false);
-    setTimeout(function () { isFlipping = false }, 650);
+    setTimeout(function () { 
+        isFlipping = false;
+        $('#nextBtn').prop('disabled', false);
+    }, 650);
 }
 
 //  Next Card

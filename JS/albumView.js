@@ -62,7 +62,7 @@ $(document).ready(function() {
         let id = String(data);
 
         //  Adds the row to the table
-        flashToTable(front, back, id)
+        flashToTable($("#frontCard").val(), $("#frontCard").val(), id)
 
         //  Flush the textareas
         $("#frontCard").val("")

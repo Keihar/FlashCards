@@ -30,13 +30,13 @@ $(document).ready(function () {
           let HTMLString = getCard(album.id, album.nome, album.descrizione, album.imgLink,
             album.username, album.data);
           row.innerHTML += "" + HTMLString;
-          if (album.username == sessionUsername) {
+          if (album.username != sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
               .attr("onclick", `albumPreview(${album.id}, user.albums)`)
               .attr("data-toggle", `modal`)
               .attr("data-target", `#exampleModal`);
             $("#deleteAlbum" + album.id).attr("onclick", `removeAlbum(${album.id})`);
-            $("#deleteSpan").attr("data-toggle", ``);
+            $("#deleteSpan" + album.id).attr("data-toggle", " ");
           }
         });
       }
@@ -73,7 +73,7 @@ function getCard(id, name, description, imgLink, author, date, authorImg = "imag
   let str = `<div class="card ${localAuth} mb-4 ml-4" style="min-width: 35rem; width: 35rem"> <div class="row no-gutters"><div class="card-header w-100 clearfix pr-2">` +
     `<a class="card-text text-muted align-middle" href="profile.html?user=${author}"> <img alt="" class="profileMiniature" src=${authorImg}> Creato da ${localAuth}</a>`+
     `<div class="float-right"><button class="btn btn-link text-muted p-0 shareLink" onclick="copyTo('localhost/dashboard.html')" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Copiato negli appunti!"><i class="fas fa-link"></i></button>`+
-    `<span id="deleteSpan" data-toggle="modal" data-target="#deleteModal"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 py-0 float-right text-danger' data-toggle="tooltip" data-placement="bottom" title="Elimina">`+
+    `<span id="deleteSpan${id}" data-toggle="modal" data-target="#deleteModal"><button id="deleteAlbum${id}" onclick='deleteAlbumConfirm(${id})' class='btn btn-link ml-1 py-0 float-right text-danger' data-toggle="tooltip" data-placement="bottom" title="Elimina">`+
     `<i class="fa fa-times"></i></button></span></div></div> <div class="col-md-4">` +
     `<img src="${imgLink}" alt="" class="listImg"> </div> <div class="col-md-8">` +
     `<div class="card-body clearfix mt-2"> <h5 class="card-title">${name}` +
