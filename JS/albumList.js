@@ -11,7 +11,6 @@ $(document).ready(function () {
     url: "PHP/json.php",
     data: "",
     success: function (data) {
-      console.log(data);
       try {
         let user = JSON.parse(data);
         let row = document.getElementById("row");
@@ -24,11 +23,9 @@ $(document).ready(function () {
         });
 
         user.albums.forEach(album => {
-          if (album.imgLink == null) {
-            album.imgLink = "images\\albumCovers\\000-icon.svg";
-          }
           let HTMLString = getCard(album.id, album.nome, album.descrizione, album.imgLink,
-            album.username, album.data);
+            album.autore.username, album.data, album.autore.imgProfilo);
+
           row.innerHTML += "" + HTMLString;
           if (album.username != sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
@@ -57,7 +54,7 @@ $(document).ready(function () {
   });
 });
 
-function getCard(id, name, description, imgLink, author, date, authorImg = "images\\profilesCovers\\dog.svg") {
+function getCard(id, name, description, imgLink, author, date, authorImg) {
 
   //  Data formatted
   date = getFormattedDatetime(date);

@@ -90,12 +90,10 @@ foreach ($json_array as &$rows) {
         ));
     }
 
-    $autore = array();
-
-    array_push($autore, array(
+    $autore = array(
         'username' => $rows["username"],
         'imgProfilo' => $rows["imgProfilo"]
-    ));
+    );
 
     array_push($albums, array(
         'id' => $rows['id'],

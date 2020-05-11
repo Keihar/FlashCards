@@ -54,7 +54,7 @@ foreach ($json_album_array as &$rows) {
 
     $autore = array(
         'username' => $rows['nome_seguito'],
-        'imgProfilo' => $rows['profilo_seguito'],
+        'imgProfilo' => $rows['profilo_seguito']
     );
     
     //inserimento nell'array finale dei campi
