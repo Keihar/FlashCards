@@ -27,7 +27,7 @@ $(document).ready(function () {
             album.autore.username, album.data, album.autore.imgProfilo);
 
           row.innerHTML += "" + HTMLString;
-          if (album.username != sessionUsername) {
+          if (album.autore.username != sessionUsername) {
             $("#viewAlbum" + album.id).html(`<i class="fas fa-search"></i> Anteprima`)
               .attr("onclick", `albumPreview(${album.id}, user.albums)`)
               .attr("data-toggle", `modal`)
