@@ -9,18 +9,38 @@ include 'DBconnect.php';
 //inizializzo la sessione
 session_start();
 
+$data = date('Y-m-d H:i:s');
 
-if(isset($_POST["id_album"])){
-
-    $id_album = mysqli_real_escape_string($connect, $_POST["id_album"]);
-
-}
-else if($_SESSION['valid']){
+if($_SESSION['valid']){
+ 
     $id_album = mysqli_real_escape_string($connect, $_SESSION['currentAlbum']);
+    
+    /*$update_data_query = "UPDATE album_salvati SET data = '$data' WHERE idAlbum='$id_album'";
+    $update_data = mysqli_query($connect, $update_data_query);*/
+
+    $user = $_SESSION["utente"];
+
+    $check_author_query = "SELECT Utente.nome AS nome FROM album INNER JOIN Utente ON (Utente.email = Album.email) WHERE album.id=".$id_album."";
+    $check_author = mysqli_query($connect, $check_author_query);
+
+    while ($riga = mysqli_fetch_array($check_author)) {
+        $autore = mysqli_real_escape_string($connect, $riga["nome"]);
+    }
+
+    if($user == $autore){
+        $update_data_query = "UPDATE album SET data = '$data' WHERE id='$id_album'";
+        $update_data = mysqli_query($connect, $update_data_query);
+    }
+    else{
+        $update_data_query = "UPDATE album_salvati SET data = '$data' WHERE idAlbum='$id_album'";
+        $update_data = mysqli_query($connect, $update_data_query);
+    }
+
 }
 else{
     exit("error");
 }
+
 
 
 //query per avere nome e descrizione dell'Album
@@ -40,10 +60,6 @@ while ($riga = mysqli_fetch_array($result1)) {
 //query per avere id, fronte, retro delle flashcards
 $preleva_albumflash = "SELECT Flashcard.id AS id, fronte, retro FROM Album INNER JOIN Flashcard ON (Flashcard.id_album = Album.id) WHERE Album.id = " . $id_album . "";
 $result = mysqli_query($connect, $preleva_albumflash);
-
-$data = date('Y-m-d H:i:s');
-$update_data_query = "UPDATE album SET data = '$data' WHERE id='$id_album'";
-$update_data = mysqli_query($connect, $update_data_query);
 
 //istanzio array che mi servirà per splittare le righe
 $json_array = array();
@@ -80,5 +96,3 @@ $post_data = array(
 $output = json_encode($post_data);
 
 echo $output;
-
-?>
