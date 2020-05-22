@@ -24,20 +24,22 @@ $(document).ready(function() {
       try { sugUser = JSON.parse(data) } 
       catch (error) { console.error("Errore nel ricevimento dei suggeriti"); return; }
 
-      if (sugUser[1] == null || sugUser[1] == undefined) {
-        $("#suggestionBox").hide();
-        $("#searchTitleBox").hide();
-        return;
-      }
+      console.table(sugUser)
+      // if (sugUser[1] == null || sugUser[1] == undefined) {
+      //   $("#suggestionBox").hide();
+      //   $("#searchTitleBox").hide();
+      //   return;
+      // }
 
-      sugUser.forEach(suggestion => {
+      sugUser.suggested.forEach(suggestion => {
         let box = $("#suggestionBox").clone();
         $(box).removeClass("d-none");
 
-        $($(box).find("#username")[0]).html(friend.nome);
-        $($(box).find("#motto")[0]).html(friend.motto);
-        $($(box).find("#profile")[0]).attr("src", friend.imgProfilo);
-        $($(box).find("#visit")[0]).attr("href", "profile.html?user=" + friend.nome);
+        $($(box).find("#suggestedImg")[0]).attr('src', suggestion.imgProfilo)
+        $($(box).find("#username")[0]).html(suggestion.nome);
+        $($(box).find("#followedBy")[0]).html("Seguito da " + suggestion.seguito_da);
+        $($(box).find("#profile")[0]).attr("src", suggestion.imgProfilo);
+        $($(box).find("#visit")[0]).attr("onclick", "window.location.href = 'profile.html?user=" + suggestion.nome + "'");
 
         $(box).prependTo("#row");
       });

@@ -175,7 +175,7 @@ function albumPreview(id, array) {
       album.imgLink = album.imgLink == null ? "images\\albumCovers\\000-icon.svg": album.imgLink;
 
       //  Setting title and description
-      $("#modal-title").html("" + album.nome);
+      $("#modal-title").html(`<img src="${album.imgLink}" class="albumPreviewProfile" alt=""> ` + album.nome);
       $("#modal-body").html("" + album.descrizione);
 
       //  Adds backs and fronts to the table

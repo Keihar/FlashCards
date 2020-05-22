@@ -22,9 +22,9 @@
             $nome_seguito2 = $row2["nome_seguito2"];
             $profilo_seguito2 = $row2["profilo_seguito2"];
             array_push($suggested, array(
-                'nome_seguito' => $nome_seguito,
-                'nome_suggested' => $nome_seguito2,
-                'imgProfilo_suggested' => $profilo_seguito2
+                'seguito_da' => $nome_seguito,
+                'nome' => $nome_seguito2,
+                'imgProfilo' => $profilo_seguito2
             ));
         }
     }

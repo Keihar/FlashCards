@@ -22,3 +22,8 @@ img {
 .nouser {
     font-size: 1.2em;
 }
+
+#suggestedImg{
+    width: 30px;
+    margin: 2px 0.5em 0 0;
+}

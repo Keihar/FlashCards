@@ -16,7 +16,7 @@ $(document).ready(function() {
                 $(box).removeClass("d-none");
 
                 $($(box).find("#username")[0]).html(friend.nome);
-                $($(box).find("#motto")[0]).html(friend.motto);
+                $($(box).find("#motto")[0]).html("\"" + friend.motto + "\"");
                 $($(box).find("#profile")[0]).attr("src", friend.imgProfilo);
                 $($(box).find("#visit")[0]).attr("href", "profile.html?user=" + friend.nome);
 
